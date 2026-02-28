@@ -2,10 +2,8 @@
 marp: true
 theme: default
 paginate: true
-header: ROS2教程完整版
+header: ROS2+PX4 无人机仿真实践
 ---
-
-<!-- slide -->
 
 # ROS2 简介
 
@@ -17,17 +15,17 @@ header: ROS2教程完整版
 - **ROS2** 是 ROS 的新一代版本，于2020年正式发布
 - ROS2 并非 ROS 的小幅度更新，而是**完全重写**
 
+---
+
 ### 2. ROS 发展历程
 
 | 版本 | 发布时间 | 特性 |
-|------|----------|------|
+| ------ | ---------- | ------ |
 | ROS1 | 2010年 | 科研为主，实时性差 |
 | ROS2 | 2020年 | 工业级，实时性强 |
 | ROS2 Humble | 2022年 | 长期支持版本 LTS |
 
 ---
-
-<!-- slide -->
 
 ### 3. ROS2  vs  ROS1
 
@@ -36,8 +34,7 @@ header: ROS2教程完整版
 - 通信基于TCPROS/UDPROS，实时性差
 - 无实时操作系统(RTOS)支持
 - 核心API不稳定
-- 几乎只支持Linux
-- 集成开发工具不完善
+- 几乎只支持Linux，集成开发工具不完善
 
 #### ROS2 改进
 
@@ -45,12 +42,9 @@ header: ROS2教程完整版
 - 支持RTOS (Real-Time OS)
 - 核心API稳定
 - 支持多平台 (Linux/Windows/macOS)
-- 集成工具完善
-- 安全性设计
+- 集成工具完善，安全性设计
 
 ---
-
-<!-- slide -->
 
 ### 4. ROS2 组成
 
@@ -65,14 +59,11 @@ header: ROS2教程完整版
 #### 4.2 生态系统
 
 - **rcl**: ROS客户端库
-- **rclcpp**: C++客户端库
-- **rclpy**: Python客户端库
+- **rclcpp**: C++客户端库，**rclpy**: Python客户端库
 - **rviz2**: 3D可视化工具
 - **gazebo**: 仿真平台
 
 ---
-
-<!-- slide -->
 
 # ROS2 安装 (Humble)
 
@@ -96,8 +87,6 @@ export LANG=en_US.UTF-8
 
 ---
 
-<!-- slide -->
-
 ### 2.2 添加ROS2源
 
 ```bash
@@ -115,8 +104,6 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-a
 
 ---
 
-<!-- slide -->
-
 ### 2.3 安装ROS2包
 
 ```bash
@@ -127,7 +114,7 @@ sudo apt update
 sudo apt install ros-humble-desktop
 
 # 基础版安装
-# sudo apt install ros-humble-ros-base
+sudo apt install ros-humble-ros-base
 
 # 开发工具
 sudo apt install ros-dev-tools
@@ -142,8 +129,6 @@ source ~/.bashrc
 ```
 
 ---
-
-<!-- slide -->
 
 ### 2.5 验证安装
 
@@ -160,21 +145,11 @@ ros2 run turtlesim turtle_teleop_key
 
 ---
 
-<!-- slide -->
-
 # ROS2 集成开发环境搭建
 
 ## 1. VSCode 安装与配置
 
 ### 1.1 安装VSCode
-
-```bash
-# 下载安装
-sudo apt install ./<file>.deb
-
-# 或使用snap
-sudo snap install --classic code
-```
 
 ### 1.2 常用插件
 
@@ -187,8 +162,6 @@ sudo snap install --classic code
 | Marp | PPT预览 |
 
 ---
-
-<!-- slide -->
 
 ### 1.3 VSCode ROS配置
 
@@ -212,30 +185,20 @@ source install/setup.bash
 
 ---
 
-<!-- slide -->
+## 2. C++ 开发环境（简介）
 
-## 2. CLion 安装配置
+所有开发的基础环境
 
-### 2.1 安装
-
-```bash
-# 下载并解压
-tar -xf <clion.tar.gz>
-sudo mv <clion-folder> /opt/
-
-# 启动
-/opt/clion/bin/clion.sh
-```
-
-### 2.2 配置ROS2
-
-1. 安装ROS插件
-2. 设置Toolchain: `/opt/ros/humble/setup.sh`
-3. 导入CMake项目
+- 操作系统: Ubuntu 22.04 LTS (Jammy Jellyfish)。
+- 编译与构建工具:
+build-essential: 包含GCC, G++, make等基础编译工具。
+cmake: 跨平台的构建系统生成工具，ROS 2项目必备。
+git: 版本控制工具，用于克隆代码仓库。
+- 其他工具:
+python3-colcon-common-extensions: Colcon构建工具的扩展，更便捷的命令。
+python3-rosdep: ROS依赖管理工具。
 
 ---
-
-<!-- slide -->
 
 ## 3. Git配置
 
@@ -251,8 +214,6 @@ cat ~/.ssh/id_ed25519.pub  # 添加到GitHub
 
 ---
 
-<!-- slide -->
-
 # ROS2 工作空间
 
 ## 1. 工作空间概念
@@ -260,7 +221,7 @@ cat ~/.ssh/id_ed25519.pub  # 添加到GitHub
 - **工作空间(Workspace)**: 存放ROS2项目源码和编译结果的目录
 - **src**: 源码目录
 - **install**: 安装目录 (编译后)
-- **build**: 编译目录
+- **build**: 编译目录 (编译后)
 - **log**: 日志目录
 
 ```
@@ -274,8 +235,6 @@ ros2_ws/
 ```
 
 ---
-
-<!-- slide -->
 
 ## 2. 创建工作空间
 
@@ -309,8 +268,6 @@ colcon build --packages-select my_package --cmake-force-configure
 
 ---
 
-<!-- slide -->
-
 ### 2.3 环境设置
 
 ```bash
@@ -327,8 +284,6 @@ ros2 pkg list | grep my_package
 
 ---
 
-<!-- slide -->
-
 ## 3. 重叠工作空间
 
 ```bash
@@ -342,8 +297,6 @@ ros2 pkg list | grep -v ~/ros2_ws/install
 ```
 
 ---
-
-<!-- slide -->
 
 # ROS2 功能包
 
@@ -368,8 +321,6 @@ my_package/
 ```
 
 ---
-
-<!-- slide -->
 
 ## 2. 创建功能包
 
@@ -399,8 +350,6 @@ ros2 pkg xml <pkg>                # 包XML信息
 
 ---
 
-<!-- slide -->
-
 ## 3. 功能包结构示例
 
 ### 3.1 C++包结构
@@ -429,8 +378,6 @@ py_package/
 
 ---
 
-<!-- slide -->
-
 # ROS2 节点
 
 ## 1. 节点概念
@@ -448,8 +395,6 @@ py_package/
 - 便于复用和测试
 
 ---
-
-<!-- slide -->
 
 ## 2. C++ 节点示例
 
@@ -492,8 +437,6 @@ int main(int argc, char * argv[])
 
 ---
 
-<!-- slide -->
-
 ## 3. Python 节点示例
 
 ### 3.1 最简单节点（不推荐）
@@ -535,8 +478,6 @@ if __name__ == '__main__':
 
 ---
 
-<!-- slide -->
-
 ## 4. 节点操作命令
 
 ```bash
@@ -558,8 +499,6 @@ ros2 node info /<node_name>
 
 ---
 
-<!-- slide -->
-
 # ROS2 话题通讯
 
 ## 1. 话题概念
@@ -578,8 +517,6 @@ ros2 node info /<node_name>
 - 实时性要求高的场景
 
 ---
-
-<!-- slide -->
 
 ## 2. C++ 话题通讯
 
@@ -616,8 +553,6 @@ private:
 
 ---
 
-<!-- slide -->
-
 ### 2.2 订阅者
 
 ```cpp
@@ -645,8 +580,6 @@ private:
 
 ---
 
-<!-- slide -->
-
 ## 3. Python 话题通讯
 
 ### 3.1 发布者
@@ -673,8 +606,6 @@ class PublisherNode(Node):
 
 ---
 
-<!-- slide -->
-
 ### 3.2 订阅者
 
 ```python
@@ -693,8 +624,6 @@ class SubscriberNode(Node):
 ```
 
 ---
-
-<!-- slide -->
 
 ## 4. 话题命令
 
@@ -723,8 +652,6 @@ ros2 topic hz /topic_name
 
 ---
 
-<!-- slide -->
-
 ## 5. 话题通讯流程
 
 ```
@@ -744,8 +671,6 @@ ros2 topic hz /topic_name
 
 ---
 
-<!-- slide -->
-
 # ROS2 服务通讯
 
 ## 1. 服务概念
@@ -764,8 +689,6 @@ ros2 topic hz /topic_name
 - 不适合持续数据流
 
 ---
-
-<!-- slide -->
 
 ## 2. 自定义服务类型
 
@@ -809,8 +732,6 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 
 ---
 
-<!-- slide -->
-
 ## 3. C++ 服务通讯
 
 ### 3.1 服务端
@@ -844,8 +765,6 @@ private:
 ```
 
 ---
-
-<!-- slide -->
 
 ### 3.2 客户端
 
@@ -890,8 +809,6 @@ private:
 
 ---
 
-<!-- slide -->
-
 ## 4. Python 服务通讯
 
 ### 4.1 服务端
@@ -913,8 +830,6 @@ class AddTwoIntsServer(Node):
 ```
 
 ---
-
-<!-- slide -->
 
 ### 4.2 客户端
 
@@ -941,8 +856,6 @@ class AddTwoIntsClient(Node):
 
 ---
 
-<!-- slide -->
-
 ## 5. 服务命令
 
 ```bash
@@ -961,8 +874,6 @@ ros2 service find <type>
 
 ---
 
-<!-- slide -->
-
 # ROS2 动作通讯
 
 ## 1. 动作概念
@@ -980,8 +891,6 @@ ros2 service find <type>
 - 有最终结果
 
 ---
-
-<!-- slide -->
 
 ## 2. 自定义动作类型
 
@@ -1014,8 +923,6 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 ```
 
 ---
-
-<!-- slide -->
 
 ## 3. C++ 动作通讯
 
@@ -1082,8 +989,6 @@ private:
 
 ---
 
-<!-- slide -->
-
 ### 3.2 动作客户端
 
 ```cpp
@@ -1148,8 +1053,6 @@ private:
 
 ---
 
-<!-- slide -->
-
 ## 4. Python 动作通讯
 
 ### 4.1 动作服务端
@@ -1185,8 +1088,6 @@ class FibonacciActionServer(Node):
 ```
 
 ---
-
-<!-- slide -->
 
 ### 4.2 动作客户端
 
@@ -1230,8 +1131,6 @@ class FibonacciActionClient(Node):
 
 ---
 
-<!-- slide -->
-
 ## 5. 动作命令
 
 ```bash
@@ -1249,8 +1148,6 @@ ros2 action send_goal /fibonacci example_interfaces/action/Fibonacci "{order: 5}
 ```
 
 ---
-
-<!-- slide -->
 
 # ROS2 自定义接口消息
 
@@ -1277,8 +1174,6 @@ package/
 ```
 
 ---
-
-<!-- slide -->
 
 ## 2. 消息(msg)定义
 
@@ -1309,8 +1204,6 @@ std_msgs/ColorRGBA color
 
 ---
 
-<!-- slide -->
-
 ## 3. 服务(srv)定义
 
 ```yaml
@@ -1327,8 +1220,6 @@ Person[] persons
 ```
 
 ---
-
-<!-- slide -->
 
 ## 4. 动作(action)定义
 
@@ -1350,8 +1241,6 @@ float32 remaining_distance
 ```
 
 ---
-
-<!-- slide -->
 
 ## 5. 接口使用示例
 
@@ -1382,8 +1271,6 @@ publisher.publish(msg)
 
 ---
 
-<!-- slide -->
-
 ## 6. 编译接口
 
 ```cmake
@@ -1407,8 +1294,6 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 
 ---
 
-<!-- slide -->
-
 # ROS2 参数服务案例
 
 ## 1. 参数服务概念
@@ -1428,8 +1313,6 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 | byte[] | 字节数组 |
 
 ---
-
-<!-- slide -->
 
 ## 2. 参数命令行操作
 
@@ -1451,8 +1334,6 @@ ros2 param load /node_name params.yaml
 ```
 
 ---
-
-<!-- slide -->
 
 ## 3. C++ 参数使用
 
@@ -1483,8 +1364,6 @@ public:
 ```
 
 ---
-
-<!-- slide -->
 
 ### 3.2 参数监听器
 
@@ -1519,8 +1398,6 @@ public:
 
 ---
 
-<!-- slide -->
-
 ## 4. Python 参数使用
 
 ### 4.1 声明参数
@@ -1545,8 +1422,6 @@ class MyNode(Node):
 
 ---
 
-<!-- slide -->
-
 ### 4.2 参数回调
 
 ```python
@@ -1566,8 +1441,6 @@ class ParameterNode(Node):
 
 ---
 
-<!-- slide -->
-
 ## 5. 参数文件示例
 
 ```yaml
@@ -1586,8 +1459,6 @@ my_node:
 
 ---
 
-<!-- slide -->
-
 # ROS2 元功能包介绍
 
 ## 1. 元功能包概念
@@ -1605,8 +1476,6 @@ my_node:
 | demos | 示例代码 |
 
 ---
-
-<!-- slide -->
 
 ## 2. 创建元功能包
 
@@ -1649,8 +1518,6 @@ ament_package()
 
 ---
 
-<!-- slide -->
-
 ## 3. 使用元功能包
 
 ```bash
@@ -1662,8 +1529,6 @@ apt show ros-humble-desktop
 ```
 
 ---
-
-<!-- slide -->
 
 # ROS2 分布式通讯
 
@@ -1680,8 +1545,6 @@ apt show ros-humble-desktop
 - 分布式计算
 
 ---
-
-<!-- slide -->
 
 ## 2. 网络配置
 
@@ -1708,8 +1571,6 @@ ping <other_machine_ip>
 
 ---
 
-<!-- slide -->
-
 ## 3. 跨机器通信设置
 
 ### 3.1 主机A配置
@@ -1735,8 +1596,6 @@ ros2 run demo_nodes_cpp talker
 
 ---
 
-<!-- slide -->
-
 ## 4. 防火墙配置
 
 ```bash
@@ -1749,8 +1608,6 @@ sudo ufw disable
 ```
 
 ---
-
-<!-- slide -->
 
 # ROS2 DDS
 
@@ -1768,8 +1625,6 @@ sudo ufw disable
 - 服务质量(QoS)策略
 
 ---
-
-<!-- slide -->
 
 ## 2. DDS 实现
 
@@ -1797,8 +1652,6 @@ export RMW_IMPLEMENTATION=rmw_connextdds_cpp
 
 ---
 
-<!-- slide -->
-
 ## 3. QoS 策略
 
 ### 3.1 常用QoS
@@ -1813,8 +1666,6 @@ export RMW_IMPLEMENTATION=rmw_connextdds_cpp
 | Lifespan | 消息寿命 |
 
 ---
-
-<!-- slide -->
 
 ### 3.2 QoS示例
 
@@ -1844,8 +1695,6 @@ subscription = node.create_subscription(String, 'topic', callback, qos)
 
 ---
 
-<!-- slide -->
-
 ## 4. 查看DDS信息
 
 ```bash
@@ -1860,8 +1709,6 @@ fastdds
 ```
 
 ---
-
-<!-- slide -->
 
 # ROS2 时间相关API
 
@@ -1897,8 +1744,6 @@ auto earlier = now - duration;
 
 ---
 
-<!-- slide -->
-
 ## 2. 定时器
 
 ### 2.1 C++ 定时器
@@ -1927,8 +1772,6 @@ private:
 
 ---
 
-<!-- slide -->
-
 ### 2.2 Python 定时器
 
 ```python
@@ -1945,8 +1788,6 @@ class TimerNode(Node):
 ```
 
 ---
-
-<!-- slide -->
 
 ## 3. 等待时间
 
@@ -1983,8 +1824,6 @@ event.wait(timeout=1)
 
 ---
 
-<!-- slide -->
-
 ## 4. 时间转换
 
 ```cpp
@@ -2006,8 +1845,6 @@ auto seconds = std::chrono::duration_cast<std::chrono::seconds>(epoch).count();
 ```
 
 ---
-
-<!-- slide -->
 
 # ROS2 常用命令工具
 
@@ -2045,8 +1882,6 @@ ros2 run <package> <executable>
 
 ---
 
-<!-- slide -->
-
 ### 1.3 话题命令
 
 ```bash
@@ -2068,8 +1903,6 @@ ros2 topic hz /topic_name
 ```
 
 ---
-
-<!-- slide -->
 
 ### 1.4 服务命令
 
@@ -2099,8 +1932,6 @@ ros2 action send_goal /action_name <action_type> "<goal>" [--feedback]
 
 ---
 
-<!-- slide -->
-
 ## 2. 参数命令
 
 ```bash
@@ -2122,8 +1953,6 @@ ros2 param load /node_name file.yaml
 
 ---
 
-<!-- slide -->
-
 ## 3. 启动命令
 
 ```bash
@@ -2135,8 +1964,6 @@ ros2 launch -s <package>
 ```
 
 ---
-
-<!-- slide -->
 
 ## 4. 其他命令
 
@@ -2165,8 +1992,6 @@ ros2 doctor -r <component>
 
 ---
 
-<!-- slide -->
-
 # ROS2 Rviz2使用
 
 ## 1. Rviz2 简介
@@ -2187,8 +2012,6 @@ rviz2 -d <config_file.rviz>
 ```
 
 ---
-
-<!-- slide -->
 
 ## 2. Rviz2 界面
 
@@ -2213,8 +2036,6 @@ rviz2 -d <config_file.rviz>
 
 ---
 
-<!-- slide -->
-
 ## 3. 配置示例
 
 ### 3.1 添加RobotModel
@@ -2238,8 +2059,6 @@ rviz2 -d <config_file.rviz>
 
 ---
 
-<!-- slide -->
-
 ## 4. 常用快捷键
 
 | 快捷键 | 功能 |
@@ -2252,8 +2071,6 @@ rviz2 -d <config_file.rviz>
 | f | 聚焦选中物体 |
 
 ---
-
-<!-- slide -->
 
 # ROS2 Rqt工具箱
 
@@ -2274,8 +2091,6 @@ rqt --plugin rqt_topic
 ```
 
 ---
-
-<!-- slide -->
 
 ## 2. 常用插件
 
@@ -2300,8 +2115,6 @@ rqt --plugin rqt_service_caller
 
 ---
 
-<!-- slide -->
-
 ### 2.3 Node Graph
 
 - 显示节点关系图
@@ -2321,8 +2134,6 @@ rqt --plugin rqt_reconfigure
 
 ---
 
-<!-- slide -->
-
 ## 3. 安装更多插件
 
 ```bash
@@ -2335,8 +2146,6 @@ sudo apt install ros-humble-rqt-image-view ros-humble-rqt-bag
 ```
 
 ---
-
-<!-- slide -->
 
 # ROS2 Launch启动文件配置
 
@@ -2357,8 +2166,6 @@ package/
 ```
 
 ---
-
-<!-- slide -->
 
 ## 2. Python Launch文件
 
@@ -2384,8 +2191,6 @@ def generate_launch_description():
 ```
 
 ---
-
-<!-- slide -->
 
 ### 2.2 参数传递
 
@@ -2415,8 +2220,6 @@ def generate_launch_description():
 
 ---
 
-<!-- slide -->
-
 ### 2.3 包含其他Launch
 
 ```python
@@ -2443,8 +2246,6 @@ def generate_launch_description():
 
 ---
 
-<!-- slide -->
-
 ## 3. XML Launch文件
 
 ```xml
@@ -2463,8 +2264,6 @@ def generate_launch_description():
 
 ---
 
-<!-- slide -->
-
 ## 4. Launch命令
 
 ```bash
@@ -2480,8 +2279,6 @@ ros2 launch pkg launch.py arg1:=value1 arg2:=value2
 
 ---
 
-<!-- slide -->
-
 # ROS2 录制回放工具
 
 ## 1. Rosbag2 简介
@@ -2492,8 +2289,6 @@ ros2 launch pkg launch.py arg1:=value1 arg2:=value2
 - 调试和测试
 
 ---
-
-<!-- slide -->
 
 ## 2. 录制命令
 
@@ -2525,8 +2320,6 @@ ros2 bag record -a --compression-format zstd
 ```
 
 ---
-
-<!-- slide -->
 
 ## 3. 回放命令
 
@@ -2561,8 +2354,6 @@ ros2 bag play --topics /topic1 /topic2 <bag_name>
 
 ---
 
-<!-- slide -->
-
 ## 4. 常用命令汇总
 
 ```bash
@@ -2583,8 +2374,6 @@ ros2 bag fix <bag>
 ```
 
 ---
-
-<!-- slide -->
 
 # ROS2 URDF模型
 
@@ -2607,8 +2396,6 @@ package/
 ```
 
 ---
-
-<!-- slide -->
 
 ## 2. URDF基本结构
 
@@ -2651,8 +2438,6 @@ package/
 
 ---
 
-<!-- slide -->
-
 ## 3. 机器人状态发布器
 
 ### 3.1 C++ 状态发布器
@@ -2683,8 +2468,6 @@ rsp.publish_transforms(jnt_state)
 
 ---
 
-<!-- slide -->
-
 ## 4. 启动URDF
 
 ```python
@@ -2711,8 +2494,6 @@ def generate_launch_description():
 
 ---
 
-<!-- slide -->
-
 ## 5. 验证URDF
 
 ```bash
@@ -2724,8 +2505,6 @@ urdf_to_graphviz robot.urdf
 ```
 
 ---
-
-<!-- slide -->
 
 # ROS2 Gazebo仿真平台
 
@@ -2747,8 +2526,6 @@ gazebo
 ```
 
 ---
-
-<!-- slide -->
 
 ## 2. 创建仿真环境
 
@@ -2784,8 +2561,6 @@ gazebo
 
 ---
 
-<!-- slide -->
-
 ## 3. ROS2与Gazebo集成
 
 ### 3.1 安装桥接包
@@ -2806,8 +2581,6 @@ ros2 launch gazebo_ros launch/robot.launch.py
 
 ---
 
-<!-- slide -->
-
 ## 4. 常用命令
 
 ```bash
@@ -2822,8 +2595,6 @@ ros2 run ros_gz bridge <bridge_config>
 ```
 
 ---
-
-<!-- slide -->
 
 # ROS2 TF2坐标变换
 
@@ -2840,8 +2611,6 @@ ros2 run ros_gz bridge <bridge_config>
 - 自动插值
 
 ---
-
-<!-- slide -->
 
 ## 2. C++ TF2 使用
 
@@ -2885,8 +2654,6 @@ private:
 
 ---
 
-<!-- slide -->
-
 ### 2.2 监听变换
 
 ```cpp
@@ -2926,8 +2693,6 @@ private:
 
 ---
 
-<!-- slide -->
-
 ## 3. Python TF2 使用
 
 ### 3.1 广播变换
@@ -2960,8 +2725,6 @@ class TFBroadcaster(Node):
 
 ---
 
-<!-- slide -->
-
 ### 3.2 监听变换
 
 ```python
@@ -2989,8 +2752,6 @@ class TFListener(Node):
 
 ---
 
-<!-- slide -->
-
 ## 4. TF2 命令行工具
 
 ```bash
@@ -3005,8 +2766,6 @@ ros2 run tf2_ros static_transform_publisher x y z roll pitch yaw parent child
 ```
 
 ---
-
-<!-- slide -->
 
 ## 5. TF2 静态变换
 
@@ -3035,8 +2794,6 @@ Node(
 
 ---
 
-<!-- slide -->
-
 # The Transform Library
 
 ## 1. Overview
@@ -3046,8 +2803,6 @@ Node(
 - Supports multiple coordinate frames over time
 
 ---
-
-<!-- slide -->
 
 ## 2. Key Concepts
 
@@ -3065,8 +2820,6 @@ Node(
 - Interpolation for smooth transformations
 
 ---
-
-<!-- slide -->
 
 ## 3. Implementation
 
@@ -3088,8 +2841,6 @@ transform.transform.translation.x = 0.2;
 - Kinematic chains
 
 ---
-
-<!-- slide -->
 
 ## 4. Best Practices
 
