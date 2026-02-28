@@ -1,0 +1,37 @@
+1 、ROS2 简介  
+1 、ROS2 概述  
+ROS2 是第二代的 Robot Operating System ， ROS1 的升级版本，解决了 ROS1 存在的一些问题。 ROS2 最
+早出现的版本 Arden 是在 2017 年，随着版本的迭代，不断地更新与优化，现如今已经有了稳定的版本。
+与ROS1 相通过， Linux 版本与 ROS2 版本的选择也是有关系的，两者对应的版本如下。
+注意 ：根据自己的 Linux 版本，下载对应的 ROS2 版本，本系列课程以 Humble 版本为例进行讲解，
+课程中出现的 程序 和 案例 适用于所有 ros2 版本。
+2 、ROS2 特性  
+2.1 、ROS2 全面支持三种平台
+Ubuntu
+Mac OS X  
+Windows 10
+2.2 、实现了分布式架构
+取消 Master 中央节点，实现节点的分布式发现，发布 / 订阅，请求 / 响应通讯。
+2.3 、 支持实时
+2.4 、使用新版本的编程语言
+C++11
+Python3.5+
+2.5 、 使用了新的编译系统 Ament （ ROS 为 Catkin ）
+2.6 、ROS1 可以通过 rosbridge 和 ROS 2 通信
+3 、ROS2 与 ROS1 的区别  
+
+3.1 、平台  
+ROS1 目前来说仅支持在 Linux 系统中运行使用，常见的是在 Ubuntu 中搭建使用。而 ROS2 目前在
+Ubuntu 、 Windows 甚至嵌入式开发板上都可以搭建使用，平台更加广泛。
+3.2 、语言  
+C++
+ROS1 的核心是 C++03 ，而 ROS2 广泛使用 C++11 。
+Python
+ROS1 的 Python 使用版本是 Python2 ，而 ROS2 使用的 Python 版本至少是 3.5 以上， Foxy 使用的
+Python 版本是 3.8 。
+3.3 、中间件  
+ROS1 启动前需要开启 roscore ，这个 master 掌握所有的节点之间的通讯，而 ROS2 则没有，只有一个抽
+象的中间件接口，通过该接口进行传输数据。。目前，此接口的所有实现都基于  DDS 标准。这使得  
+ROS 2 能够提供各种优质的  Qos 服务策略，从而改善不同网络的通信。
+3.4 、编译命令  
+ROS1 的编译命令是 catkin_make ，而 ROS2 的编译命令使用 colcon build 命令。

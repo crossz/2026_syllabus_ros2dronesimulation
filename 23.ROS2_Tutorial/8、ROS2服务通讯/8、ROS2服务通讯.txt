@@ -1,0 +1,139 @@
+8 、ROS2 服务通讯  
+ 
+1 、服务通讯简介  
+服务通讯是一种基于请求响应的通信模型，在通信双方中，客户端发送请求数据到服务端，服务端响应
+结果给客户端。
+客户端 / 服务器模型如下：
+从服务的实现机制上来看，这种你问我答的形式叫做客户端 / 服务器模型，简称为 CS 模型，客户端在需要
+某些数据的时候，针对某个具体的服务，发送请求信息，服务器端收到请求之后，就会进行处理并反馈
+应答信息。
+这种通信机制在生活中也很常见，比如我们经常浏览的各种网页，此时你的电脑浏览器就是客户端，通
+过域名或者各种操作，向网站服务器发送请求，服务器收到之后返回需要展现的页面数据。
+ 
+2 、新建功能包  
+在工作空间 src 目录下：
+ 
+执行完上述命令，会创建 pkg_service 功能包，同时会创建一个 server_demo 的节点，并且已经配置好相
+关的配置文件ros2 pkg create pkg_service --build-type ament_python --dependencies rclpy --
+node-name server_demo
+
+ 
+3 、服务端实现  
+3.1 创建服务端  
+接下来编辑【 server_demo.py 】实现服务端的功能，添加如下代码：
+重点看下服务回调函数， Add2Ints_callback ，这里需要传入的参数除了 self ，还有就是 request 和
+response ， request 是服务需要的参数， response 是服务的反馈结果。 request.a 和 request.b 是
+request 部分的内容， response.sum 是 response 部分的内容，这里首先看看下 AddTwoInts 这个类型的
+数据是怎么样的。
+可以使用以下命令查看#导入相关的库文件
+import rclpy
+from rclpy.node import Node
+from example_interfaces.srv import AddTwoInts
+class Service_Server(Node):
+    def __init__(self,name):
+        super().__init__(name)
+        #创建一个服务端，使用的是 create_service 函数，传入的参数分别是：
+        #服务数据的数据类型、服务的名称，服务回调函数（也就是服务的内容）
+        self.srv = self.create_service(AddTwoInts, '/add_two_ints', 
+self.Add2Ints_callback)
+    #这里的服务回调函数的内容是把两个整型数相加，然后返回相加的结果    
+    def Add2Ints_callback(self,request,response):
+        response.sum = request.a + request.b
+        print("response.sum = ",response.sum)
+        return response
+def main():
+    rclpy.init()
+    server_demo = Service_Server("publisher_node")
+    rclpy.spin(server_demo)
+    server_demo.destroy_node()                     # 销毁节点对象
+    rclpy.shutdown()                               # 关闭ROS2 Python 接口
+ros2 interface show example_interfaces/srv/AddTwoInts
+
+“---” 把该类型的数据划分成了两个部分，上边代表的是 request ，下边代表的是 response 。然后各自的
+领域中又各自的变量，比如 int64 a 、 int64 b ，所有在再传入参数的是，需要指定 a 、 b 的值是是多少。同
+样，反馈的结果也需要指定 sum 的值是多少。
+ 
+3.2 编辑配置文件  
+打开 setup.py, 在 console_scripts 列表中添加
+ 
+3.3 编译功能包  
+编译功能包'server_demo = pkg_service.server_demo:main',
+colcon build --packages-select pkg_service
+
+ 
+3.4 运行程序  
+刷新环境变量然后运行节点
+ 
+运行后，由于没有调用该服务，所以没有反馈数据，可以通过命令行方式调用该服务，首先查询当前有
+哪些服务，另一个终端输入：
+/add_two_ints 就是我们需要调用的服务，通过以下命令进行调用，终端输入：
+这里我们把 a 的值赋值成 1 ， b 的值赋值成 4 ，也就是调用服务计算 1 和 4 的和：
+由上图可以看出，调用了服务后，反馈回来的结果是 5 ，运行服务端的终端也打印了反馈的值。  
+4 、客户端实现  ros2 run pkg_service server_demo
+ros2 service list
+ros2 service call /add_two_ints example_interfaces/srv/AddTwoInts "{a: 1,b: 4}"
+
+4.1 创建客户端  
+在【 server_demo.py 】同级目录下新建文件【 client_demo.py 】
+ 
+接下来编辑【 client_demo.py 】实现客户端的功能，添加如下代码：
+#导入相关的库
+import rclpy
+from rclpy.node import Node
+from example_interfaces.srv import AddTwoInts
+class Service_Client(Node):
+    def __init__(self,name):
+        super().__init__(name)
+        #创建客户端，使用的是 create_client 函数，传入的参数是服务数据的数据类型、服务的话题名
+称
+        self.client = self.create_client(AddTwoInts,'/add_two_ints')
+        # 循环等待服务器端成功启动
+        while not self.client.wait_for_service(timeout_sec=1.0):
+            print("service not available, waiting again...")
+        # 创建服务请求的数据对象
+        self.request = AddTwoInts.Request()
+        
+    def send_request(self): 
+        self.request.a = 10
+        self.request.b = 90
+        #发送服务请求
+        self.future = self.client.call_async(self.request)
+        
+def main():
+    rclpy.init() #节点初始化
+    service_client = Service_Client("client_node") #创建对象
+    service_client.send_request() #发送服务请求
+    while rclpy.ok():
+        rclpy.spin_once(service_client)
+        #判断数据是否处理完成
+        if service_client.future.done():
+            try:
+                #获得服务反馈的信息并且打印
+                response = service_client.future.result()
+                print("service_client.request.a = ",service_client.request.a)
+                print("service_client.request.b = ",service_client.request.b)
+
+ 
+4.2 编辑配置文件  
+打开 setup.py, 在 console_scripts 列表中添加
+ 
+4.3 编译功能包                  print("Result = ",response.sum)
+            except Exception as e:
+                service_client.get_logger().info('Service call failed %r' % 
+(e,))
+        break
+    service_client.destroy_node()                    
+    rclpy.shutdown()                              
+'client_demo = pkg_service.client_demo:main'
+colcon build --packages-select pkg_service
+
+ 
+ 
+4.4 运行程序  
+刷新环境变量然后运行节点
+ 
+先运行服务端，然后运行客户端，客户端提供 a=10 ， b=90 ，服务端进行求和，得到结果是 100 ，结果在
+两者终端打印。#启动服务端节点
+ros2 run pkg_service server_demo
+#启动客户端节点
+ros2 run pkg_service client_demo

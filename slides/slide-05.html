@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仿真价值：为什么需要数字孪生</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+        .slide-content {
+            width: 960px;
+            height: 540px;
+            position: relative;
+            transform-origin: center center;
+        }
+    </style>
+    <script>
+        function scaleSlide() {
+            const slide = document.querySelector('.slide-content');
+            if (!slide) return;
+            const slideWidth = 960;
+            const slideHeight = 540;
+            const scaleX = window.innerWidth / slideWidth;
+            const scaleY = window.innerHeight / slideHeight;
+            const scale = Math.min(scaleX, scaleY);
+            slide.style.width = slideWidth + 'px';
+            slide.style.height = slideHeight + 'px';
+            slide.style.transform = `scale(${scale})`;
+            slide.style.transformOrigin = 'center center';
+            slide.style.flexShrink = '0';
+        }
+        window.addEventListener('load', scaleSlide);
+        window.addEventListener('resize', scaleSlide);
+    </script>
+</head>
+<body>
+    <div class="slide-content" style="background: #1A1A1A;">
+        <!-- 背景装饰 -->
+        <svg width="100%" height="100%" style="position:absolute;top:0;left:0;pointer-events:none;">
+            <defs>
+                <pattern id="hex" x="0" y="0" width="50" height="86" patternUnits="userSpaceOnUse">
+                    <path d="M25 0 L50 14 L50 43 L25 57 L0 43 L0 14 Z" stroke="#FFD700" stroke-width="0.5" stroke-opacity="0.06" fill="none"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#hex)"/>
+        </svg>
+        
+        <!-- 主标题 -->
+        <div style="position:absolute; left:60px; top:30px;">
+            <p style="margin:0; font-size:32px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">仿真价值：为什么需要数字孪生？</p>
+            <p style="margin:8px 0 0 0; font-size:14px; color:#83C5BE; font-family:'Times New Roman', serif;">Simulation Value: Why Digital Twins Matter</p>
+        </div>
+        
+        <!-- 左侧：四大价值要点 -->
+        <div style="position:absolute; left:60px; top:120px; width:440px;">
+            <!-- 价值点1 -->
+            <div style="display:flex; margin-bottom:20px; align-items:flex-start;">
+                <div style="width:50px; height:50px; background:#FFD700; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                    <svg width="28" height="28" viewBox="0 0 28 28">
+                        <path d="M14 4 L24 10 L24 22 L14 28 L4 22 L4 10 Z" stroke="#1A1A1A" stroke-width="2" fill="none"/>
+                        <path d="M14 10 L14 18 M10 14 L18 14" stroke="#1A1A1A" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div style="margin-left:16px; flex:1;">
+                    <p style="margin:0 0 6px 0; font-size:16px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">"炸机"成本</p>
+                    <p style="margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.5;">真实无人机坠毁损失高达数万美元，包含设备损耗、数据丢失、地面财产损害及潜在人身伤害风险</p>
+                </div>
+            </div>
+            
+            <!-- 价值点2 -->
+<div style="display:flex; margin-bottom:20px; align-items:flex-start;">
+                <div style="width:50px; height:50px; background:#83C5BE; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                    <svg width="28" height="28" viewBox="0 0 28 28">
+                        <rect x="4" y="8" width="20" height="14" rx="2" stroke="#1A1A1A" stroke-width="2" fill="none"/>
+                        <path d="M8 14 L12 18 L20 10" stroke="#1A1A1A" stroke-width="2" fill="none"/>
+                    </svg>
+                </div>
+                <div style="margin-left:16px; flex:1;">
+                    <p style="margin:0 0 6px 0; font-size:16px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif;">数字孪生</p>
+                    <p style="margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.5;">在虚拟环境中测试算法，无需真实飞行即可验证控制策略，大幅降低研发风险与成本</p>
+                </div>
+            </div>
+            
+            <!-- 价值点3 -->
+            <div style="display:flex; margin-bottom:20px; align-items:flex-start;">
+                <div style="width:50px; height:50px; background:#83C5BE; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                    <svg width="28" height="28" viewBox="0 0 28 28">
+                        <circle cx="14" cy="14" r="10" stroke="#1A1A1A" stroke-width="2" fill="none"/>
+                        <path d="M14 8 L14 14 L18 17" stroke="#1A1A1A" stroke-width="2" fill="none"/>
+                    </svg>
+                </div>
+                <div style="margin-left:16px; flex:1;">
+                    <p style="margin:0 0 6px 0; font-size:16px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif;">快速迭代</p>
+                    <p style="margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.5;">仿真环境下一天完成数千次测试，相比真实飞行效率提升百倍，加速算法优化周期</p>
+                </div>
+            </div>
+            
+            <!-- 价值点4 -->
+            <div style="display:flex; align-items:flex-start;">
+                <div style="width:50px; height:50px; background:#FF6B6B; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                    <svg width="28" height="28" viewBox="0 0 28 28">
+                        <path d="M4 20 L14 6 L24 20" stroke="#1A1A1A" stroke-width="2" fill="none"/>
+                        <path d="M10 20 L14 14 L18 20" stroke="#1A1A1A" stroke-width="2" fill="none"/>
+                    </svg>
+                </div>
+                <div style="margin-left:16px; flex:1;">
+                    <p style="margin:0 0 6px 0; font-size:16px; font-weight:600; color:#FF6B6B; font-family:'Times New Roman', serif;">极端场景</p>
+                    <p style="margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.5;">模拟暴风雨、电磁干扰、GPS信号丢失等危险情况，训练无人机应急决策能力</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 右侧：数据可视化 -->
+        <div style="position:absolute; right:60px; top:120px; width:400px; height:380px; background:#232323; border-radius:12px; border:1px solid #333;">
+            <p style="margin:20px 0 0 20px; font-size:16px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">仿真效率对比</p>
+            
+            <!-- 对比图表 -->
+            <div style="position:absolute; top:60px; left:30px; right:30px;">
+                <!-- 真实飞行 -->
+                <div style="margin-bottom:24px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                        <span style="font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif;">真实飞行测试</span>
+                        <span style="font-size:13px; color:#83C5BE; font-family:'Times New Roman', serif;">50次/天</span>
+                    </div>
+                    <svg width="340" height="16" viewBox="0 0 340 16">
+                        <rect width="340" height="16" rx="8" fill="#333"/>
+                        <rect width="34" height="16" rx="8" fill="#83C5BE"/>
+                    </svg>
+                </div>
+                
+                <!-- 仿真测试 -->
+                <div style="margin-bottom:24px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                        <span style="font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif;">仿真测试</span>
+                        <span style="font-size:13px; color:#FFD700; font-family:'Times New Roman', serif;">5000次/天</span>
+                    </div>
+                    <svg width="340" height="16" viewBox="0 0 340 16">
+                        <rect width="340" height="16" rx="8" fill="#333"/>
+                        <rect width="340" height="16" rx="8" fill="#FFD700"/>
+                    </svg>
+                </div>
+                
+                <!-- 效率提升 -->
+                <div style="background:#2A2A2A; border-radius:8px; padding:16px; text-align:center;">
+                    <p style="margin:0; font-size:12px; color:#83C5BE; font-family:'Times New Roman', serif;">效率提升</p>
+                    <p style="margin:8px 0 0 0; font-size:36px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">100x</p>
+                </div>
+            </div>
+            
+            <!-- 成本对比 -->
+            <div style="position:absolute; bottom:20px; left:30px; right:30px; display:flex; gap:20px;">
+                <div style="flex:1; background:#2A2A2A; border-radius:8px; padding:12px; text-align:center;">
+                    <p style="margin:0; font-size:11px; color:#83C5BE; font-family:'Times New Roman', serif;">单次真实飞行成本</p>
+                    <p style="margin:8px 0 0 0; font-size:20px; font-weight:600; color:#FF6B6B; font-family:'Times New Roman', serif;">$5000</p>
+                </div>
+                <div style="flex:1; background:#2A2A2A; border-radius:8px; padding:12px; text-align:center;">
+                    <p style="margin:0; font-size:11px; color:#83C5BE; font-family:'Times New Roman', serif;">单次仿真成本</p>
+                    <p style="margin:8px 0 0 0; font-size:20px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif;">$0.5</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页码角标 -->
+        <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+            <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">05</text>
+        </svg>
+    </div>
+</body>
+</html>

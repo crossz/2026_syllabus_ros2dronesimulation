@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>核心概念：消息队列工作原理</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+        .slide-content {
+            width: 960px;
+            height: 540px;
+            position: relative;
+            transform-origin: center center;
+        }
+    </style>
+    <script>
+        function scaleSlide() {
+            const slide = document.querySelector('.slide-content');
+            if (!slide) return;
+            const slideWidth = 960;
+            const slideHeight = 540;
+            const scaleX = window.innerWidth / slideWidth;
+            const scaleY = window.innerHeight / slideHeight;
+            const scale = Math.min(scaleX, scaleY);
+            slide.style.width = slideWidth + 'px';
+            slide.style.height = slideHeight + 'px';
+            slide.style.transform = `scale(${scale})`;
+            slide.style.transformOrigin = 'center center';
+            slide.style.flexShrink = '0';
+        }
+        window.addEventListener('load', scaleSlide);
+        window.addEventListener('resize', scaleSlide);
+    </script>
+</head>
+<body>
+    <div class="slide-content" style="background: #1A1A1A;">
+        <!-- 背景装饰 -->
+        <svg width="100%" height="100%" style="position:absolute;top:0;left:0;pointer-events:none;">
+            <defs>
+                <pattern id="grid" x="0" y="0" width="35" height="35" patternUnits="userSpaceOnUse">
+                    <path d="M0 0 L35 0 M0 0 L0 35" stroke="#FFD700" stroke-width="0.5" stroke-opacity="0.06"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)"/>
+        </svg>
+        
+        <!-- 主标题 -->
+        <div style="position:absolute; left:60px; top:30px;">
+            <p style="margin:0; font-size:32px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">核心概念：消息队列 (Message Queue)</p>
+            <p style="margin:8px 0 0 0; font-size:14px; color:#83C5BE; font-family:'Times New Roman', serif;">Core Concept: Message Queue Working Principle</p>
+        </div>
+        
+        <!-- 生产者/消费者模型图解 -->
+        <div style="position:absolute; left:60px; top:120px; width:500px; height:280px; background:#232323; border-radius:12px; border:1px solid #333;">
+            <p style="margin:16px 0 0 20px; font-size:16px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">生产者/消费者模型</p>
+            
+            <!-- 模型图 -->
+            <div style="position:absolute; top:50px; left:20px; right:20px; height:180px;">
+                <!-- 生产者 -->
+                <div style="position:absolute; left:0; top:20px; width:80px; text-align:center;">
+                    <div style="width:60px; height:60px; background:#FFD700; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 8px;">
+                        <svg width="28" height="28" viewBox="0 0 28 28">
+                            <rect x="6" y="8" width="16" height="4" rx="2" fill="#1A1A1A"/>
+                            <rect x="6" y="14" width="16" height="4" rx="2" fill="#1A1A1A"/>
+                            <rect x="6" y="20" width="16" height="4" rx="2" fill="#1A1A1A"/>
+                        </svg>
+                    </div>
+<p style="margin:0; font-size:13px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">生产者</p>
+                    <p style="margin:4px 0 0 0; font-size:10px; color:#83C5BE; font-family:'Times New Roman', serif;">Producer</p>
+                </div>
+                
+                <!-- 消息队列 -->
+                <div style="position:absolute; left:100px; top:0; width:180px; height:160px; display:flex; flex-direction:column;">
+                    <div style="flex:1; background:#2A2A2A; border:2px dashed #83C5BE; border-radius:8px; display:flex; align-items:center; justify-content:center;">
+                        <div style="text-align:center;">
+                            <p style="margin:0; font-size:14px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif;">消息队列</p>
+                            <p style="margin:4px 0 0 0; font-size:10px; color:#83C5BE; font-family:'Times New Roman', serif;">Message Queue</p>
+                            <p style="margin:8px 0 0 0; font-size:11px; color:#666; font-family:'Times New Roman', serif;">[缓冲区 Buffer]</p>
+                        </div>
+                    </div>
+                    <!-- 队列消息示意 -->
+                    <div style="position:absolute; top:40px; left:10px; right:10px; display:flex; flex-direction:column; gap:4px;">
+                        <div style="background:#FFD700; padding:4px 8px; border-radius:4px;">
+                            <p style="margin:0; font-size:9px; color:#1A1A1A; font-family:'Times New Roman', serif;">msg_001: /drone/pose</p>
+                        </div>
+                        <div style="background:#FFD700; padding:4px 8px; border-radius:4px;">
+                            <p style="margin:0; font-size:9px; color:#1A1A1A; font-family:'Times New Roman', serif;">msg_002: /sensor/gps</p>
+                        </div>
+                        <div style="background:#FFD700; padding:4px 8px; border-radius:4px; opacity:0.6;">
+                            <p style="margin:0; font-size:9px; color:#1A1A1A; font-family:'Times New Roman', serif;">msg_003: /cmd/velocity</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 箭头 -->
+                <svg width="30" height="80" style="position:absolute; left:285px; top:40px;">
+                    <path d="M0 40 L20 40 M14 34 L20 40 L14 46" stroke="#FFD700" stroke-width="2" fill="none"/>
+                </svg>
+                
+                <!-- 消费者 -->
+                <div style="position:absolute; right:0; top:20px; width:80px; text-align:center;">
+                    <div style="width:60px; height:60px; background:#83C5BE; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 8px;">
+                        <svg width="28" height="28" viewBox="0 0 28 28">
+                            <circle cx="14" cy="14" r="6" fill="#1A1A1A"/>
+                            <path d="M6 24 L14 6 L22 24" fill="#1A1A1A"/>
+                        </svg>
+                    </div>
+                    <p style="margin:0; font-size:13px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif;">消费者</p>
+                    <p style="margin:4px 0 0 0; font-size:10px; color:#83C5BE; font-family:'Times New Roman', serif;">Consumer</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 四大特性说明 -->
+        <div style="position:absolute; right:60px; top:120px; width:340px; height:380px;">
+            <!-- 特性1: 解耦 -->
+            <div style="background:#232323; border-radius:8px; padding:14px; margin-bottom:12px; border-left:3px solid #FFD700;">
+                <p style="margin:0 0 6px 0; font-size:14px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">解耦 Decoupling</p>
+                <p style="margin:0; font-size:11px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.5;">生产者和消费者无需直接连接，各自独立演进，降低系统耦合度</p>
+            </div>
+            
+            <!-- 特性2: 缓冲 -->
+            <div style="background:#232323; border-radius:8px; padding:14px; margin-bottom:12px; border-left:3px solid #83C5BE;">
+                <p style="margin:0 0 6px 0; font-size:14px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif;">缓冲区 Buffer</p>
+                <p style="margin:0; font-size:11px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.5;">消息队列暂存数据，平衡生产速度与消费速度的时间差</p>
+            </div>
+            
+            <!-- 特性3: 削峰 -->
+            <div style="background:#232323; border-radius:8px; padding:14px; margin-bottom:12px; border-left:3px solid #FF6B6B;">
+                <p style="margin:0 0 6px 0; font-size:14px; font-weight:600; color:#FF6B6B; font-family:'Times New Roman', serif;">削峰填谷 Peak Shaving</p>
+                <p style="margin:0; font-size:11px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.5;">应对突发流量，高峰期消息堆积在队列中，避免系统过载崩溃</p>
+            </div>
+            
+            <!-- 特性4: 异步 -->
+            <div style="background:#232323; border-radius:8px; padding:14px; border-left:3px solid #9B59B6;">
+                <p style="margin:0 0 6px 0; font-size:14px; font-weight:600; color:#9B59B6; font-family:'Times New Roman', serif;">异步通信 Asynchronous</p>
+                <p style="margin:0; font-size:11px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.5;">发送方无需等待响应，继续处理其他任务，提升系统吞吐量</p>
+            </div>
+        </div>
+        
+        <!-- 底部示意图 -->
+        <div style="position:absolute; left:60px; bottom:30px; width:840px; height:80px; background:#1A1A1A; border-radius:8px; border:1px solid #333; display:flex; align-items:center; padding:0 20px;">
+            <div style="flex:1; text-align:center;">
+                <p style="margin:0; font-size:11px; color:#83C5BE; font-family:'Times New Roman', serif;">Topic/主题</p>
+                <p style="margin:4px 0 0 0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif;">/drone/sensor_data</p>
+            </div>
+            <div style="flex:1; text-align:center; border-left:1px solid #333;">
+                <p style="margin:0; font-size:11px; color:#83C5BE; font-family:'Times New Roman', serif;">Qos/服务质量</p>
+                <p style="margin:4px 0 0 0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif;">RELIABLE / BEST_EFFORT</p>
+            </div>
+            <div style="flex:1; text-align:center; border-left:1px solid #333;">
+                <p style="margin:0; font-size:11px; color:#83C5BE; font-family:'Times New Roman', serif;">协议</p>
+                <p style="margin:4px 0 0 0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif;">DDS / MQTT / ZeroMQ</p>
+            </div>
+        </div>
+        
+        <!-- 页码角标 -->
+        <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+            <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">07</text>
+        </svg>
+    </div>
+</body>
+</html>

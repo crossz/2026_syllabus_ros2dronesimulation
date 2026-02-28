@@ -1,0 +1,128 @@
+22 、 ROS2 Gazebo 仿真平台  
+ 
+1 、Gazebo 简介  
+Gazebo 是 ROS 系统中最为常用的 三维物理仿真平台 ，支持动力学引擎，可以实现高质量的图形渲染，不
+仅可以模拟机器人及周边环境，还可以加入摩擦力、弹性系数等物理属性。
+比如我们要开发一个火星车，那就可以在 Gazebo 中模拟火星表面的环境，再比如我们做无人机，续航和
+限飞都导致我们没有办法频繁用实物做实验，此时不妨使用 Gazebo 先做仿真，等算法开发的差不多了，
+再部署到实物上来运行。
+所以类似 Gazebo 这样的仿真平台，可以帮助我们验证机器人算法、优化机器人设计、测试机器人场景应
+用，为机器人开发提供更多可能。
+注意：本章节只做了解学习，教程中并未配置该环境，因为这边直接用的真机调试
+ 
+2 、安装运行  
+通过命令 apt 进行安装 gazebo
+运行 gazebo
+通过以下命令启动或直接通过桌面图标启动
+sudo apt install ros-${ROS_DISTRO}-gazebo-*
+gazebo --verbose -s libgazebo_ros_init.so -s libgazebo_ros_factory.so 
+
+ 
+运行之后可以看到如下页面：
+可选项：为保证模型顺利加载，可以将请将离线模型下载并放置到 ~/.gazebo/models 路径下，下
+载链接如下： https://github.com/osrf/gazebo_models
+ 
+3 、gazebo 启动节点与服务  
+1 、查看节点
+正确返回： /gazebo
+2 、查看节点的对外提供的服务：ros2 node list
+
+可以看出如下的结果：
+出去最后几个常规的服务，我们只注意前三个特殊的服务：
+/spawn_entity ，用于加载模型到 gazebo 中
+/get_model_list ，用于获取模型列表
+/delete_entity ，用于删除 gazbeo 中已经加载的模型
+ 
+4 、创建功能包  
+创建一个 myrobot 功能包，用来存放我们的 URDF 模型文件和启动文件
+进入到 myrobot 的目录下，创建 launch 、 urdf 文件夹，在 urdf 文件夹下创建一个
+demo01_base.urdf 文件，这个文件就是一个简单的演示文件，只有一个基础的立方体。ros2 service list
+ros2 pkg create myrobot --build-type ament_cmake
+<robot name="myrobot">
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <box size="0.2 0.2 0.2"/>
+            </geometry>
+            <origin xyz="0.0 0.0 0.0"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.2 0.2 0.2"/>
+            </geometry>
+            <origin xyz="0.0 0.0 0.0"/>
+        </collision>
+        <inertial>
+            <mass value="0.1"/>
+            <inertia ixx="0.000190416666667" ixy="0" ixz="0" iyy="0.0001904" 
+iyz="0" izz="0.00036"/>
+        </inertial>
+    </link>
+    <gazebo reference="base_link">
+        <material>Gazebo/Red</material>
+    </gazebo>
+</robot>
+
+ 
+5 、编写 launch 启动文件  
+launch 文件的编写， launch 文件主要启动两个部分，启动 Gazebo 文件，然后将机器人模型加载到
+Gazebo 中。
+这个命令就是启动 Gazebo 的，就是一个启动命令，并没有特别复杂的地方，下面是加载模型的命令：
+这个命令注意后面两个参数 -entity 是模型文件中的名字， -file 是通过 urdf 文件加载参数，后面我们还可
+以看到通过 topic 话题加载模型的。在 launch 目录下新建一个 bringup_model.launch.py 文件完整的启动
+文件如下：start_gazebo_cmd =  ExecuteProcess(
+        cmd=['gazebo', '--verbose','-s', 'libgazebo_ros_init.so', '-s', 
+'libgazebo_ros_factory.so'],
+        output='screen')
+ spawn_entity_cmd = Node(
+        package='gazebo_ros', 
+        executable='spawn_entity.py',
+        arguments=['-entity', robot_name_in_model,  '-file', urdf_model_path ], 
+output='screen')
+import os
+from launch import LaunchDescription
+from launch.actions import ExecuteProcess
+from launch_ros.actions import Node
+from launch_ros.substitutions import FindPackageShare
+from launch_ros.parameter_descriptions import ParameterValue
+from launch.substitutions import Command
+def generate_launch_description():
+    robot_name_in_model = 'myrobot'
+    package_name = 'myrobot'
+    urdf_name = "demo01_base.urdf"
+   
+    ld = LaunchDescription()
+    pkg_share = FindPackageShare(package=package_name).find(package_name) 
+    urdf_model_path = os.path.join(pkg_share, f'urdf/{urdf_name}')
+   
+    # Start Gazebo server
+    start_gazebo_cmd =  ExecuteProcess(
+        cmd=['gazebo', '--verbose','-s', 'libgazebo_ros_init.so', '-s', 
+'libgazebo_ros_factory.so'],
+        output='screen')
+    # Launch the robot
+    spawn_entity_cmd = Node(
+        package='gazebo_ros', 
+        executable='spawn_entity.py',
+        arguments=['-entity', robot_name_in_model,  '-file', urdf_model_path ], 
+output='screen')
+    ld.add_action(start_gazebo_cmd)
+
+在 Cmakelist 中填入以下内容，用于将我们的 urdf 和 launch 文件夹安装进 install 目录下
+ 
+之后编译运行功能包
+ 
+刷新环境变量然后运行 launch 启动文件
+ 
+启动之后可以看到如下的 Gazebo 模型：    ld.add_action(spawn_entity_cmd)
+    return ld
+install(
+    DIRECTORY urdf launch
+    DESTINATION share/${PROJECT_NAME}
+)
+colcon build --packages-select myrobot
+ros2 launch myrobot bringup_model.launch.py
+
+可以看到红色的模型，因为最后加上了 Gazebo 的标签设置。
+ 
+ 

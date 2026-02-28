@@ -1,0 +1,79 @@
+11 、 ROS2 参数服务案例  
+ 
+1 、参数简介  
+类似 C++ 编程中的全局变量，可以便于在多个程序中共享某些数据，参数是 ROS 机器人系统中的全局字
+典，可以运行多个节点中共享数据。
+在ROS 系统中，参数是以全局字典的形态存在的，什么叫字典？就像真实的字典一样，由名称和数值组
+成，也叫做键和值，合成键值。或者我们也可以理解为，就像编程中的参数一样，有一个参数名  ，然后
+跟一个等号，后边就是参数值了，在使用的时候，访问这个参数名即可。
+参数的特性非常丰富，比如某一个节点共享了一个参数，其他节点都可以访问，如果某一个节点对参数
+进行了修改，其他节点也有办法立刻知道，从而获取最新的数值。
+ 
+2 、小海龟例程中的参数  
+在小海龟的例程中，仿真器也提供了不少参数，我们一起来通过这个例程，熟悉下参数的含义和命令行
+的使用方法。
+由于这里要显示 GUI ，为方便操作，以下案例在教程配套的虚拟机中演示
+1 、虚拟机启动两个终端，分别运行小海龟仿真器和键盘控制节点：
+ 
+2 、虚拟机启动一个终端，并使用如下命令查看参数列表ros2 run turtlesim turtlesim_node
+ros2 run turtlesim turtle_teleop_key
+
+ 
+3 、参数查询与修改
+如果想要查询或者修改某个参数的值，可以在 param 命令后边跟 get 或者 set 子命令：
+4 、参数文件保存与加载
+一个一个查询 / 修改参数太麻烦了，不如试一试参数文件， ROS 中的参数文件使用 yaml 格式，可以在
+param 命令后边跟 dump 子命令，将某个节点的参数都保存到文件中，或者通过 load 命令一次性加载某
+个参数文件中的所有内容：
+ 
+3 、参数案例  
+3.1 、新建功能包  
+在工作空间的 src 目录下新建功能包ros2 param list
+ros2 param describe turtlesim background_b   # 查看某个参数的描述信息
+ros2 param get turtlesim background_b        # 查询某个参数的值
+ros2 param set turtlesim background_b 10     # 修改某个参数的值
+ros2 param dump turtlesim >> turtlesim.yaml  # 将某个节点的参数保存到参数文件中
+ros2 param load turtlesim turtlesim.yaml     # 一次性加载某一个文件中的所有参数
+ros2 pkg create pkg_param --build-type ament_python --dependencies rclpy --node-
+name param_demo
+
+执行完上述命令，会创建 pkg_param 功能包，同时会创建一个 param_demo 的节点，并且已经配置好相
+关的配置文件
+ 
+3.2 、代码实现  
+接下来编辑【 param_demo.py 】实现发布方的功能，添加如下代码：
+import rclpy                                     # ROS2 Python 接口库
+from rclpy.node import Node                    # ROS2 节点类
+class ParameterNode(Node):
+    def __init__(self, name):
+        super().__init__(name)                                    # ROS2节点父类初
+始化
+        self.timer = self.create_timer(2, self.timer_callback)    # 创建一个定时器
+（单位为秒的周期，定时执行的回调函数）
+        self.declare_parameter('robot_name', 'muto')              # 创建一个参数，
+并设置参数的默认值
+    def timer_callback(self):                                      # 创建定时器周期
+执行的回调函数
+        robot_name_param = 
+self.get_parameter('robot_name').get_parameter_value().string_value   # 从ROS2系统
+中读取参数的值
+        self.get_logger().info('Hello %s!' % robot_name_param)     # 输出日志信息，
+打印读取到的参数值
+def main(args=None):                                 # ROS2节点主入口 main 函数
+    rclpy.init(args=args)                            # ROS2 Python 接口初始化
+    node = ParameterNode("param_declare")            # 创建ROS2节点对象并进行初始化
+    rclpy.spin(node)                                 # 循环等待 ROS2 退出
+
+ 
+3.3 、编译功能包  
+ 
+3.4 、运行程序  
+先刷新环境变量，然后运行节点
+ 
+开启另一个终端，将 robot_name 设置为 robot ：
+终端中可以看到循环打印的日志信息，其中的 “muto” 是我们默认设置的一个参数值，参数名称是
+“robot_name” ，通过命令行修改这个参数后，看到终端中也跟着变化了。    node.destroy_node()                              # 销毁节点对象
+    rclpy.shutdown()                                 # 关闭ROS2 Python 接口
+colcon build --packages-select pkg_param
+ros2 run pkg_param param_demo
+ros2 param set param_declare robot_name robot

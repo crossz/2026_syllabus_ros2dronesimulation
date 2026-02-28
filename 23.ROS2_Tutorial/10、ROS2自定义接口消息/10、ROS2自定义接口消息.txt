@@ -1,0 +1,82 @@
+10 、 ROS2 自定义接口消息  
+ 
+1 、通讯接口简介  
+在ROS 系统中，无论话题、服务还是动作，都会用到一个重要的概念 —— 通信接口。
+通信并不是一个人自言自语，而是两个甚至更多个人，你来我往的交流，交流的内容是什么呢？为了让
+大家都好理解，我们可以给传递的数据定义一个标准的结构，这就是通信接口。
+接口可以让程序之间的依赖降低，便于我们使用别人的代码，也方便别人使用我们的代码，这就是 ROS
+的核心目标，减少重复造轮子。
+ROS 有三种常用的通信机制，分别是话题、服务、动作，通过每一种通信种定义的接口，各种节点才能
+有机的联系到一起。
+ 
+2 、创建自定义接口流程  
+自定义接口消息的流程与在功能包中编写可执行程序的流程类似，主要步骤如下：
+1. 创建接口功能包；
+2. 创建并编辑  .msg 文件  、 .srv 文件、 .action 文件
+3. 编辑配置文件；
+4. 编译；
+5. 测试。
+ 
+3 、创建动作通信自定义接口  
+在【 11 、 ROS2 动作通讯服务端实现】案例中，我们已经演示过如果创建动作通讯接口的完整流程，大
+家可以先回去复习一下，这里就不再赘述。
+ 
+
+4 、创建话题通信自定义接口  
+1 、在【 ROS2 动作通讯服务端实现】课程中我们已经创建了自定义接口功能包，功能包 pkg_interfaces
+下新建  msg 文件夹， msg 文件夹下新建 Person.msg 文件，文件中输入如下内容：
+ 
+2 、在 package.xml 和 CMakeLists.txt 中添加如下配置：
+CMakeLists.txt
+package.xmlstring   name
+int32    age
+float64  height
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "action/Progress.action"
+  "msg/Person.msg"
+)
+<buildtool_depend>rosidl_default_generators</buildtool_depend>
+<exec_depend>rosidl_default_runtime</exec_depend>
+<depend>action_msgs</depend>
+<member_of_group>rosidl_interface_packages</member_of_group>
+
+ 
+3 、终端中进入当前工作空间，编译功能包：
+ 
+4 、测试接口是否正常
+先刷新环境变量
+查看接口类型
+正常情况下，终端将会输出与 Person.msg 文件一致的内容。
+colcon build --packages-select pkg_interfaces
+source install/setup.bash 
+ros2 interface show pkg_interfaces/msg/Person
+
+ 
+5 、创建服务通信自定义接口  
+1 、在【 ROS2 动作通讯服务端实现】课程中我们已经创建了自定义接口功能包，功能包 pkg_interfaces
+下新建 srv 文件夹， srv 文件夹下新建 Add.srv 文件，文件中输入如下内容：
+ 
+2 、在 package.xml 和 CMakeLists.txt 中添加如下配置：
+CMakeLists.txt
+package.xml
+ int32 num1
+int32 num2
+---
+int32 sum
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "action/Progress.action"
+  "msg/Person.msg"
+  "srv/Add.srv"
+)
+<buildtool_depend>rosidl_default_generators</buildtool_depend>
+<exec_depend>rosidl_default_runtime</exec_depend>
+<depend>action_msgs</depend>
+<member_of_group>rosidl_interface_packages</member_of_group>
+
+3 、终端中进入当前工作空间，编译功能包：
+4 、测试
+正常情况下，终端将会输出与 Person.msg 文件一致的内容。
+cd ~/yahboomcar_ros2_ws/yahboomcar_ws
+colcon build --packages-select pkg_interfaces
+source install/setup.bash
+ros2 interface show pkg_interfaces/srv/Add

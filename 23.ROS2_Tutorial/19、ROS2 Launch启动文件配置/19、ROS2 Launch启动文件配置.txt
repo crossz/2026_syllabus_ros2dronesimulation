@@ -1,0 +1,420 @@
+19 、 ROS2 Launch 启动文件配置  
+ 
+1 、launch 介绍  
+到目前为止，每当我们运行一个 ROS 节点，都需要打开一个新的终端运行一个命令。机器人系统中节点
+很多，每次都这样启动好麻烦呀。有没有一种方式可以一次性启动所有节点呢？答案当然是肯定的，那
+就是 Launch 启动文件，它是 ROS 系统中多节点启动与配置的一种脚本。
+ROS2 中， launch 用于多节点启动和配置程序运行参数等功能， ROS2 的 launch 文件格式有 xml 、 yaml 和
+python 格式。本节课程以 python 格式的 launch 文件为例，相对于另外两种格式， python 格式的更加灵
+活：
+python 拥有众多的函数库，可以在启动文件中使用；
+ROS2 通用启动特性和特定启动特性是用 Python 编写的，因此可以访问 XML 和 YAML 可能没有公开
+的启动特性；
+使用 python 语言编写 ROS2 launch 文件，最主要的是把每个节点、文件、脚本等抽象成一个 action ，用
+统一的接口来启动。
+ 
+参考资料：
+launch 系统设计文档 :ROS 2 launch 系统设计文档
+launch 官方 API 文档： launch API 文档（随官方更新）
+ 
+ 
+准备工作，创建功能包存放程序文件
+ 
+2 、编写单个 Node 节点的 launch  
+2.1 、新建 launch 文件  
+在功能包下新建一个 launch 文件夹，然后在 launch 文件夹内新建【 single_node_launch.py 】文件，把
+以下内容复制到该文件中：ros2 pkg create learn_launch --build-type ament_python
+
+ 
+2.2 、配置 setup.py 文件  
+launch 文件命名常以 LaunchName_launch.py ，其中， LaunchName 自定义， _launch.py 是常认为固定
+的。需要修改功能包下的 setup.py 文件，修改内容为添加 launch 路径下的文件，编译才能生成执行的 .py
+文件，from launch import LaunchDescription
+from launch_ros.actions import Node
+def generate_launch_description():
+    node = Node(
+        package='pkg_helloworld_py',
+        executable='helloworld',
+        output='screen'
+    )
+    return LaunchDescription([node])
+#1、导入相关的头文件
+import os
+from glob import glob
+#2、在data_files 的列表中，加上 launch 路径以及路径下的 launch.py 文件
+(os.path.join('share',package_name,'launch'),glob(os.path.join('launch','*launch
+.py')))
+
+ 
+2.3 、编译功能包  
+ 
+2.4 、运行程序  
+刷新环境变量，然后运行 launch 文件
+colcon build --packages-select learn_launch
+ros2 launch learn_launch single_node_launch.py
+
+2.5 、源码分析  
+1 、导入相关库
+2 、定义一个函数 generate_launch_description ，并且返回一个 launch_description
+定义了一个变量 node 作为一个节点启动的返回值，调用 Node 函数，启动重要的两个参数， package 和
+executable 。
+package ：表示功能包，代表功能包的名字。
+executable ：表示执行的程序，可执行程序的名字。
+最后调用 LaunchDescription 函数传入 node 参数执行返回。
+ 
+3 、编写多个 Node 节点的 launch  
+3.1 、新建 launch 文件  
+新建【 multi_node_launch.py 】文件，添加如下内容：
+ from launch import LaunchDescription
+from launch_ros.actions import Node
+def generate_launch_description():
+    node = Node(
+        package='pkg_helloworld_py',
+        executable='helloworld',
+    )
+    return LaunchDescription([node])
+return LaunchDescription([node])
+from launch import LaunchDescription
+from launch_ros.actions import Node
+def generate_launch_description():
+    publisher_node = Node(
+        package='pkg_topic',
+        executable='publisher_demo',
+        output='screen'
+    )
+    subscriber_node = Node(
+        package='pkg_topic',
+        executable='subscriber_demo',
+        output='screen'
+    )
+    return LaunchDescription([
+        publisher_node,
+        subscriber_node
+    ])
+
+3.2 、编译功能包  
+ 
+3.3 、运行程序  
+刷新环境变量，然后运行 launch 文件
+ 
+如果终端没有打印内容，我们可以查看哪些节点启动  来验证是否有启动成功，终端输入：
+colcon build --packages-select learn_launch
+ros2 launch learn_launch multi_node_launch.py 
+ros2 node list
+
+3.4 、源码解析  
+大致与 simple_node_launch.py 差不多，不过是多了一个节点。
+4 、话题重映射案例  
+4.1 、新建 launch 文件  
+在multi_node_launch.py 同级目录下新建【 remap_name_launch.py 】文件，添加如下内容：
+ 
+4.2 、编译功能包  
+ 
+ 
+4.3 、运行程序  
+我们先看看没有重映射话题前， publisher_demo 节点发布的话题是什么：from launch import LaunchDescription
+from launch_ros.actions import Node
+def generate_launch_description():
+    publisher_node = Node(
+        package='pkg_topic',
+        executable='publisher_demo',
+        output='screen',
+        remappings=[("/topic_demo", "/topic_update")]
+    )
+    return LaunchDescription([
+        publisher_node
+    ])
+colcon build --packages-select learn_launch
+ros2 launch learn_launch multi_node_launch.py 
+ros2 topic list
+
+这里的话题是【 /topic_demo 】
+再刷新环境变量，运行重映射话题后的程序，看看变化：
+ 
+由上图可知，重映射了话题名称为【 /topic_update 】
+ 
+4.4 、源码分析  
+主要是加了以下部分：
+这里就是把原来的 /topic_demo 话题重映射成 /topic_update
+ ros2 launch learn_launch remap_name_launch.py
+ros2 topic list
+remappings=[("/topic_demo", "/topic_update")]
+
+5 、launch 文件嵌套启动另一个 launch 文件案例  
+5.1 、新建 launch 文件  
+在 multi_node_launch.py 同级目录下新建【 include_launch.py 】文件，添加如下内容：
+ 
+5.2 、编译功能包  
+ 
+5.3 、运行程序  
+刷新环境变量运行 launch 文件
+from launch import LaunchDescription
+from launch_ros.actions import Node 
+import os
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from ament_index_python.packages import get_package_share_directory
+def generate_launch_description():
+    hello_launch = IncludeLaunchDescription(PythonLaunchDescriptionSource(
+        [os.path.join(get_package_share_directory('learn_launch'), 'launch'),
+        '/multi_node_launch.py']),
+    )
+    return LaunchDescription([
+        hello_launch
+    ])
+colcon build --packages-select learn_launch
+ros2 launch learn_launch include_launch.py
+
+ 
+5.4 、源码分析  
+嵌套启动 launch 文件需要使用 launch 系统的  IncludeLaunchDescription 和
+PythonLaunchDescriptionSource 两个类
+os.path.join(get_package_share_directory('learn_launch') ：获取功能包的位置，其中
+的'learn_launch' 为功能包的名字；
+launch') ：表示存放功能包下存放 launch 文件的文件夹；
+/multi_node_launch.py' ：表示该功能包 launch 文件夹下的 /multi_node_launch.py 文件。
+ 
+6 、综合 launch 文件示例  
+本案例主要展示如何编写复杂的 launch 文件，程序的功能可忽略。
+6.1 、新建 launch 文件  
+在multi_node_launch.py 同级目录下新建【 complex_launch.py 】文件，添加如下内容：
+import os
+from ament_index_python import get_package_share_directory
+from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription
+from launch.actions import GroupAction
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.substitutions import LaunchConfiguration
+from launch.substitutions import TextSubstitution
+from launch_ros.actions import Node
+from launch_ros.actions import PushRosNamespace
+def generate_launch_description():
+    # args that can be set from the command line or a default will be used
+    background_r_launch_arg = DeclareLaunchArgument(
+        "background_r", default_value=TextSubstitution(text="0")
+    )
+    background_g_launch_arg = DeclareLaunchArgument(
+        "background_g", default_value=TextSubstitution(text="255")
+    )
+    background_b_launch_arg = DeclareLaunchArgument(
+        "background_b", default_value=TextSubstitution(text="0")
+    )
+    chatter_ns_launch_arg = DeclareLaunchArgument(
+        "chatter_ns", default_value=TextSubstitution(text="my/chatter/ns")
+    )
+    # include another launch file
+    launch_include = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(
+                get_package_share_directory('demo_nodes_cpp'),
+                'launch/topics/talker_listener.launch.py'))
+    )
+
+    # include another launch file in the chatter_ns namespace
+    launch_include_with_namespace = GroupAction(
+        actions=[
+            # push-ros-namespace to set namespace of included nodes
+            PushRosNamespace(LaunchConfiguration('chatter_ns')),
+            IncludeLaunchDescription(
+                PythonLaunchDescriptionSource(
+                    os.path.join(
+                        get_package_share_directory('demo_nodes_cpp'),
+                        'launch/topics/talker_listener.launch.py'))
+            ),
+        ]
+    )
+    # start a turtlesim_node in the turtlesim1 namespace
+    turtlesim_node = Node(
+            package='turtlesim',
+            namespace='turtlesim1',
+            executable='turtlesim_node',
+            name='sim'
+        )
+    # start another turtlesim_node in the turtlesim2 namespace
+    # and use args to set parameters
+    turtlesim_node_with_parameters = Node(
+            package='turtlesim',
+            namespace='turtlesim2',
+            executable='turtlesim_node',
+            name='sim',
+            parameters=[{
+                "background_r": LaunchConfiguration('background_r'),
+                "background_g": LaunchConfiguration('background_g'),
+                "background_b": LaunchConfiguration('background_b'),
+            }]
+        )
+    # perform remap so both turtles listen to the same command topic
+    forward_turtlesim_commands_to_second_turtlesim_node = Node(
+            package='turtlesim',
+            executable='mimic',
+            name='mimic',
+            remappings=[
+                ('/input/pose', '/turtlesim1/turtle1/pose'),
+                ('/output/cmd_vel', '/turtlesim2/turtle1/cmd_vel'),
+            ]
+        )
+    return LaunchDescription([
+        background_r_launch_arg,
+        background_g_launch_arg,
+        background_b_launch_arg,
+        chatter_ns_launch_arg,
+        launch_include,
+        launch_include_with_namespace,
+        turtlesim_node,
+        turtlesim_node_with_parameters,
+        forward_turtlesim_commands_to_second_turtlesim_node,
+    ])
+
+  
+6.2 、编译工作空间  
+ 
+6.3 、运行程序  
+终端刷新环境变量，运行 launch 文件
+在宿主机的 vnc 上会显示两子小乌龟。
+ colcon build --packages-select learn_launch
+ros2 launch learn_launch complex_launch.py
+
+启动键盘控制节点，并添加命名空间（因为我们在 launch 文件中启动节点时添加了命名空间）
+使用上下左右键控制海龟 1 运动，海龟 2 会完全模仿海龟 1 的行为
+ 
+6.4 、程序说明  
+程序主要是启动：
+1 、 demo_nodes_cpp 的 talker_listener 节点，
+2 、带命名空间的 talker_listener 节点
+3 、已 turtlesim1 为命名空间的小乌龟 1
+4 、已 turtlesim2 为命名空间的小乌龟 2
+5 、执行重映射，使两只乌龟都能听到相同的命令主题
+7 、xml 实现  
+7.1 、新建 launch 文件  
+在 complex_launch.py 同级目录下新建【 complex_launch.xml 】文件，添加如下内容：ros2 run turtlesim turtle_teleop_key --ros-args -r __ns:=/turtlesim1
+<launch>
+    <!-- args that can be set from the command line or a default will be used --
+>
+    <arg name="background_r" default="0"/>
+    <arg name="background_g" default="255"/>
+    <arg name="background_b" default="0"/>
+    <arg name="chatter_ns" default="my/chatter/ns"/>
+  
+    <!-- include another launch file -->
+    <include file="$(find-pkg-share 
+demo_nodes_cpp)/launch/topics/talker_listener.launch.py"/>
+
+7.2 、 setup.py 文件配置  
+需要配置编译文件，在编译时将我们 .xml 格式的 launch 文件拷贝到 install 安装目录下， ros 系统才
+能找到我们的文件
+ 
+7.3 、编译功能包  
+    <!-- include another launch file in the chatter_ns namespace-->
+    <group>
+      <!-- push-ros-namespace to set namespace of included nodes -->
+      <push-ros-namespace namespace="$(var chatter_ns)"/>
+      <include file="$(find-pkg-share 
+demo_nodes_cpp)/launch/topics/talker_listener.launch.py"/>
+    </group>
+  
+    <!-- start a turtlesim_node in the turtlesim1 namespace -->
+    <node pkg="turtlesim" exec="turtlesim_node" name="sim" 
+namespace="turtlesim1"/>
+    <!-- start another turtlesim_node in the turtlesim2 namespace
+        and use args to set parameters -->
+    <node pkg="turtlesim" exec="turtlesim_node" name="sim" 
+namespace="turtlesim2">
+      <param name="background_r" value="$(var background_r)"/>
+      <param name="background_g" value="$(var background_g)"/>
+      <param name="background_b" value="$(var background_b)"/>
+    </node>
+    <!-- perform remap so both turtles listen to the same command topic -->
+    <node pkg="turtlesim" exec="mimic" name="mimic">
+      <remap from="/input/pose" to="/turtlesim1/turtle1/pose"/>
+      <remap from="/output/cmd_vel" to="/turtlesim2/turtle1/cmd_vel"/>
+    </node>
+</launch> 
+colcon build --packages-select learn_launch
+
+ 
+7.4 、运行程序  
+终端输入：
+按照预期会出现两只小海龟，并且终端会打印日志信息
+启动键盘控制节点，并添加命名空间
+使用键盘控制启动海龟 1 进行运行，海龟 2 会完全模仿海龟 1 的行为
+ 
+8 、yaml 实现  
+8.1 、新建 launch 文件  
+在 complex_launch.py 同级目录下新建【 complex_launch.yaml 】文件，添加如下内容：ros2 launch learn_launch complex_launch.xml
+ros2 run turtlesim turtle_teleop_key --ros-args -r __ns:=/turtlesim1
+launch:
+
+# args that can be set from the command line or a default will be used
+- arg:
+    name: "background_r"
+    default: "0"
+- arg:
+    name: "background_g"
+    default: "255"
+- arg:
+    name: "background_b"
+    default: "0"
+- arg:
+    name: "chatter_ns"
+    default: "my/chatter/ns"
+# include another launch file
+- include:
+    file: "$(find-pkg-share 
+demo_nodes_cpp)/launch/topics/talker_listener.launch.py"
+# include another launch file in the chatter_ns namespace
+- group:
+    - push-ros-namespace:
+        namespace: "$(var chatter_ns)"
+    - include:
+        file: "$(find-pkg-share 
+demo_nodes_cpp)/launch/topics/talker_listener.launch.py"
+# start a turtlesim_node in the turtlesim1 namespace
+- node:
+    pkg: "turtlesim"
+    exec: "turtlesim_node"
+    name: "sim"
+    namespace: "turtlesim1"
+# start another turtlesim_node in the turtlesim2 namespace and use args to set 
+parameters
+- node:
+    pkg: "turtlesim"
+    exec: "turtlesim_node"
+    name: "sim"
+    namespace: "turtlesim2"
+    param:
+    -
+      name: "background_r"
+      value: "$(var background_r)"
+    -
+      name: "background_g"
+      value: "$(var background_g)"
+    -
+      name: "background_b"
+      value: "$(var background_b)"
+# perform remap so both turtles listen to the same command topic
+- node:
+    pkg: "turtlesim"
+    exec: "mimic"
+    name: "mimic"
+
+8.2 、配置  
+需要配置编译文件，在编译时将我们 .yaml 格式的 launch 文件拷贝到 install 安装目录下， ros 系统才
+能找到我们的文件
+ 
+ 
+8.3 、编译功能包  
+8.4 、运行程序  
+刷新环境变量然后运行
+按照预期会出现两只小海龟，并且终端会打印日志信息    remap:
+    -
+        from: "/input/pose"
+        to: "/turtlesim1/turtle1/pose"
+    -
+        from: "/output/cmd_vel"
+        to: "/turtlesim2/turtle1/cmd_vel" 
+colcon build --packages-select learn_launch
+ros2 launch learn_launch complex_launch.yaml
+
+启动键盘控制节点，并添加命名空间
+使用键盘控制启动海龟 1 进行运行，海龟 2 会完全模仿海龟 1 的行为ros2 run turtlesim turtle_teleop_key --ros-args -r __ns:=/turtlesim1

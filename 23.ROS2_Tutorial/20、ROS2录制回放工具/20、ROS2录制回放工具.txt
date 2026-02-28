@@ -1,0 +1,64 @@
+20 、 ROS2 录制回放工具  
+ 
+1 、录制回放工具简介  
+ROS2 中常用的录制回放工具 ——bag2 ，这个工具用于记录话题的数据。我们就可以使用这个指令将话
+题数据存储为文件  ，后续我们无需启动节点，直接可以将 bag 文件里的话题数据发布出来。
+这个工具在我们做一个真实机器人的时候非常有用，比如我们可以录制一段机器人发生问题的话题数
+据，录制完成后可以多次发布出来进行测试和实验，也可以将话题数据分享给别人用于验证算法等。
+我们尝试使用 bag 工具来记录话题数据，并二次重放。
+ 
+2 、使用教程  
+2.1 、启动要录制的话题节点  
+如ros2 demo 中的 talker ：
+2.2 、记录  
+/topic-name 为话题名字
+其它选项
+-o name 自定义输出文件的名字
+-s 存储格式
+目前仅支持 sqllite3, 其他还带拓展
+2.3 、查看录制出话题的信息  
+我们在播放一个视频前，可以通过文件信息查看视频的相关信息，比如话题记录的时间，大小，类型，
+数量ros2 run demo_nodes_py talker
+# 记录单个话题
+ros2 bag record /topic-name
+# 记录多个话题
+ros2 bag record topic-name1 topic-name2
+# 记录所有话题
+ros2 bag record -a
+ros2 bag record -o file-name topic-name
+# 假设录制的 file 为 rosbag2_2023_10_31-07_58_23
+ros2 bag info rosbag2_2023_10_31-07_58_23
+
+2.4 、播放并查看  
+2.4.1 、播放  
+接着我们就可以重新播放数据，使用下面的指令可以播放数据
+2.4.2 、查看  
+使用 ros2 的 topic 的指令来查看数据
+2.4.3 、播放选项  
+1 、倍速播放  -r
+-r 选项可以修改播放速率，比如  -r 值，比如  -r 10, 就是 10 倍速，十倍速播放话题
+2 、循环播放  -l
+单曲循环就是它了
+3 、播放单个话题
+ 
+3 、示例  
+3.1 、运行 talker 节点  
+3.2 、录制  
+如何停止录制呢？我们直接在终端中使用 Ctrl+C 指令打断录制即可ros2 bag play rosbag2_2023_10_31-07_58_23
+ros2 topic echo /chatter
+ros2 bag play rosbag2_2023_10_31-07_58_23 -r 10
+ros2 bag play rosbag2_2023_10_31-07_58_23 -l
+ros2 bag play rosbag2_2023_10_31-07_58_23 --topics /chatter
+ros2 run demo_nodes_py talker
+# 记录所有话题
+ros2 bag record -a
+
+接着你会在终端中发现多处一个文件夹，名字叫做 rosbag2_2023_10_31-08_21_21
+打开文件夹，可以看到内容
+  
+这样我们就完成了录制。
+3.3 、播放并查看  
+这里我们循环播放
+开启另一个终端查看 topic ：
+ros2 bag play rosbag2_2023_10_31-07_58_23 -l  
+ros2 topic echo /chatter

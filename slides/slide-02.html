@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>课程目录 - ROS2机器人操作系统</title>
+  <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+  }
+  .slide-content {
+    width: 960px;
+    height: 540px;
+    position: relative;
+    transform-origin: center center;
+    background: #1A1A1A;
+  }
+  </style>
+  <script>
+  function scaleSlide() {
+    const slide = document.querySelector('.slide-content');
+    if (!slide) return;
+    const slideWidth = 960;
+    const slideHeight = 540;
+    const scaleX = window.innerWidth / slideWidth;
+    const scaleY = window.innerHeight / slideHeight;
+    const scale = Math.min(scaleX, scaleY);
+    slide.style.width = slideWidth + 'px';
+    slide.style.height = slideHeight + 'px';
+    slide.style.transform = `scale(${scale})`;
+    slide.style.transformOrigin = 'center center';
+    slide.style.flexShrink = '0';
+  }
+  window.addEventListener('load', scaleSlide);
+  window.addEventListener('resize', scaleSlide);
+  </script>
+</head>
+<body>
+  <div class="slide-content">
+    <!-- 背景装饰 - 点阵纹理 -->
+    <svg width="960" height="540" style="position:absolute;top:0;left:0;opacity:0.08;pointer-events:none;">
+      <defs>
+        <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+          <circle cx="15" cy="15" r="1.5" fill="#83C5BE"/>
+        </pattern>
+      </defs>
+      <rect width="960" height="540" fill="url(#dots)"/>
+    </svg>
+
+    <!-- 顶部装饰条 -->
+    <svg width="960" height="3" style="position:absolute;top:0;left:0;">
+      <rect width="960" height="3" fill="#FFD700"/>
+    </svg>
+
+    <!-- 主标题区域 -->
+    <div style="position:absolute; left:50px; top:45px;">
+      <p style="margin:0; font-family:'Times New Roman', serif; font-size:42px; font-weight:700; color:#FFD700; letter-spacing:4px;">课程目录</p>
+      <p style="margin:8px 0 0 0; font-family:'Times New Roman', serif; font-size:18px; font-weight:400; color:#83C5BE; letter-spacing:1px;">ROS2 机器人操作系统 — 前四周核心内容</p>
+    </div>
+
+    <!-- 分隔线 -->
+    <svg width="400" height="2" style="position:absolute;left:50px;top:125px;">
+      <rect width="400" height="2" fill="#FFD700" fill-opacity="0.4"/>
+    </svg>
+
+    <!-- 左侧目录列表 -->
+    <div style="position:absolute; left:50px; top:155px; width:450px;">
+      <!-- 第一周 -->
+      <div style="display:flex; align-items:flex-start; margin-bottom:65px;">
+        <svg width="36" height="36" style="flex-shrink:0; margin-right:18px;">
+          <circle cx="18" cy="18" r="18" fill="#FFD700"/>
+          <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="16" font-weight="700" fill="#1A1A1A" font-family="'Times New Roman', serif">1</text>
+        </svg>
+        <div>
+          <p style="margin:0; font-family:'Times New Roman', serif; font-size:20px; font-weight:600; color:#FFFFFF;">第一周</p>
+          <p style="margin:4px 0 0 0; font-family:'Times New Roman', serif; font-size:15px; font-weight:400; color:#83C5BE;">课程导论与消息通讯机制理论</p>
+        </div>
+      </div>
+
+      <!-- 第二周 -->
+      <div style="display:flex; align-items:flex-start; margin-bottom:65px;">
+        <svg width="36" height="36" style="flex-shrink:0; margin-right:18px;">
+          <circle cx="18" cy="18" r="18" fill="#FFD700"/>
+          <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="16" font-weight="700" fill="#1A1A1A" font-family="'Times New Roman', serif">2</text>
+        </svg>
+        <div>
+          <p style="margin:0; font-family:'Times New Roman', serif; font-size:20px; font-weight:600; color:#FFFFFF;">第二周</p>
+          <p style="margin:4px 0 0 0; font-family:'Times New Roman', serif; font-size:15px; font-weight:400; color:#83C5BE;">开发环境搭建与仿真生态深度解析</p>
+        </div>
+      </div>
+
+      <!-- 第三周 -->
+      <div style="display:flex; align-items:flex-start; margin-bottom:65px;">
+        <svg width="36" height="36" style="flex-shrink:0; margin-right:18px;">
+          <circle cx="18" cy="18" r="18" fill="#FFD700"/>
+          <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="16" font-weight="700" fill="#1A1A1A" font-family="'Times New Roman', serif">3</text>
+        </svg>
+        <div>
+          <p style="margin:0; font-family:'Times New Roman', serif; font-size:20px; font-weight:600; color:#FFFFFF;">第三周</p>
+          <p style="margin:4px 0 0 0; font-family:'Times New Roman', serif; font-size:15px; font-weight:400; color:#83C5Be;">ROS2通信机制 — 核心节点与通讯</p>
+        </div>
+      </div>
+
+      <!-- 第四周 -->
+      <div style="display:flex; align-items:flex-start;">
+        <svg width="36" height="36" style="flex-shrink:0; margin-right:18px;">
+          <circle cx="18" cy="18" r="18" fill="#FFD700"/>
+          <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="16" font-weight="700" fill="#1A1A1A" font-family="'Times New Roman', serif">4</text>
+        </svg>
+        <div>
+          <p style="margin:0; font-family:'Times New Roman', serif; font-size:20px; font-weight:600; color:#FFFFFF;">第四周</p>
+          <p style="margin:4px 0 0 0; font-family:'Times New Roman', serif; font-size:15px; font-weight:400; color:#83C5Be;">话题通讯实战与可视化调试</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧科技装饰元素 -->
+    <div style="position:absolute; right:50px; top:140px; width:380px; height:350px;">
+      <!-- 装饰性圆形 -->
+      <svg width="380" height="350" style="position:absolute;top:0;left:0;">
+        <!-- 外圈大圆 -->
+        <circle cx="190" cy="175" r="160" stroke="#FFD700" stroke-width="1" fill="none" opacity="0.15"/>
+        <!-- 中圈 -->
+        <circle cx="190" cy="175" r="120" stroke="#FFD700" stroke-width="1" fill="none" opacity="0.2"/>
+        <!-- 内圈 -->
+        <circle cx="190" cy="175" r="80" stroke="#83C5BE" stroke-width="1" fill="none" opacity="0.3"/>
+        <!-- 中心点 -->
+        <circle cx="190" cy="175" r="4" fill="#FFD700"/>
+
+        <!-- 放射线装饰 -->
+        <line x1="190" y1="15" x2="190" y2="35" stroke="#FFD700" stroke-width="1" opacity="0.4"/>
+        <line x1="190" y1="315" x2="190" y2="335" stroke="#FFD700" stroke-width="1" opacity="0.4"/>
+        <line x1="30" y1="175" x2="50" y2="175" stroke="#FFD700" stroke-width="1" opacity="0.4"/>
+        <line x1="330" y1="175" x2="350" y2="175" stroke="#FFD700" stroke-width="1" opacity="0.4"/>
+
+        <!-- 对角线装饰 -->
+        <line x1="80" y1="65" x2="100" y2="85" stroke="#83C5BE" stroke-width="1" opacity="0.3"/>
+        <line x1="300" y1="285" x2="320" y2="305" stroke="#83C5Be" stroke-width="1" opacity="0.3"/>
+        <line x1="300" y1="65" x2="320" y2="85" stroke="#83C5Be" stroke-width="1" opacity="0.3"/>
+        <line x1="80" y1="285" x2="100" y2="305" stroke="#83C5Be" stroke-width="1" opacity="0.3"/>
+
+        <!-- 几何方块装饰 -->
+        <rect x="150" y="135" width="80" height="80" stroke="#FFD700" stroke-width="1" fill="none" opacity="0.2" rx="4"/>
+        <rect x="165" y="150" width="50" height="50" stroke="#83C5Be" stroke-width="1" fill="none" opacity="0.3" rx="2"/>
+      </svg>
+
+      <!-- 底部科技文字 -->
+      <div style="position:absolute; bottom:20px; left:50%; transform:translateX(-50%); text-align:center;">
+        <p style="margin:0; font-family:'Times New Roman', serif; font-size:14px; font-weight:400; color:#83C5Be; letter-spacing:8px;">ROBOT OPERATING SYSTEM</p>
+        <p style="margin:6px 0 0 0; font-family:'Times New Roman', serif; font-size:12px; font-weight:400; color:#FFFFFF; opacity:0.5; letter-spacing:2px;">Version 2.0 • Foxy/Humble</p>
+      </div>
+    </div>
+
+    <!-- 页码角标 -->
+    <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+      <circle cx="18" cy="18" r="18" fill="#83C5Be"/>
+      <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A" font-family="'Times New Roman', serif">2</text>
+    </svg>
+  </div>
+</body>
+</html>

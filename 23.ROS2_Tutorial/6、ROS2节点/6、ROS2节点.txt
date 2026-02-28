@@ -1,0 +1,57 @@
+6 、ROS2 节点  
+ 
+1 、节点简介  
+在通信时，不论采用何种方式，通信对象的构建都依赖于节点 (Node) ，在 ROS2 中，一般情况下每个节
+点都对应某一单一的功能模块 ( 例如：雷达驱动节点可能负责发布雷达消息，摄像头驱动节点可能负责发
+布图像消息 ) 。一个完整的机器人系统可能由许多协同工作的节点组成， ROS2 中的单个可执行文件
+(C++ 程序或 Python 程序 ) 可以包含一个或多个节点。
+ 
+2 、创建节点流程  
+1. 创建程序文件
+2. 导入相关 ros 库
+3. 编写节点功能
+4. 编写配置文件
+5. 编译运行
+ 
+3 、Hello World 节点案例  
+这里以 python 功能包为例讲解
+ 
+3.1 、创建 python 功能包  
+workspace 替换成实际的工作空间路径
+ 
+3.2 、编写代码  
+执行上面命令后会创建 pkg_helloworld_py ，同时会创建 helloworld.py 文件来编写节点：cd workspace/src
+ros2 pkg create pkg_helloworld_py --build-type ament_python --dependencies rclpy 
+--node-name helloworld
+
+ 
+删除原本  helloworld.py 的代码，编写如下代码：
+完成代码的编写后需要设置功能包的编译选项，让系统知道 Python 程序的入口，打开功能包的 setup.py
+文件，加入如下入口点的配置：import rclpy                                     # ROS2 Python 接口库
+from rclpy.node import Node                      # ROS2 节点类
+import time
+"""
+创建一个HelloWorld 节点 , 初始化时输出 “hello world” 日志
+"""
+class HelloWorldNode(Node):
+    def __init__(self, name):
+        super().__init__(name)                     # ROS2节点父类初始化
+        while rclpy.ok():                          # ROS2系统是否正常运行
+            self.get_logger().info("Hello World")  # ROS2日志输出
+            time.sleep(0.5)                        # 休眠控制循环时间
+def main(args=None):                               # ROS2节点主入口 main 函数
+    rclpy.init(args=args)                          # ROS2 Python 接口初始化
+    node = HelloWorldNode("helloworld")            # 创建ROS2节点对象并进行初始化
+    rclpy.spin(node)                               # 循环等待 ROS2 退出
+    node.destroy_node()                            # 销毁节点对象
+    rclpy.shutdown()                               # 关闭ROS2 Python 接口
+
+3.3 、编译功能包  
+编译功能包
+在工作空间下刷新环境变量
+ 
+3.4 、运行节点  
+运行成功后，可以在终端中看到循环打印 “Hello World” 字符串的效果 :
+colcon build --packages-select pkg_helloworld_py
+source install/setup.bash
+ros2 run pkg_helloworld_py helloworld

@@ -1,0 +1,74 @@
+2 、ROS2 安装 Humble  
+ROS2-Humble 对应的 ubuntu 系统是 22.04
+如果需要安装其他版本的 ros2 ，只需要将对应安装命令中 humble 版本标识修改成对应的版本即
+可，适应于 ros2 系列教程中其他所有特定 ros 版本的软件，后续教程不再进行赘述。
+1 、设置语言环境  
+请先检查本地语言环境是否支持 UTF-8 编码，可调用如下指令检查并设置 UTF-8 编码
+注意：语言环境可以不同，但必须支持 UTF-8 编码
+ 
+2 、设置软件源  
+启动 Ubuntu universe 存储库
+将ROS 2 apt 存储库添加到系统，用 apt 授权我们的 GPG 密钥
+将存储库添加到源列表
+ 
+3 、安装 Humble  
+首先更新 apt 存储库缓存：locale  # 检查是否支持  UTF-8
+sudo apt update && sudo apt install locales
+sudo locale-gen en_US en_US.UTF-8
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+locale  # 验证设置是否成果
+sudo apt install software-properties-common
+sudo add-apt-repository universe
+sudo apt update && sudo apt install curl gnupg lsb-release -y
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o 
+/usr/share/keyrings/ros-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-
+archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(source /etc/os-
+release && echo $UBUNTU_CODENAME) main" | sudo tee 
+/etc/apt/sources.list.d/ros2.list > /dev/null
+sudo apt update
+
+然后升级已安装的软件 (ROS2 软件包建立在经常更新的 Ubuntu 系统上，在安装新软件包之前请确保您的
+系统是最新的 ) ：
+安装桌面版 ROS2( 建议 ) ，包含： ROS 、 RViz 、示例与教程，安装命令如下 , 如果需要安装其他版本，将下
+面命令中的 humble 替换对应的版本号：
+安装 colcon 构建工具
+ 
+4 、配置环境  
+如果使用的是其他版本 ros2 ，将 humble 版本标识替换成对应版本，例如 foxy 版本 , 将命令中的
+humble 替换成 foxy 。
+终端下，执行 ROS2 程序时，需要调用如下命令配置环境：
+每次新开终端时，都得执行上述命令，或者也可以执行如下命令，将配置环境指令写入  ”~/.bashrc“ 文
+件，那么每次新启动终端时，不需要在手动配置环境
+到目前为止， ROS2 就已经安装且配置完毕了。
+ 
+ 
+5 、运行发布者、订阅者示例节点  
+ros2 桌面版为我们集成好了一些示例的节点，我们可以通过运行示例节点来测试 ros2 是否成功安装
+运行发布者节点
+运行订阅者节点
+ 
+6 、运行体验小海龟案例  
+海龟模拟器 turtlesim 是 ros 中经典的教学工具，通过 turtlesim 可以快速上理解 ros 中的核心概念sudo apt upgrade
+sudo apt install ros-humble-desktop python3-argcomplete
+sudo apt install python3-colcon-common-extensions
+source /opt/ros/humble/setup.bash
+echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+ros2 run demo_nodes_cpp talker
+ros2 run demo_nodes_cpp listener
+
+运行海龟模拟器
+运行键盘控制节点
+查看速度话题数据
+ 
+7 、关于卸载  
+ROS2 安装完毕之后，如果想卸载 ROS2 ，可以执行如下命令：
+还可以再删除 ROS2 对应的存储库：
+ ros2 run turtlesim turtlesim_node
+ros2 run turtlesim turtle_teleop_key
+ros2 topic echo /turtle1/cmd_vel
+sudo apt remove ~nros-humble-* && sudo apt autoremove
+sudo rm /etc/apt/sources.list.d/ros2.list
+sudo apt update
+sudo apt autoremove
