@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROS2龟类命名法</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+    }
+    .slide-content {
+      width: 960px;
+      height: 540px;
+      position: relative;
+      transform-origin: center center;
+    }
+  </style>
+  <script>
+    function scaleSlide() {
+      const slide = document.querySelector('.slide-content');
+      if (!slide) return;
+      const slideWidth = 960;
+      const slideHeight = 540;
+      const scaleX = window.innerWidth / slideWidth;
+      const scaleY = window.innerHeight / slideHeight;
+      const scale = Math.min(scaleX, scaleY);
+      slide.style.width = slideWidth + 'px';
+      slide.style.height = slideHeight + 'px';
+      slide.style.transform = `scale(${scale})`;
+      slide.style.transformOrigin = 'center center';
+      slide.style.flexShrink = '0';
+    }
+    window.addEventListener('load', scaleSlide);
+    window.addEventListener('resize', scaleSlide);
+  </script>
+</head>
+<body>
+  <div class="slide-content" style="background: #1A1A1A;">
+    <!-- 标题区域 -->
+    <p style="position:absolute; left:40px; top:24px; margin:0; font-size:32px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">ROS2龟类命名法</p>
+    
+    <!-- 左侧文字内容 -->
+    <div style="position:absolute; left:40px; top:80px; width:420px;">
+      <!-- 命名规则 -->
+      <div style="margin-bottom:16px;">
+        <p style="margin:0; font-size:15px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif; margin-bottom:4px;">发行版命名规则</p>
+        <p style="margin:0; font-size:12px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:18px;">ROS2发行版以海龟命名，每两年发布一个LTS版本，与Ubuntu LTS同步</p>
+      </div>
+      
+      <!-- 版本列表 -->
+      <!-- Humble Hawksbill -->
+      <div style="background:#2A2A2A; padding:10px; border-radius:6px; margin-bottom:10px; border-left:3px solid #FFD700;">
+        <p style="margin:0; font-size:13px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">Humble Hawksbill (2022 LTS)</p>
+        <p style="margin:4px 0 0 0; font-size:11px; color:#FFFFFF; font-family:'Times New Roman', serif;">玳瑁龟 | 2022年5月发布，当前推荐LTS版本</p>
+      </div>
+      
+      <!-- Jazzy Jalisco -->
+      <div style="background:#2A2A2A; padding:10px; border-radius:6px; margin-bottom:10px; border-left:3px solid #83C5BE;">
+        <p style="margin:0; font-size:13px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif;">Jazzy Jalisco (2024 LTS)</p>
+        <p style="margin:4px 0 0 0; font-size:11px; color:#FFFFFF; font-family:'Times New Roman', serif;">哈利斯科州龟 | 2024年5月发布，最新LTS版本</p>
+      </div>
+      
+      <!-- Iron Irwini -->
+      <div style="background:#2A2A2A; padding:10px; border-radius:6px; margin-bottom:10px; border-left:3px solid #FFFFFF;">
+        <p style="margin:0; font-size:13px; font-weight:600; color:#FFFFFF; font-family:'Times New Roman', serif;">Iron Irwini (2023)</p>
+        <p style="margin:4px 0 0 0; font-size:11px; color:#CCCCCC; font-family:'Times New Roman', serif;">欧文氏海龟 | 2023年发布，中期版本</p>
+      </div>
+      
+      <!-- Galactic Geochelone -->
+      <div style="background:#2A2A2A; padding:10px; border-radius:6px; margin-bottom:10px; border-left:3px solid #AAAAAA;">
+        <p style="margin:0; font-size:13px; font-weight:600; color:#AAAAAA; font-family:'Times New Roman', serif;">Galactic Geochelone (2021)</p>
+        <p style="margin:4px 0 0 0; font-size:11px; color:#CCCCCC; font-family:'Times New Roman', serif;">加拉帕戈斯象龟 | 第一个ROS2正式版</p>
+      </div>
+    </div>
+    
+    <!-- 右侧图片 -->
+    <div style="position:absolute; left:480px; top:80px; width:440px; height:380px;">
+      <img src="imgs/ros2_turtles.png" alt="ROS2 Turtles" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+    </div>
+    
+    <!-- 底部说明 -->
+    <div style="position:absolute; left:40px; bottom:40px; width:400px;">
+      <p style="margin:0; font-size:11px; color:#83C5BE; font-family:'Times New Roman', serif;">海龟保护：ROS2以海龟命名也旨在提高对海龟保护的认识</p>
+    </div>
+    
+    <!-- 页码角标 -->
+    <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+      <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+      <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">22</text>
+    </svg>
+  </div>
+</body>
+</html>

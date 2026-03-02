@@ -1,0 +1,178 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+.slide-content {
+  width: 960px;
+  height: 540px;
+  position: relative;
+  transform-origin: center center;
+}
+</style>
+<script>
+function scaleSlide() {
+  const slide = document.querySelector('.slide-content');
+  if (!slide) return;
+  const slideWidth = 960;
+  const slideHeight = 540;
+  const scaleX = window.innerWidth / slideWidth;
+  const scaleY = window.innerHeight / slideHeight;
+  const scale = Math.min(scaleX, scaleY);
+  slide.style.width = slideWidth + 'px';
+  slide.style.height = slideHeight + 'px';
+  slide.style.transform = `scale(${scale})`;
+  slide.style.transformOrigin = 'center center';
+  slide.style.flexShrink = '0';
+}
+window.addEventListener('load', scaleSlide);
+window.addEventListener('resize', scaleSlide);
+</script>
+
+<div class="slide-content" style="background: #1A1A1A;">
+  <!-- 背景装饰 -->
+  <svg width="960" height="540" style="position:absolute;top:0;left:0;">
+    <defs>
+      <pattern id="dots" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse">
+        <circle cx="12" cy="12" r="1" fill="#83C5BE" opacity="0.12"/>
+      </pattern>
+    </defs>
+    <rect width="960" height="540" fill="url(#dots)"/>
+  </svg>
+  
+  <!-- 主标题 -->
+  <h1 style="position:absolute; left:40px; top:15px; margin:0; font-size:28px; font-weight:700; color:#FFFFFF; font-family:'Times New Roman', serif;">Deep Dive:</h1>
+  <h2 style="position:absolute; left:40px; top:50px; margin:0; font-size:28px; font-weight:700; color:#83C5BE; font-family:'Times New Roman', serif;">Microsoft AirSim</h2>
+  
+  <!-- 左侧内容区 -->
+  <div style="position:absolute; left:40px; top:100px; width:380px; height:400px;">
+    <!-- 发展历程 -->
+    <div style="position:absolute; top:0; left:0; width:380px;">
+      <svg width="380" height="2" style="position:absolute;top:8px;left:0;">
+        <rect width="380" height="2" fill="#83C5BE" opacity="0.4"/>
+      </svg>
+      <p style="position:absolute; top:0; left:0; margin:0; font-size:12px; font-weight:700; color:#83C5BE; font-family:'Times New Roman', serif;">Origin & Development</p>
+    </div>
+    
+    <div style="position:absolute; top:25px; left:0; width:380px;">
+      <p style="margin:0; font-size:10px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.6;">
+        <span style="color:#FFD700;">2017:</span> AirSim initially released by Microsoft Research<br>
+        <span style="color:#FFD700;">2018:</span> Added vehicle simulation support<br>
+        <span style="color:#FFD700;">2020:</span> AirSim on Unity platform released<br>
+        <span style="color:#FFD700;">2022:</span> New Architecture (colossus) announced<br>
+        <span style="color:#FFD700;">Now:</span> UE5 support, active community
+      </p>
+    </div>
+    
+    <!-- 核心架构 -->
+    <div style="position:absolute; top:140px; left:0; width:380px;">
+      <svg width="380" height="2" style="position:absolute;top:8px;left:0;">
+        <rect width="380" height="2" fill="#FFD700" opacity="0.4"/>
+      </svg>
+      <p style="position:absolute; top:0; left:0; margin:0; font-size:12px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">Core Architecture</p>
+    </div>
+    
+    <!-- 架构图标 -->
+    <div style="position:absolute; top:160px; left:0; width:380px; display:flex; gap:15px; flex-wrap:wrap;">
+      <svg width="110" height="36" viewBox="0 0 110 36">
+        <rect width="110" height="36" rx="4" fill="#83C5BE" fill-opacity="0.25"/>
+        <text x="55" y="20" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="600" fill="#83C5BE">Drone Sim</text>
+      </svg>
+      <svg width="110" height="36" viewBox="0 0 110 36">
+        <rect width="110" height="36" rx="4" fill="#83C5BE" fill-opacity="0.25"/>
+        <text x="55" y="20" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="600" fill="#83C5BE">Vehicle Sim</text>
+      </svg>
+      <svg width="110" height="36" viewBox="0 0 110 36">
+        <rect width="110" height="36" rx="4" fill="#FFFFFF" fill-opacity="0.2"/>
+        <text x="55" y="20" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="600" fill="#FFFFFF">UE4/UE5</text>
+      </svg>
+    </div>
+    
+    <!-- API支持 -->
+    <div style="position:absolute; top:215px; left:0; width:380px;">
+      <svg width="380" height="2" style="position:absolute;top:8px;left:0;">
+        <rect width="380" height="2" fill="#FFFFFF" opacity="0.3"/>
+      </svg>
+      <p style="position:absolute; top:0; left:0; margin:0; font-size:12px; font-weight:700; color:#FFFFFF; font-family:'Times New Roman', serif;">API Support</p>
+    </div>
+    
+    <div style="position:absolute; top:235px; left:0; width:380px; display:flex; gap:12px;">
+      <svg width="100" height="32" viewBox="0 0 100 32">
+        <rect width="100" height="32" rx="4" fill="#FFD700" fill-opacity="0.2"/>
+        <text x="50" y="18" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="600" fill="#FFD700">Python</text>
+      </svg>
+      <svg width="100" height="32" viewBox="0 0 100 32">
+        <rect width="100" height="32" rx="4" fill="#83C5BE" fill-opacity="0.2"/>
+        <text x="50" y="18" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="600" fill="#83C5BE">C++</text>
+      </svg>
+      <svg width="100" height="32" viewBox="0 0 100 32">
+        <rect width="100" height="32" rx="4" fill="#FFFFFF" fill-opacity="0.2"/>
+        <text x="50" y="18" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="600" fill="#FFFFFF">ROS</text>
+      </svg>
+    </div>
+    
+    <!-- 传感器仿真 -->
+    <div style="position:absolute; top:290px; left:0; width:380px;">
+      <svg width="380" height="2" style="position:absolute;top:8px;left:0;">
+        <rect width="380" height="2" fill="#83C5BE" opacity="0.4"/>
+      </svg>
+      <p style="position:absolute; top:0; left:0; margin:0; font-size:12px; font-weight:700; color:#83C5BE; font-family:'Times New Roman', serif;">Sensor Simulation</p>
+    </div>
+    
+    <div style="position:absolute; top:310px; left:0; width:360px; display:flex; gap:10px; flex-wrap:wrap;">
+      <svg width="80" height="28" viewBox="0 0 80 28">
+        <rect width="80" height="28" rx="14" fill="#FFD700" fill-opacity="0.15"/>
+        <text x="40" y="15" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="600" fill="#FFD700">Camera</text>
+      </svg>
+      <svg width="80" height="28" viewBox="0 0 80 28">
+        <rect width="80" height="28" rx="14" fill="#83C5BE" fill-opacity="0.15"/>
+        <text x="40" y="15" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="600" fill="#83C5BE">LiDAR</text>
+      </svg>
+      <svg width="80" height="28" viewBox="0 0 80 28">
+        <rect width="80" height="28" rx="14" fill="#FFFFFF" fill-opacity="0.15"/>
+        <text x="40" y="15" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="600" fill="#FFFFFF">GPS</text>
+      </svg>
+      <svg width="80" height="28" viewBox="0 0 80 28">
+        <rect width="80" height="28" rx="14" fill="#83C5BE" fill-opacity="0.1"/>
+        <text x="40" y="15" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="600" fill="#83C5BE">IMU</text>
+      </svg>
+      <svg width="80" height="28" viewBox="0 0 80 28">
+        <rect width="80" height="28" rx="14" fill="#FFD700" fill-opacity="0.1"/>
+        <text x="40" y="15" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="600" fill="#FFD700">Depth</text>
+      </svg>
+    </div>
+    
+    <!-- 应用场景 -->
+    <div style="position:absolute; top:360px; left:0; width:380px;">
+      <svg width="380" height="2" style="position:absolute;top:8px;left:0;">
+        <rect width="380" height="2" fill="#FFD700" opacity="0.3"/>
+      </svg>
+      <p style="position:absolute; top:0; left:0; margin:0; font-size:11px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">Applications</p>
+    </div>
+    
+    <div style="position:absolute; top:378px; left:0; width:380px;">
+      <p style="margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.5;">
+        Autonomous driving research | Drone navigation algorithms | Computer vision training | Safety testing | Edge case scenarios
+      </p>
+    </div>
+  </div>
+  
+  <!-- 右侧图片 -->
+  <div style="position:absolute; right:30px; top:90px; width:500px; height:420px; border:2px solid #83C5BE; border-radius:10px; overflow:hidden;">
+    <img src="imgs/slide25_airsim.png" style="width:100%; height:100%; object-fit:cover;"/>
+  </div>
+  
+  <!-- 页码角标 -->
+  <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+    <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+    <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">25</text>
+  </svg>
+</div>

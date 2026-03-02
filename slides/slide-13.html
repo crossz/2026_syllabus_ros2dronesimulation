@@ -1,0 +1,114 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+.slide-content {
+  width: 960px;
+  height: 540px;
+  position: relative;
+  transform-origin: center center;
+}
+</style>
+<script>
+function scaleSlide() {
+  const slide = document.querySelector('.slide-content');
+  if (!slide) return;
+  const slideWidth = 960;
+  const slideHeight = 540;
+  const scaleX = window.innerWidth / slideWidth;
+  const scaleY = window.innerHeight / slideHeight;
+  const scale = Math.min(scaleX, scaleY);
+  slide.style.width = slideWidth + 'px';
+  slide.style.height = slideHeight + 'px';
+  slide.style.transform = `scale(${scale})`;
+  slide.style.transformOrigin = 'center center';
+  slide.style.flexShrink = '0';
+}
+window.addEventListener('load', scaleSlide);
+window.addEventListener('resize', scaleSlide);
+</script>
+
+<div class="slide-content" style="background:#1A1A1A;">
+  <!-- 背景装饰 -->
+  <svg width="960" height="540" style="position:absolute;top:0;left:0;opacity:0.05;">
+    <defs>
+      <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+        <circle cx="15" cy="15" r="1.5" fill="#FFFFFF"/>
+      </pattern>
+    </defs>
+    <rect width="960" height="540" fill="url(#dots)"/>
+  </svg>
+  
+  <!-- 主标题 -->
+  <h1 style="position:absolute; left:40px; top:24px; margin:0; font-size:32px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">ROS1 vs ROS2: Architecture Transformation</h1>
+  <svg width="200" height="3" style="position:absolute; left:40px; top:62px;">
+    <rect width="200" height="3" fill="#FFD700"/>
+  </svg>
+  
+  <!-- 左侧: ROS1 缺点 -->
+  <div style="position:absolute; left:40px; top:90px; width:420px; height:420px; background:#2D2D2D; border-radius:8px; padding:16px; box-sizing:border-box;">
+    <h2 style="margin:0 0 12px 0; font-size:20px; font-weight:500; color:#FF6B6B; font-family:'Times New Roman', serif;">ROS1 Limitations</h2>
+    <ul style="margin:0; padding-left:20px; font-size:13px; color:#FFFFFF; line-height:1.8; font-family:'Times New Roman', serif;">
+      <li style="margin-bottom:8px;"><strong style="color:#FFD700;">Transport:</strong> TCPROS/UDPROS only, limited reliability</li>
+      <li style="margin-bottom:8px;"><strong style="color:#FFD700;">Real-time:</strong> No native RTOS support</li>
+      <li style="margin-bottom:8px;"><strong style="color:#FFD700;">API Stability:</strong> Core API changes between versions</li>
+      <li style="margin-bottom:8px;"><strong style="color:#FFD700;">Platform:</strong> Linux only, limited portability</li>
+      <li style="margin-bottom:8px;"><strong style="color:#FFD700;">Security:</strong> No built-in security mechanisms</li>
+      <li style="margin-bottom:8px;"><strong style="color:#FFD700;">Scalability:</strong> Single master architecture bottleneck</li>
+    </ul>
+  </div>
+  
+  <!-- 右侧: ROS2 改进 -->
+  <div style="position:absolute; left:480px; top:90px; width:420px; height:420px; background:#2D2D2D; border-radius:8px; padding:16px; box-sizing:border-box;">
+    <h2 style="margin:0 0 12px 0; font-size:20px; font-weight:500; color:#83C5BE; font-family:'Times New Roman', serif;">ROS2 Improvements</h2>
+    <ul style="margin:0; padding-left:20px; font-size:13px; color:#FFFFFF; line-height:1.8; font-family:'Times New Roman', serif;">
+      <li style="margin-bottom:8px;"><strong style="color:#83C5BE;">Transport:</strong> DDS-based, enterprise-grade middleware</li>
+      <li style="margin-bottom:8px;"><strong style="color:#83C5BE;">Real-time:</strong> Native RTOS and hard real-time support</li>
+      <li style="margin-bottom:8px;"><strong style="color:#83C5BE;">API Stability:</strong> Stable API since ROS2 Crystal</li>
+      <li style="margin-bottom:8px;"><strong style="color:#83C5BE;">Platform:</strong> Multi-platform: Linux, Windows, macOS</li>
+      <li style="margin-bottom:8px;"><strong style="color:#83C5BE;">Security:</strong> DDS-Security plugin architecture</li>
+      <li style="margin-bottom:8px;"><strong style="color:#83C5BE;">Scalability:</strong> Decentralized, distributed architecture</li>
+    </ul>
+  </div>
+  
+  <!-- 对比表格 -->
+  <div style="position:absolute; left:200px; top:340px; width:540px; height:80px; background:#1A1A1A; border:2px solid #3D3D3D; border-radius:6px; display:flex; align-items:center; justify-content:space-around;">
+    <div style="text-align:center; flex:1;">
+      <p style="margin:0; font-size:11px; color:#888888; font-family:'Times New Roman', serif;">Architecture</p>
+      <p style="margin:4px 0 0 0; font-size:14px; color:#FFFFFF; font-family:'Times New Roman', serif;">Masterless</p>
+    </div>
+    <div style="width:1px; height:50px; background:#3D3D3D;"></div>
+    <div style="text-align:center; flex:1;">
+      <p style="margin:0; font-size:11px; color:#888888; font-family:'Times New Roman', serif;">QoS Support</p>
+      <p style="margin:4px 0 0 0; font-size:14px; color:#83C5BE; font-family:'Times New Roman', serif;">Yes</p>
+    </div>
+    <div style="width:1px; height:50px; background:#3D3D3D;"></div>
+    <div style="text-align:center; flex:1;">
+      <p style="margin:0; font-size:11px; color:#888888; font-family:'Times New Roman', serif;">Lifecycle</p>
+      <p style="margin:4px 0 0 0; font-size:14px; color:#83C5BE; font-family:'Times New Roman', serif;">Managed</p>
+    </div>
+    <div style="width:1px; height:50px; background:#3D3D3D;"></div>
+    <div style="text-align:center; flex:1;">
+      <p style="margin:0; font-size:11px; color:#888888; font-family:'Times New Roman', serif;">Industry</p>
+      <p style="margin:4px 0 0 0; font-size:14px; color:#FFD700; font-family:'Times New Roman', serif;">Production</p>
+    </div>
+  </div>
+  
+  <!-- 底部图片 -->
+  <img src="imgs/slide-13-ros-comparison.png" style="position:absolute; left:680px; top:340px; width:260px; height:160px; object-fit:cover; border-radius:8px; opacity:0.9;">
+  
+  <!-- 页码角标 -->
+  <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+    <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+    <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">13</text>
+  </svg>
+</div>

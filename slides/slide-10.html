@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROS2架构初探</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+;
+            justify-content: center;
+                       display: flex align-items: center;
+            background: #000;
+        }
+        .slide-content {
+            width: 960px;
+            height: 540px;
+            position: relative;
+            transform-origin: center center;
+            background: #1A1A1A;
+        }
+    </style>
+    <script>
+        function scaleSlide() {
+            const slide = document.querySelector('.slide-content');
+            if (!slide) return;
+            const slideWidth = 960;
+            const slideHeight = 540;
+            const scaleX = window.innerWidth / slideWidth;
+            const scaleY = window.innerHeight / slideHeight;
+            const scale = Math.min(scaleX, scaleY);
+            slide.style.width = slideWidth + 'px';
+            slide.style.height = slideHeight + 'px';
+            slide.style.transform = `scale(${scale})`;
+            slide.style.transformOrigin = 'center center';
+            slide.style.flexShrink = '0';
+        }
+        window.addEventListener('load', scaleSlide);
+        window.addEventListener('resize', scaleSlide);
+    </script>
+</head>
+<body>
+    <div class="slide-content" style="background: #1A1A1A;">
+        <!-- 背景装饰 -->
+        <svg width="960" height="540" style="position:absolute; top:0; left:0; opacity:0.05;">
+            <defs>
+                <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <circle cx="20" cy="20" r="2" fill="#83C5BE"/>
+                </pattern>
+            </defs>
+            <rect width="960" height="540" fill="url(#dots)"/>
+        </svg>
+        
+        <!-- 主标题 -->
+        <div style="position:absolute; left:40px; top:15px; width:880px; height:50px; background:#FFD700; border-radius:8px;">
+            <p style="position:absolute; left:0; top:0; width:880px; height:50px; margin:0; line-height:50px; text-align:center; font-size:24px; font-weight:700; color:#1A1A1A; font-family:'Times New Roman', serif;">ROS2架构初探：基于DDS的工业级中间件</p>
+        </div>
+        
+        <!-- 架构分层图 -->
+        <div style="position:absolute; left:30px; top:80px; width:560px; height:380px;">
+            <!-- 应用层 -->
+            <div style="position:absolute; left:0; top:0; width:560px; height:80px; background:#FFD700; border-radius:10px;">
+                <p style="position:absolute; left:0; top:0; width:560px; height:80px; margin:0; line-height:80px; text-align:center; font-size:22px; font-weight:700; color:#1A1A1A; font-family:'Times New Roman', serif;">应用层 (Application Layer)</p>
+            </div>
+            <svg width="560" height="15" style="position:absolute; left:0; top:80px;">
+                <path d="M0 7 L280 7 L300 15 L320 7 L560 7" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+            </svg>
+            
+            <!-- 客户端库层 -->
+            <div style="position:absolute; left:0; top:95px; width:560px; height:80px; background:#E6C200; border-radius:10px;">
+                <p style="position:absolute; left:0; top:0; width:560px; height:80px; margin:0; line-height:80px; text-align:center; font-size:20px; font-weight:700; color:#1A1A1A; font-family:'Times New Roman', serif;">客户端库层 (Client Library Layer) - rclcpp / rclpy</p>
+            </div>
+            <svg width="560" height="15" style="position:absolute; left:0; top:175px;">
+                <path d="M0 7 L280 7 L300 15 L320 7 L560 7" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+            </svg>
+            
+            <!-- rcl层 -->
+            <div style="position:absolute; left:0; top:190px; width:560px; height:80px; background:#83C5BE; border-radius:10px;">
+                <p style="position:absolute; left:0; top:0; width:560px; height:80px; margin:0; line-height:80px; text-align:center; font-size:20px; font-weight:700; color:#1A1A1A; font-family:'Times New Roman', serif;">ROS客户端库层 (rcl - ROS Client Library)</p>
+            </div>
+            <svg width="560" height="15" style="position:absolute; left:0; top:270px;">
+                <path d="M0 7 L280 7 L300 15 L320 7 L560 7" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+            </svg>
+            
+            <!-- DDS层 -->
+            <div style="position:absolute; left:0; top:285px; width:560px; height:80px; background:#5BA39C; border-radius:10px;">
+                <p style="position:absolute; left:0; top:0; width:560px; height:80px; margin:0; line-height:80px; text-align:center; font-size:20px; font-weight:700; color:#FFFFFF; font-family:'Times New Roman', serif;">DDS层 (Data Distribution Service)</p>
+            </div>
+        </div>
+        
+        <!-- 右侧DDS核心作用 -->
+        <div style="position:absolute; left:610px; top:80px; width:320px; height:200px; background:#2D2D2D; border:2px solid #83C5BE; border-radius:12px;">
+            <p style="position:absolute; left:15px; top:12px; margin:0; font-size:16px; font-weight:700; color:#83C5BE; font-family:'Times New Roman', serif;">DDS的核心作用</p>
+            
+            <ul style="position:absolute; left:15px; top:40px; width:290px; margin:0; padding-left:18px; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:26px;">
+                <li><span style="color:#FFD700; font-weight:700;">发现协议</span>：自动发现网络中节点</li>
+                <li><span style="color:#FFD700; font-weight:700;">传输层</span>：可靠UDP/TCP传输</li>
+                <li><span style="color:#FFD700; font-weight:700;">序列化</span>：数据打包/解包</li>
+                <li><span style="color:#FFD700; font-weight:700;">QoS策略</span>：服务质量控制</li>
+            </ul>
+        </div>
+        
+        <!-- 跨平台支持 -->
+        <div style="position:absolute; left:610px; top:295px; width:320px; height:165px; background:#2D2D2D; border:2px solid #FFD700; border-radius:12px;">
+            <p style="position:absolute; left:15px; top:12px; margin:0; font-size:16px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">跨平台支持</p>
+            
+            <!-- 平台图标 -->
+            <svg width="280" height="110" style="position:absolute; left:20px; top:45px;">
+                <!-- Linux -->
+                <rect x="10" y="20" width="60" height="50" rx="6" fill="#83C5BE"/>
+                <text x="40" y="50" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#1A1A1A">Linux</text>
+                
+                <!-- Windows -->
+                <rect x="85" y="20" width="60" height="50" rx="6" fill="#83C5BE"/>
+                <text x="115" y="50" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#1A1A1A">Windows</text>
+                
+                <!-- macOS -->
+                <rect x="160" y="20" width="60" height="50" rx="6" fill="#83C5BE"/>
+                <text x="190" y="50" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#1A1A1A">macOS</text>
+                
+                <!-- 嵌入式 -->
+                <rect x="10" y="80" width="60" height="25" rx="4" fill="#FFD700"/>
+                <text x="40" y="95" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#1A1A1A">RTOS</text>
+                
+                <!-- 移动端 -->
+                <rect x="85" y="80" width="60" height="25" rx="4" fill="#FFD700"/>
+                <text x="115" y="95" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#1A1A1A">iOS/Android</text>
+            </svg>
+        </div>
+        
+        <!-- 页码角标 -->
+        <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+            <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">10</text>
+        </svg>
+    </div>
+</body>
+</html>

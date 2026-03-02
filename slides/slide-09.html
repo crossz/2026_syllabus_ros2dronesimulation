@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROS2中的同步与异步</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+        .slide-content {
+            width: 960px;
+            height: 540px;
+            position: relative;
+            transform-origin: center center;
+            background: #1A1A1A;
+        }
+    </style>
+    <script>
+        function scaleSlide() {
+            const slide = document.querySelector('.slide-content');
+            if (!slide) return;
+            const slideWidth = 960;
+            const slideHeight = 540;
+            const scaleX = window.innerWidth / slideWidth;
+            const scaleY = window.innerHeight / slideHeight;
+            const scale = Math.min(scaleX, scaleY);
+            slide.style.width = slideWidth + 'px';
+            slide.style.height = slideHeight + 'px';
+            slide.style.transform = `scale(${scale})`;
+            slide.style.transformOrigin = 'center center';
+            slide.style.flexShrink = '0';
+        }
+        window.addEventListener('load', scaleSlide);
+        window.addEventListener('resize', scaleSlide);
+    </script>
+</head>
+<body>
+    <div class="slide-content" style="background: #1A1A1A;">
+        <!-- 背景装饰 -->
+        <svg width="960" height="540" style="position:absolute; top:0; left:0; opacity:0.05;">
+            <defs>
+                <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <circle cx="20" cy="20" r="2" fill="#83C5BE"/>
+                </pattern>
+            </defs>
+            <rect width="960" height="540" fill="url(#dots)"/>
+        </svg>
+        
+        <!-- 主标题 -->
+        <div style="position:absolute; left:40px; top:20px; width:880px; height:50px; background:#FFD700; border-radius:8px;">
+            <p style="position:absolute; left:0; top:0; width:880px; height:50px; margin:0; line-height:50px; text-align:center; font-size:26px; font-weight:700; color:#1A1A1A; font-family:'Times New Roman', serif;">ROS2中的同步与异步</p>
+        </div>
+        
+        <!-- 左侧：Topic异步 -->
+        <div style="position:absolute; left:30px; top:90px; width:440px; height:380px; background:#2D2D2D; border:2px solid #FFD700; border-radius:12px;">
+            <div style="position:absolute; left:20px; top:15px; width:400px; height:40px; background:#FFD700; border-radius:6px;">
+                <p style="position:absolute; left:0; top:0; width:400px; height:40px; margin:0; line-height:40px; text-align:center; font-size:20px; font-weight:700; color:#1A1A1A; font-family:'Times New Roman', serif;">ROS2 Topic (异步)</p>
+            </div>
+            
+            <p style="position:absolute; left:20px; top:70px; margin:0; font-size:14px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">发布/订阅模式 (Publish/Subscribe)</p>
+            <ul style="position:absolute; left:20px; top:95px; width:400px; margin:0; padding-left:20px; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:24px;">
+                <li>发布者 (Publisher) -> 话题 (Topic) -> 订阅者 (Subscriber)</li>
+                <li>持续数据流，持续传输</li>
+                <li>无需等待，发布后即可继续</li>
+                <li>一对多、多对一、多对多通信</li>
+                <li>适用于传感器数据、状态更新</li>
+            </ul>
+            
+            <!-- 图示 -->
+            <svg width="400" height="120" style="position:absolute; left:20px; top:230px;">
+                <!-- 发布者 -->
+                <rect x="10" y="30" width="80" height="40" rx="6" fill="#FFD700"/>
+                <text x="50" y="55" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#1A1A1A">Publisher</text>
+                
+                <!-- 箭头1 -->
+                <path d="M100 50 L140 50" stroke="#FFFFFF" stroke-width="2"/>
+                <path d="M130 45 L140 50 L130 55" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+                
+                <!-- Topic -->
+                <rect x="150" y="25" width="100" height="50" rx="8" fill="#83C5BE"/>
+                <text x="200" y="55" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="700" fill="#1A1A1A">/topic</text>
+                
+                <!-- 箭头2 -->
+                <path d="M260 50 L300 50" stroke="#FFFFFF" stroke-width="2"/>
+                <path d="M290 45 L300 50 L290 55" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+                
+                <!-- 订阅者1 -->
+                <rect x="310" y="10" width="80" height="35" rx="6" fill="#83C5BE"/>
+                <text x="350" y="30" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="700" fill="#1A1A1A">Sub 1</text>
+                
+                <!-- 订阅者2 -->
+                <rect x="310" y="55" width="80" height="35" rx="6" fill="#83C5BE"/>
+                <text x="350" y="75" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="700" fill="#1A1A1A">Sub 2</text>
+            </svg>
+        </div>
+        
+        <!-- 右侧：Service同步 -->
+        <div style="position:absolute; left:490px; top:90px; width:440px; height:380px; background:#2D2D2D; border:2px solid #83C5BE; border-radius:12px;">
+            <div style="position:absolute; left:20px; top:15px; width:400px; height:40px; background:#83C5BE; border-radius:6px;">
+                <p style="position:absolute; left:0; top:0; width:400px; height:40px; margin:0; line-height:40px; text-align:center; font-size:20px; font-weight:700; color:#1A1A1A; font-family:'Times New Roman', serif;">ROS2 Service (同步)</p>
+            </div>
+            
+            <p style="position:absolute; left:20px; top:70px; margin:0; font-size:14px; font-weight:700; color:#83C5BE; font-family:'Times New Roman', serif;">请求/响应模式 (Request/Response)</p>
+            <ul style="position:absolute; left:20px; top:95px; width:400px; margin:0; padding-left:20px; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:24px;">
+                <li>客户端 (Client) -> 服务 (Service) -> 服务器 (Server)</li>
+                <li>一对一通信，请求后等待响应</li>
+                <li>阻塞等待，必须等结果返回</li>
+                <li>同步操作，实时交互</li>
+                <li>适用于查询、控制、状态获取</li>
+            </ul>
+            
+            <!-- 图示 -->
+            <svg width="400" height="120" style="position:absolute; left:20px; top:230px;">
+                <!-- 客户端 -->
+                <rect x="10" y="35" width="70" height="50" rx="6" fill="#83C5BE"/>
+                <text x="45" y="65" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#1A1A1A">Client</text>
+                
+                <!-- 请求箭头 -->
+                <path d="M90 60 L150 60" stroke="#FFD700" stroke-width="3"/>
+                <path d="M140 55 L150 60 L140 65" stroke="#FFD700" stroke-width="3" fill="none"/>
+                
+                <!-- Service -->
+                <rect x="160" y="25" width="80" height="70" rx="8" fill="#83C5BE"/>
+                <text x="200" y="55" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#1A1A1A">Service</text>
+                <text x="200" y="72" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#1A1A1A">Server</text>
+                
+                <!-- 响应箭头 -->
+                <path d="M250 60 L310 60" stroke="#83C5BE" stroke-width="3"/>
+                <path d="M300 55 L310 60 L300 65" stroke="#83C5BE" stroke-width="3" fill="none"/>
+                
+                <!-- 等待标识 -->
+                <circle cx="200" cy="110" r="8" fill="#FFD700"/>
+                <text x="200" y="110" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#1A1A1A">!</text>
+                <text x="200" y="128" text-anchor="middle" font-size="9" fill="#FFD700">等待响应</text>
+            </svg>
+        </div>
+        
+        <!-- 页码角标 -->
+        <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+            <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">9</text>
+        </svg>
+    </div>
+</body>
+</html>

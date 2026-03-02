@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Windows用户福音：WSL高效开发</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+    }
+    .slide-content {
+      width: 960px;
+      height: 540px;
+      position: relative;
+      transform-origin: center center;
+    }
+  </style>
+  <script>
+    function scaleSlide() {
+      const slide = document.querySelector('.slide-content');
+      if (!slide) return;
+      const slideWidth = 960;
+      const slideHeight = 540;
+      const scaleX = window.innerWidth / slideWidth;
+      const scaleY = window.innerHeight / slideHeight;
+      const scale = Math.min(scaleX, scaleY);
+      slide.style.width = slideWidth + 'px';
+      slide.style.height = slideHeight + 'px';
+      slide.style.transform = `scale(${scale})`;
+      slide.style.transformOrigin = 'center center';
+      slide.style.flexShrink = '0';
+    }
+    window.addEventListener('load', scaleSlide);
+    window.addEventListener('resize', scaleSlide);
+  </script>
+</head>
+<body>
+  <div class="slide-content" style="background: #1A1A1A;">
+    <!-- 标题区域 -->
+    <p style="position:absolute; left:40px; top:24px; margin:0; font-size:32px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">Windows用户福音：WSL高效开发</p>
+    
+    <!-- 左侧文字内容 -->
+    <div style="position:absolute; left:40px; top:80px; width:440px;">
+      <!-- WSL简介 -->
+      <div style="margin-bottom:20px;">
+        <p style="margin:0; font-size:16px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif; margin-bottom:6px;">WSL 简介</p>
+        <p style="margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:20px;">Windows Subsystem for Linux，让Windows原生运行Linux二进制可执行文件，无需虚拟机或双系统</p>
+      </div>
+      
+      <!-- WSL2架构 -->
+      <div style="margin-bottom:20px;">
+        <p style="margin:0; font-size:16px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif; margin-bottom:6px;">WSL2 架构</p>
+        <p style="margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:20px;">内核级桥接，完整Linux内核通过轻量级虚拟机运行，性能接近原生Linux，文件IO速度提升2-20倍</p>
+      </div>
+      
+      <!-- 文件系统交互 -->
+      <div style="margin-bottom:20px;">
+        <p style="margin:0; font-size:16px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif; margin-bottom:6px;">Ubuntu文件系统与Windows交互</p>
+        <p style="margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:20px;">/mnt/c 访问Windows C盘，Windows资源管理器可直接访问wsl$，文件共享无缝衔接</p>
+      </div>
+      
+      <!-- 为什么选择WSL -->
+      <div>
+        <p style="margin:0; font-size:16px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif; margin-bottom:6px;">为什么选择WSL进行ROS2开发</p>
+        <p style="margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:20px;">原生支持ROS2，GPU加速可直接访问，VS Code远程开发，Docker容器完美运行</p>
+      </div>
+    </div>
+    
+    <!-- 右侧图片 -->
+    <div style="position:absolute; left:500px; top:80px; width:420px; height:380px;">
+      <img src="imgs/wsl_architecture.png" alt="WSL Architecture" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+    </div>
+    
+    <!-- 底部装饰 -->
+    <svg width="200" height="3" style="position:absolute; left:40px; bottom:100px;">
+      <rect width="200" height="3" fill="#FFD700"/>
+    </svg>
+    
+    <!-- 关键优势 -->
+    <div style="position:absolute; left:40px; bottom:40px; width:440px;">
+      <p style="margin:0; font-size:12px; color:#83C5BE; font-family:'Times New Roman', serif;">核心优势：轻量 | 高效 | 集成 | 兼容</p>
+    </div>
+    
+    <!-- 页码角标 -->
+    <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+      <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+      <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">19</text>
+    </svg>
+  </div>
+</body>
+</html>

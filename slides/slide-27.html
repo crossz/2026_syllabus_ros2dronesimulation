@@ -1,0 +1,182 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+.slide-content {
+  width: 960px;
+  height: 540px;
+  position: relative;
+  transform-origin: center center;
+}
+</style>
+<script>
+function scaleSlide() {
+  const slide = document.querySelector('.slide-content');
+  if (!slide) return;
+  const slideWidth = 960;
+  const slideHeight = 540;
+  const scaleX = window.innerWidth / slideWidth;
+  const scaleY = window.innerHeight / slideHeight;
+  const scale = Math.min(scaleX, scaleY);
+  slide.style.width = slideWidth + 'px';
+  slide.style.height = slideHeight + 'px';
+  slide.style.transform = `scale(${scale})`;
+  slide.style.transformOrigin = 'center center';
+  slide.style.flexShrink = '0';
+}
+window.addEventListener('load', scaleSlide);
+window.addEventListener('resize', scaleSlide);
+</script>
+
+<div class="slide-content" style="background: #1A1A1A;">
+  <!-- 背景装饰 -->
+  <svg width="960" height="540" style="position:absolute;top:0;left:0;">
+    <defs>
+      <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+        <circle cx="15" cy="15" r="1.5" fill="#83C5BE" opacity="0.1"/>
+      </pattern>
+    </defs>
+    <rect width="960" height="540" fill="url(#dots)"/>
+  </svg>
+  
+  <!-- 主标题 -->
+  <h1 style="position:absolute; left:40px; top:15px; margin:0; font-size:28px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">Hands-on:</h1>
+  <h2 style="position:absolute; left:40px; top:50px; margin:0; font-size:24px; font-weight:700; color:#FFFFFF; font-family:'Times New Roman', serif;">Launch Your First Simulation Robot</h2>
+  
+  <!-- 步骤1: 环境准备 -->
+  <div style="position:absolute; left:40px; top:105px; width:280px; height:130px; background:#2A2A2A; border-radius:8px; border-left:3px solid #FFD700; padding:12px;">
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+      <svg width="24" height="24" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="12" fill="#FFD700"/>
+        <text x="12" y="16" text-anchor="middle" font-size="12" font-weight="700" fill="#1A1A1A">1</text>
+      </svg>
+      <p style="margin:0; font-size:13px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">Gazebo Environment Setup</p>
+    </div>
+    <p style="margin:0; font-size:10px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.5;">
+      # Install Gazebo (ROS2)<br>
+      sudo apt install ros-humble-gazebo-ros-pkgs<br><br>
+      # Launch Gazebo<br>
+      gazebo
+    </p>
+  </div>
+  
+  <!-- 步骤2: 加载模型 -->
+  <div style="position:absolute; left:330px; top:105px; width:280px; height:130px; background:#2A2A2A; border-radius:8px; border-left:3px solid #83C5BE; padding:12px;">
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+      <svg width="24" height="24" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="12" fill="#83C5BE"/>
+        <text x="12" y="16" text-anchor="middle" font-size="12" font-weight="700" fill="#1A1A1A">2</text>
+      </svg>
+      <p style="margin:0; font-size:13px; font-weight:700; color:#83C5BE; font-family:'Times New Roman', serif;">Load TurtleBot3 Model</p>
+    </div>
+    <p style="margin:0; font-size:10px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.5;">
+      # Load world with TurtleBot3<br>
+      ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py<br><br>
+      # Or use empty world<br>
+      ros2 launch turtlebot3_gazebo empty_world.launch.py
+    </p>
+  </div>
+  
+  <!-- 步骤3: 键盘控制 -->
+  <div style="position:absolute; left:620px; top:105px; width:280px; height:130px; background:#2A2A2A; border-radius:8px; border-left:3px solid #FFFFFF; padding:12px;">
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+      <svg width="24" height="24" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="12" fill="#FFFFFF"/>
+        <text x="12" y="16" text-anchor="middle" font-size="12" font-weight="700" fill="#1A1A1A">3</text>
+      </svg>
+      <p style="margin:0; font-size:13px; font-weight:700; color:#FFFFFF; font-family:'Times New Roman', serif;">Keyboard Control</p>
+    </div>
+    <p style="margin:0; font-size:10px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.5;">
+      # Install teleop package<br>
+      sudo apt install ros-humble-teleop-twist-keyboard<br><br>
+      # Run keyboard control<br>
+      ros2 run teleop_twist_keyboard teleop_twist_keyboard
+    </p>
+  </div>
+  
+  <!-- 步骤4: RViz可视化 -->
+  <div style="position:absolute; left:40px; top:250px; width:280px; height:100px; background:#2A2A2A; border-radius:8px; border-left:3px solid #83C5BE; padding:12px;">
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+      <svg width="24" height="24" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="12" fill="#83C5BE"/>
+        <text x="12" y="16" text-anchor="middle" font-size="12" font-weight="700" fill="#1A1A1A">4</text>
+      </svg>
+      <p style="margin:0; font-size:13px; font-weight:700; color:#83C5BE; font-family:'Times New Roman', serif;">RViz2 Visualization</p>
+    </div>
+    <p style="margin:0; font-size:10px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.5;">
+      # Launch RViz2<br>
+      ros2 launch turtlebot3_gazebo robot_state_publisher.launch.py<br>
+      rviz2 -d /opt/ros/humble/share/turtlebot3_gazebo/rviz/turtlebot3_world.rviz
+    </p>
+  </div>
+  
+  <!-- 右侧图片 -->
+  <div style="position:absolute; right:30px; top:250px; width:440px; height:260px; border:2px solid #83C5BE; border-radius:10px; overflow:hidden;">
+    <img src="imgs/slide27_turtlebot.png" style="width:100%; height:100%; object-fit:cover;"/>
+  </div>
+  
+  <!-- 键盘控制说明 -->
+  <div style="position:absolute; left:330px; top:250px; width:280px; height:200px; background:#222; border-radius:8px; padding:12px; border:1px solid #444;">
+    <p style="margin:0; font-size:12px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">Keyboard Control Keys</p>
+    
+    <div style="position:absolute; top:40px; left:10px; width:260px; display:grid; grid-template-columns:repeat(4, 1fr); gap:5px;">
+      <div style="background:#333; border-radius:4px; padding:8px; text-align:center;">
+        <p style="margin:0; font-size:14px; font-weight:700; color:#FFFFFF;">i</p>
+        <p style="margin:3px 0 0 0; font-size:8px; color:#999;">Forward</p>
+      </div>
+      <div style="background:#333; border-radius:4px; padding:8px; text-align:center;">
+        <p style="margin:0; font-size:14px; font-weight:700; color:#FFFFFF;">,</p>
+        <p style="margin:3px 0 0 0; font-size:8px; color:#999;">Backward</p>
+      </div>
+      <div style="background:#333; border-radius:4px; padding:8px; text-align:center;">
+        <p style="margin:0; font-size:14px; font-weight:700; color:#FFFFFF;">j</p>
+        <p style="margin:3px 0 0 0; font-size:8px; color:#999;">Left</p>
+      </div>
+      <div style="background:#333; border-radius:4px; padding:8px; text-align:center;">
+        <p style="margin:0; font-size:14px; font-weight:700; color:#FFFFFF;">l</p>
+        <p style="margin:3px 0 0 0; font-size:8px; color:#999;">Right</p>
+      </div>
+      <div style="background:#333; border-radius:4px; padding:8px; text-align:center;">
+        <p style="margin:0; font-size:14px; font-weight:700; color:#FFFFFF;">k</p>
+        <p style="margin:3px 0 0 0; font-size:8px; color:#999;">Stop</p>
+      </div>
+      <div style="background:#333; border-radius:4px; padding:8px; text-align:center;">
+        <p style="margin:0; font-size:14px; font-weight:700; color:#FFFFFF;">q</p>
+        <p style="margin:3px 0 0 0; font-size:8px; color:#999;">Speed+</p>
+      </div>
+      <div style="background:#333; border-radius:4px; padding:8px; text-align:center;">
+        <p style="margin:0; font-size:14px; font-weight:700; color:#FFFFFF;">z</p>
+        <p style="margin:3px 0 0 0; font-size:8px; color:#999;">Speed-</p>
+      </div>
+      <div style="background:#FFD700; border-radius:4px; padding:8px; text-align:center;">
+        <p style="margin:0; font-size:14px; font-weight:700; color:#1A1A1A;">space</p>
+        <p style="margin:3px 0 0 0; font-size:8px; color:#333;">Brake</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 常见问题排查 -->
+  <div style="position:absolute; left:620px; top:360px; width:280px; height:100px; background:#2A2A2A; border-radius:8px; padding:12px; border:1px solid #FFD700;">
+    <p style="margin:0; font-size:11px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">Troubleshooting</p>
+    <p style="margin:8px 0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.5;">
+      <span style="color:#83C5BE;">●</span> Model not found → export TURTLEBOT3_MODEL=burger<br>
+      <span style="color:#83C5BE;">●</span> Gazebo won't start → check ~/.gazebo folder<br>
+      <span style="color:#83C5BE;">●</span> Teleop not working → check topic permissions
+    </p>
+  </div>
+  
+  <!-- 页码角标 -->
+  <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+    <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+    <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">27</text>
+  </svg>
+</div>

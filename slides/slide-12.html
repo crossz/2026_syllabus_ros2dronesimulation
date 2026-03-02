@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第一周知识点总结</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+        .slide-content {
+            width: 960px;
+            height: 540px;
+            position: relative;
+            transform-origin: center center;
+            background: #1A1A1A;
+        }
+    </style>
+    <script>
+        function scaleSlide() {
+            const slide = document.querySelector('.slide-content');
+            if (!slide) return;
+            const slideWidth = 960;
+            const slideHeight = 540;
+            const scaleX = window.innerWidth / slideWidth;
+            const scaleY = window.innerHeight / slideHeight;
+            const scale = Math.min(scaleX, scaleY);
+            slide.style.width = slideWidth + 'px';
+            slide.style.height = slideHeight + 'px';
+            slide.style.transform = `scale(${scale})`;
+            slide.style.transformOrigin = 'center center';
+            slide.style.flexShrink = '0';
+        }
+        window.addEventListener('load', scaleSlide);
+        window.addEventListener('resize', scaleSlide);
+    </script>
+</head>
+<body>
+    <div class="slide-content" style="background: #1A1A1A;">
+        <!-- 背景装饰 -->
+        <svg width="960" height="540" style="position:absolute; top:0; left:0; opacity:0.05;">
+            <defs>
+                <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <circle cx="20" cy="20" r="2" fill="#83C5BE"/>
+                </pattern>
+            </defs>
+            <rect width="960" height="540" fill="url(#dots)"/>
+        </svg>
+        
+        <!-- 主标题 -->
+        <div style="position:absolute; left:40px; top:15px; width:880px; height:50px; background:#FFD700; border-radius:8px;">
+            <p style="position:absolute; left:0; top:0; width:880px; height:50px; margin:0; line-height:50px; text-align:center; font-size:26px; font-weight:700; color:#1A1A1A; font-family:'Times New Roman', serif;">第一周知识点总结</p>
+        </div>
+        
+        <!-- 四个总结卡片 -->
+        <!-- 卡片1：英特航空业务场景 -->
+        <div style="position:absolute; left:30px; top:80px; width:435px; height:210px; background:#2D2D2D; border:2px solid #FFD700; border-radius:12px;">
+            <div style="position:absolute; left:15px; top:15px; width:405px; height:35px; background:#FFD700; border-radius:6px;">
+                <p style="position:absolute; left:0; top:0; width:405px; height:35px; margin:0; line-height:35px; text-align:center; font-size:16px; font-weight:700; color:#1A1A1A; font-family:'Times New Roman', serif;">1. 英特航空三大业务场景</p>
+            </div>
+            <ul style="position:absolute; left:20px; top:60px; width:395px; margin:0; padding-left:20px; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:26px;">
+                <li><span style="color:#FFD700; font-weight:700;">智慧城市</span>：无人机物流、空中监测</li>
+                <li><span style="color:#FFD700; font-weight:700;">应急救援</span>：搜救、灾害评估</li>
+                <li><span style="color:#FFD700; font-weight:700;">设施巡检</span>：电力线路、管道巡检</li>
+            </ul>
+        </div>
+        
+        <!-- 卡片2：消息通信机制 -->
+        <div style="position:absolute; left:495px; top:80px; width:435px; height:210px; background:#2D2D2D; border:2px solid #83C5BE; border-radius:12px;">
+            <div style="position:absolute; left:15px; top:15px; width:405px; height:35px; background:#83C5BE; border-radius:6px;">
+                <p style="position:absolute; left:0; top:0; width:405px; height:35px; margin:0; line-height:35px; text-align:center; font-size:16px; font-weight:700; color:#1A1A1A; font-family:'Times New Roman', serif;">2. 消息通信机制核心概念</p>
+            </div>
+            <ul style="position:absolute; left:20px; top:60px; width:395px; margin:0; padding-left:20px; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:26px;">
+                <li><span style="color:#83C5BE; font-weight:700;">Topic</span>：发布/订阅，持续数据流</li>
+                <li><span style="color:#83C5BE; font-weight:700;">Service</span>：请求/响应，一对一</li>
+                <li><span style="color:#83C5BE; font-weight:700;">Action</span>：长期任务，可取消/反馈</li>
+            </ul>
+        </div>
+        
+        <!-- 卡片3：同步vs异步 -->
+        <div style="position:absolute; left:30px; top:310px; width:435px; height:210px; background:#2D2D2D; border:2px solid #FFD700; border-radius:12px;">
+            <div style="position:absolute; left:15px; top:15px; width:405px; height:35px; background:#FFD700; border-radius:6px;">
+                <p style="position:absolute; left:0; top:0; width:405px; height:35px; margin:0; line-height:35px; text-align:center; font-size:16px; font-weight:700; color:#1A1A1A; font-family:'Times New Roman', serif;">3. 同步 vs 异步对比</p>
+            </div>
+            <ul style="position:absolute; left:20px; top:60px; width:395px; margin:0; padding-left:20px; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:26px;">
+                <li><span style="color:#FFD700; font-weight:700;">同步</span>：阻塞等待，实时响应（打电话）</li>
+                <li><span style="color:#FFD700; font-weight:700;">异步</span>：非阻塞，解耦（发邮件）</li>
+                <li>ROS2 Topic = 异步，Service = 同步</li>
+            </ul>
+        </div>
+        
+        <!-- 卡片4：ROS2与DDS -->
+        <div style="position:absolute; left:495px; top:310px; width:435px; height:210px; background:#2D2D2D; border:2px solid #83C5BE; border-radius:12px;">
+            <div style="position:absolute; left:15px; top:15px; width:405px; height:35px; background:#83C5BE; border-radius:6px;">
+                <p style="position:absolute; left:0; top:0; width:405px; height:35px; margin:0; line-height:35px; text-align:center; font-size:16px; font-weight:700; color:#1A1A1A; font-family:'Times New Roman', serif;">4. ROS2与DDS架构关系</p>
+            </div>
+            <ul style="position:absolute; left:20px; top:60px; width:395px; margin:0; padding-left:20px; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:26px;">
+                <li><span style="color:#83C5BE; font-weight:700;">架构</span>：应用层→rcl→DDS层</li>
+                <li><span style="color:#83C5BE; font-weight:700;">DDS</span>：自动发现、QoS、RTPS协议</li>
+                <li><span style="color:#83C5BE; font-weight:700;">跨平台</span>：Linux/Windows/macOS/RTOS</li>
+            </ul>
+        </div>
+        
+        <!-- 底部装饰线 -->
+        <svg width="880" height="4" style="position:absolute; left:40px; top:75px;">
+            <rect width="880" height="4" rx="2" fill="#FFD700"/>
+        </svg>
+        
+        <!-- 页码角标 -->
+        <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+            <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">12</text>
+        </svg>
+    </div>
+</body>
+</html>

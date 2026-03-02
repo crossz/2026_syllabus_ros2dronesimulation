@@ -1,0 +1,158 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+.slide-content {
+  width: 960px;
+  height: 540px;
+  position: relative;
+  transform-origin: center center;
+}
+</style>
+<script>
+function scaleSlide() {
+  const slide = document.querySelector('.slide-content');
+  if (!slide) return;
+  const slideWidth = 960;
+  const slideHeight = 540;
+  const scaleX = window.innerWidth / slideWidth;
+  const scaleY = window.innerHeight / slideHeight;
+  const scale = Math.min(scaleX, scaleY);
+  slide.style.width = slideWidth + 'px';
+  slide.style.height = slideHeight + 'px';
+  slide.style.transform = `scale(${scale})`;
+  slide.style.transformOrigin = 'center center';
+  slide.style.flexShrink = '0';
+}
+window.addEventListener('load', scaleSlide);
+window.addEventListener('resize', scaleSlide);
+</script>
+
+<div class="slide-content" style="background: #1A1A1A;">
+  <!-- 背景装饰 -->
+  <svg width="960" height="540" style="position:absolute;top:0;left:0;">
+    <defs>
+      <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+        <circle cx="15" cy="15" r="1.5" fill="#FFD700" opacity="0.1"/>
+      </pattern>
+    </defs>
+    <rect width="960" height="540" fill="url(#dots)"/>
+  </svg>
+  
+  <!-- 主标题 -->
+  <h1 style="position:absolute; left:40px; top:20px; margin:0; font-size:30px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">Simulator Panorama</h1>
+  <h2 style="position:absolute; left:40px; top:55px; margin:0; font-size:16px; font-weight:400; color:#83C5BE; font-family:'Times New Roman', serif;">More Than Just Gazebo - A Comprehensive Overview</h2>
+  
+  <!-- 仿真器对比卡片 -->
+  <div style="position:absolute; left:40px; top:100px; width:280px; height:180px; background:#2A2A2A; border-radius:8px; border:1px solid #83C5BE; padding:15px;">
+    <p style="margin:0; font-size:16px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">Webots</p>
+    <p style="margin:5px 0; font-size:10px; color:#83C5BE; font-family:'Times New Roman', serif;">Cyberbotics | Cross-platform</p>
+    <p style="margin:8px 0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.4;">
+      ✓ Commercial-grade quality<br>
+      ✓ Rich robot models library<br>
+      ✓ Web-based controller<br>
+      ✗ Limited customizability
+    </p>
+  </div>
+  
+  <div style="position:absolute; left:330px; top:100px; width:280px; height:180px; background:#2A2A2A; border-radius:8px; border:1px solid #FFD700; padding:15px;">
+    <p style="margin:0; font-size:16px; font-weight:700; color:#FFFFFF; font-family:'Times New Roman', serif;">CoppeliaSim (V-REP)</p>
+    <p style="margin:5px 0; font-size:10px; color:#FFD700; font-family:'Times New Roman', serif;">Academic Research Favorite</p>
+    <p style="margin:8px 0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.4;">
+      ✓ Free for academic use<br>
+      ✓ Lua scripting support<br>
+      ✓ Multiple control modes<br>
+      ✗ Discontinued development
+    </p>
+  </div>
+  
+  <div style="position:absolute; left:620px; top:100px; width:280px; height:180px; background:#2A2A2A; border-radius:8px; border:1px solid #FFFFFF; padding:15px;">
+    <p style="margin:0; font-size:16px; font-weight:700; color:#83C5BE; font-family:'Times New Roman', serif;">AirSim</p>
+    <p style="margin:5px 0; font-size:10px; color:#FFFFFF; font-family:'Times New Roman', serif;">Microsoft | UE4/UE5 Based</p>
+    <p style="margin:8px 0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.4;">
+      ✓ Photorealistic rendering<br>
+      ✓ Drone & vehicle sim<br>
+      ✓ Python/C++/ROS APIs<br>
+      ✗ Requires UE knowledge
+    </p>
+  </div>
+  
+  <!-- 底部对比表格 -->
+  <div style="position:absolute; left:40px; top:300px; width:860px; height:200px;">
+    <svg width="860" height="2" style="position:absolute;top:0;left:0;">
+      <rect width="860" height="2" fill="#83C5BE" opacity="0.3"/>
+    </svg>
+    
+    <!-- 表格头部 -->
+    <div style="position:absolute; top:10px; left:0; width:860px; display:flex;">
+      <p style="width:150px; margin:0; font-size:11px; font-weight:700; color:#FFFFFF; font-family:'Times New Roman', serif;">Simulator</p>
+      <p style="width:140px; margin:0; font-size:10px; color:#83C5BE; font-family:'Times New Roman', serif;">Rendering</p>
+      <p style="width:140px; margin:0; font-size:10px; color:#83C5BE; font-family:'Times New Roman', serif;">Physics</p>
+      <p style="width:140px; margin:0; font-size:10px; color:#83C5BE; font-family:'Times New Roman', serif;">ROS Support</p>
+      <p style="width:140px; margin:0; font-size:10px; color:#83C5BE; font-family:'Times New Roman', serif;">License</p>
+      <p style="width:140px; margin:0; font-size:10px; color:#83C5BE; font-family:'Times New Roman', serif;">Best For</p>
+    </div>
+    
+    <!-- Webots行 -->
+    <div style="position:absolute; top:45px; left:0; width:860px; display:flex; align-items:center;">
+      <p style="width:150px; margin:0; font-size:11px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">Webots</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">Good</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">ODE/Bullet</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">ROS1/2</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">Commercial</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">Education</p>
+    </div>
+    
+    <!-- CoppeliaSim行 -->
+    <div style="position:absolute; top:75px; left:0; width:860px; display:flex; align-items:center;">
+      <p style="width:150px; margin:0; font-size:11px; font-weight:600; color:#FFFFFF; font-family:'Times New Roman', serif;">CoppeliaSim</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">Good</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">ODE/Bullet</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">ROS1/2</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">Free/Academic</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">Research</p>
+    </div>
+    
+    <!-- AirSim行 -->
+    <div style="position:absolute; top:105px; left:0; width:860px; display:flex; align-items:center;">
+      <p style="width:150px; margin:0; font-size:11px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif;">AirSim</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">Excellent</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">Custom</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">ROS1/2</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">MIT License</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">Autonomous Driving</p>
+    </div>
+    
+    <!-- Gazebo行 -->
+    <div style="position:absolute; top:135px; left:0; width:860px; display:flex; align-items:center;">
+      <p style="width:150px; margin:0; font-size:11px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">Gazebo</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">Good</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">ODE/Bullet/Simbody/DART</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCC00; font-family:'Times New Roman', serif;">ROS1/2 (Native)</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">Apache 2.0</p>
+      <p style="width:140px; margin:0; font-size:9px; color:#CCCCCC; font-family:'Times New Roman', serif;">Robotics Research</p>
+    </div>
+    
+    <!-- 选择建议 -->
+    <div style="position:absolute; top:170px; left:0; width:860px; padding:10px; background:#FFD700; background-opacity:0.1; border-radius:4px; border-left:3px solid #FFD700;">
+      <p style="margin:0; font-size:10px; color:#FFD700; font-family:'Times New Roman', serif;">
+        <strong>Recommendation:</strong> For ROS robotics research → Gazebo | For autonomous driving → AirSim | For education → Webots | For academic paper → CoppeliaSim
+      </p>
+    </div>
+  </div>
+  
+  <!-- 页码角标 -->
+  <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+    <circle cx="18" cy="18" r="18" fill="#FFD700"/>
+    <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">24</text>
+  </svg>
+</div>

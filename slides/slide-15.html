@@ -1,0 +1,129 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+.slide-content {
+  width: 960px;
+  height: 540px;
+  position: relative;
+  transform-origin: center center;
+}
+</style>
+<script>
+function scaleSlide() {
+  const slide = document.querySelector('.slide-content');
+  if (!slide) return;
+  const slideWidth = 960;
+  const slideHeight = 540;
+  const scaleX = window.innerWidth / slideWidth;
+  const scaleY = window.innerHeight / slideHeight;
+  const scale = Math.min(scaleX, scaleY);
+  slide.style.width = slideWidth + 'px';
+  slide.style.height = slideHeight + 'px';
+  slide.style.transform = `scale(${scale})`;
+  slide.style.transformOrigin = 'center center';
+  slide.style.flexShrink = '0';
+}
+window.addEventListener('load', scaleSlide);
+window.addEventListener('resize', scaleSlide);
+</script>
+
+<div class="slide-content" style="background:#1A1A1A;">
+  <!-- 背景装饰 -->
+  <svg width="960" height="540" style="position:absolute;top:0;left:0;opacity:0.05;">
+    <defs>
+      <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+        <circle cx="15" cy="15" r="1.5" fill="#FFFFFF"/>
+      </pattern>
+    </defs>
+    <rect width="960" height="540" fill="url(#dots)"/>
+  </svg>
+  
+  <!-- 主标题 -->
+  <h1 style="position:absolute; left:40px; top:24px; margin:0; font-size:32px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">Topic: Publish-Subscribe Model</h1>
+  <svg width="200" height="3" style="position:absolute; left:40px; top:62px;">
+    <rect width="200" height="3" fill="#FFD700"/>
+  </svg>
+  
+  <!-- 核心概念 -->
+  <div style="position:absolute; left:40px; top:90px; width:440px; height:200px; background:#2D2D2D; border-radius:8px; padding:16px; box-sizing:border-box;">
+    <h2 style="margin:0 0 12px 0; font-size:18px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">Core Concepts</h2>
+    <ul style="margin:0; padding-left:20px; font-size:13px; color:#FFFFFF; line-height:1.9; font-family:'Times New Roman', serif;">
+      <li style="margin-bottom:10px;"><strong style="color:#83C5BE;">Publisher:</strong> Node that sends messages to a topic</li>
+      <li style="margin-bottom:10px;"><strong style="color:#83C5BE;">Subscriber:</strong> Node that receives messages from a topic</li>
+      <li style="margin-bottom:10px;"><strong style="color:#83C5BE;">Topic:</strong> Named channel for message transport</li>
+      <li style="margin-bottom:10px;"><strong style="color:#FF6B6B;">Anonymous:</strong> Publishers don't know subscribers</li>
+    </ul>
+  </div>
+  
+  <!-- 多对多通信 -->
+  <div style="position:absolute; left:500px; top:90px; width:420px; height:200px; background:#2D2D2D; border-radius:8px; padding:16px; box-sizing:border-box;">
+    <h2 style="margin:0 0 12px 0; font-size:18px; font-weight:500; color:#83C5BE; font-family:'Times New Roman', serif;">Many-to-Many Communication</h2>
+    <ul style="margin:0; padding-left:20px; font-size:13px; color:#FFFFFF; line-height:1.9; font-family:'Times New Roman', serif;">
+      <li style="margin-bottom:10px;"><strong>Multiple Publishers:</strong> Many nodes can publish to same topic</li>
+      <li style="margin-bottom:10px;"><strong>Multiple Subscribers:</strong> Many nodes can subscribe to same topic</li>
+      <li style="margin-bottom:10px;"><strong>Decoupled:</strong> Time and space decoupling between nodes</li>
+      <li style="margin-bottom:10px;"><strong>Async:</strong> Non-blocking message passing</li>
+    </ul>
+  </div>
+  
+  <!-- 示意图区域 -->
+  <div style="position:absolute; left:40px; top:310px; width:540px; height:200px; background:#252525; border-radius:8px; padding:16px; box-sizing:border-box;">
+    <h3 style="margin:0 0 12px 0; font-size:16px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">Topic Architecture Diagram</h3>
+    <svg width="500" height="150" viewBox="0 0 500 150">
+      <!-- Topic Bus -->
+      <rect x="200" y="50" width="100" height="50" rx="8" fill="#3D3D3D" stroke="#FFD700" stroke-width="2"/>
+      <text x="250" y="80" text-anchor="middle" font-size="12" fill="#FFD700" font-family="Times New Roman">/cmd_vel</text>
+      
+      <!-- Publishers -->
+      <rect x="30" y="20" width="70" height="35" rx="4" fill="#2D2D2D" stroke="#FF6B6B" stroke-width="2"/>
+      <text x="65" y="43" text-anchor="middle" font-size="10" fill="#FFFFFF" font-family="Times New Roman">Pub1</text>
+      
+      <rect x="30" y="95" width="70" height="35" rx="4" fill="#2D2D2D" stroke="#FF6B6B" stroke-width="2"/>
+      <text x="65" y="118" text-anchor="middle" font-size="10" fill="#FFFFFF" font-family="Times New Roman">Pub2</text>
+      
+      <!-- Subscribers -->
+      <rect x="400" y="20" width="70" height="35" rx="4" fill="#2D2D2D" stroke="#83C5BE" stroke-width="2"/>
+      <text x="435" y="43" text-anchor="middle" font-size="10" fill="#FFFFFF" font-family="Times New Roman">Sub1</text>
+      
+      <rect x="400" y="65" width="70" height="35" rx="4" fill="#2D2D2D" stroke="#83C5BE" stroke-width="2"/>
+      <text x="435" y="88" text-anchor="middle" font-size="10" fill="#FFFFFF" font-family="Times New Roman">Sub2</text>
+      
+      <rect x="400" y="110" width="70" height="35" rx="4" fill="#2D2D2D" stroke="#83C5BE" stroke-width="2"/>
+      <text x="435" y="133" text-anchor="middle" font-size="10" fill="#FFFFFF" font-family="Times New Roman">Sub3</text>
+      
+      <!-- Arrows from Publishers to Topic -->
+      <path d="M100 37 L195 75" stroke="#FF6B6B" stroke-width="2" fill="none"/>
+      <path d="M100 112 L195 75" stroke="#FF6B6B" stroke-width="2" fill="none"/>
+      
+      <!-- Arrows from Topic to Subscribers -->
+      <path d="M305 75 L395 37" stroke="#83C5BE" stroke-width="2" fill="none"/>
+      <path d="M305 75 L395 82" stroke="#83C5BE" stroke-width="2" fill="none"/>
+      <path d="M305 75 L395 127" stroke="#83C5BE" stroke-width="2" fill="none"/>
+    </svg>
+  </div>
+  
+  <!-- 右侧图片 -->
+  <img src="imgs/slide-15-topic-pubsub.png" style="position:absolute; left:600px; top:310px; width:320px; height:200px; object-fit:cover; border-radius:8px; opacity:0.9;">
+  
+  <!-- 特性标签 -->
+  <div style="position:absolute; left:600px; top:90px; width:320px; height:80px; background:#252525; border-radius:6px; padding:12px; box-sizing:border-box;">
+    <h4 style="margin:0 0 8px 0; font-size:14px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">Key Characteristics</h4>
+    <p style="margin:0; font-size:11px; color:#CCCCCC; line-height:1.6; font-family:'Times New Roman', serif;">Topics are for continuous data streams (sensor data, odometry). Messages are queued and delivered asynchronously. Suitable for real-time sensor fusion.</p>
+  </div>
+  
+  <!-- 页码角标 -->
+  <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+    <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+    <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">15</text>
+  </svg>
+</div>

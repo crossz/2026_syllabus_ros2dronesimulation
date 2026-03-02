@@ -1,0 +1,138 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+.slide-content {
+  width: 960px;
+  height: 540px;
+  position: relative;
+  transform-origin: center center;
+}
+</style>
+<script>
+function scaleSlide() {
+  const slide = document.querySelector('.slide-content');
+  if (!slide) return;
+  const slideWidth = 960;
+  const slideHeight = 540;
+  const scaleX = window.innerWidth / slideWidth;
+  const scaleY = window.innerHeight / slideHeight;
+  const scale = Math.min(scaleX, scaleY);
+  slide.style.width = slideWidth + 'px';
+  slide.style.height = slideHeight + 'px';
+  slide.style.transform = `scale(${scale})`;
+  slide.style.transformOrigin = 'center center';
+  slide.style.flexShrink = '0';
+}
+window.addEventListener('load', scaleSlide);
+window.addEventListener('resize', scaleSlide);
+</script>
+
+<div class="slide-content" style="background:#1A1A1A;">
+  <!-- 背景装饰 -->
+  <svg width="960" height="540" style="position:absolute;top:0;left:0;opacity:0.05;">
+    <defs>
+      <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+        <circle cx="15" cy="15" r="1.5" fill="#FFFFFF"/>
+      </pattern>
+    </defs>
+    <rect width="960" height="540" fill="url(#dots)"/>
+  </svg>
+  
+  <!-- 主标题 -->
+  <h1 style="position:absolute; left:40px; top:24px; margin:0; font-size:32px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">Message Communication: Underlying Logic</h1>
+  <svg width="200" height="3" style="position:absolute; left:40px; top:62px;">
+    <rect width="200" height="3" fill="#FFD700"/>
+  </svg>
+  
+  <!-- 四个知识点卡片 -->
+  <!-- TCP/UDP传输层 -->
+  <div style="position:absolute; left:40px; top:90px; width:220px; height:180px; background:#2D2D2D; border-radius:8px; padding:14px; box-sizing:border-box; border-left:4px solid #FF6B6B;">
+    <h3 style="margin:0 0 10px 0; font-size:15px; font-weight:500; color:#FF6B6B; font-family:'Times New Roman', serif;">TCP vs UDP Transport</h3>
+    <ul style="margin:0; padding-left:16px; font-size:11px; color:#FFFFFF; line-height:1.7; font-family:'Times New Roman', serif;">
+      <li style="margin-bottom:4px;"><strong>TCP:</strong> Reliable, ordered, connection-oriented</li>
+      <li style="margin-bottom:4px;"><strong>UDP:</strong> Fast, unreliable, no ordering</li>
+      <li style="margin-bottom:4px;"><strong>ROS2:</strong> Uses DDS with configurable QoS</li>
+    </ul>
+  </div>
+  
+  <!-- 序列化与反序列化 -->
+  <div style="position:absolute; left:270px; top:90px; width:220px; height:180px; background:#2D2D2D; border-radius:8px; padding:14px; box-sizing:border-box; border-left:4px solid #83C5BE;">
+    <h3 style="margin:0 0 10px 0; font-size:15px; font-weight:500; color:#83C5BE; font-family:'Times New Roman', serif;">Serialization/Deserialization</h3>
+    <ul style="margin:0; padding-left:16px; font-size:11px; color:#FFFFFF; line-height:1.7; font-family:'Times New Roman', serif;">
+      <li style="margin-bottom:4px;"><strong>msg → bytes:</strong> Serialize at publisher</li>
+      <li style="margin-bottom:4px;"><strong>bytes → msg:</strong> Deserialize at subscriber</li>
+      <li style="margin-bottom:4px;"><strong>Format:</strong> CDR (Common Data Representation)</li>
+    </ul>
+  </div>
+  
+  <!-- 订阅者发现机制 -->
+  <div style="position:absolute; left:500px; top:90px; width:220px; height:180px; background:#2D2D2D; border-radius:8px; padding:14px; box-sizing:border-box; border-left:4px solid #FFD700;">
+    <h3 style="margin:0 0 10px 0; font-size:15px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">Subscriber Discovery</h3>
+    <ul style="margin:0; padding-left:16px; font-size:11px; color:#FFFFFF; line-height:1.7; font-family:'Times New Roman', serif;">
+      <li style="margin-bottom:4px;"><strong>Discovery:</strong> Participant Discovery Protocol</li>
+      <li style="margin-bottom:4px;"><strong>Match:</strong> Topic matching via DDS</li>
+      <li style="margin-bottom:4px;"><strong>Announce:</strong> Publication/Subscription built-in</li>
+    </ul>
+  </div>
+  
+  <!-- 数据流控制 -->
+  <div style="position:absolute; left:730px; top:90px; width:200px; height:180px; background:#2D2D2D; border-radius:8px; padding:14px; box-sizing:border-box; border-left:4px solid #9B59B6;">
+    <h3 style="margin:0 0 10px 0; font-size:15px; font-weight:500; color:#9B59B6; font-family:'Times New Roman', serif;">Data Flow Control</h3>
+    <ul style="margin:0; padding-left:16px; font-size:11px; color:#FFFFFF; line-height:1.7; font-family:'Times New Roman', serif;">
+      <li style="margin-bottom:4px;"><strong>QoS:</strong> History, Durability, Deadline</li>
+      <li style="margin-bottom:4px;"><strong>Flow:</strong> Backpressure handling</li>
+      <li style="margin-bottom:4px;"><strong>Buffer:</strong> Message queue management</li>
+    </ul>
+  </div>
+  
+  <!-- 流程示意图 -->
+  <div style="position:absolute; left:40px; top:290px; width:580px; height:220px; background:#252525; border-radius:8px; padding:16px; box-sizing:border-box;">
+    <h3 style="margin:0 0 12px 0; font-size:16px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">Communication Flow Diagram</h3>
+    <svg width="540" height="160" viewBox="0 0 540 160">
+      <!-- Publisher Node -->
+      <rect x="20" y="50" width="80" height="50" rx="6" fill="#2D2D2D" stroke="#FFD700" stroke-width="2"/>
+      <text x="60" y="80" text-anchor="middle" font-size="12" fill="#FFFFFF" font-family="Times New Roman">Publisher</text>
+      
+      <!-- Serialize -->
+      <rect x="120" y="65" width="60" height="30" rx="4" fill="#3D3D3D"/>
+      <text x="150" y="85" text-anchor="middle" font-size="10" fill="#83C5BE" font-family="Times New Roman">Serialize</text>
+      
+      <!-- Transport -->
+      <rect x="200" y="60" width="140" height="40" rx="4" fill="#3D3D3D"/>
+      <text x="270" y="85" text-anchor="middle" font-size="11" fill="#FFFFFF" font-family="Times New Roman">DDS Transport Layer</text>
+      
+      <!-- Deserialize -->
+      <rect x="360" y="65" width="60" height="30" rx="4" fill="#3D3D3D"/>
+      <text x="390" y="85" text-anchor="middle" font-size="10" fill="#83C5BE" font-family="Times New Roman">Deserialize</text>
+      
+      <!-- Subscriber Node -->
+      <rect x="440" y="50" width="80" height="50" rx="6" fill="#2D2D2D" stroke="#83C5BE" stroke-width="2"/>
+      <text x="480" y="80" text-anchor="middle" font-size="12" fill="#FFFFFF" font-family="Times New Roman">Subscriber</text>
+      
+      <!-- Arrows -->
+      <path d="M100 75 L115 75" stroke="#FFD700" stroke-width="2"/>
+      <path d="M180 75 L195 75" stroke="#FFD700" stroke-width="2"/>
+      <path d="M340 75 L355 75" stroke="#83C5BE" stroke-width="2"/>
+      <path d="M420 75 L435 75" stroke="#83C5BE" stroke-width="2"/>
+    </svg>
+  </div>
+  
+  <!-- 右侧图片 -->
+  <img src="imgs/slide-14-message-communication.png" style="position:absolute; left:640px; top:290px; width:290px; height="220px; object-fit:cover; border-radius:8px; opacity:0.9;">
+  
+  <!-- 页码角标 -->
+  <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+    <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+    <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">14</text>
+  </svg>
+</div>

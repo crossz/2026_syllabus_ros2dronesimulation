@@ -1,0 +1,132 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+.slide-content {
+  width: 960px;
+  height: 540px;
+  position: relative;
+  transform-origin: center center;
+}
+</style>
+<script>
+function scaleSlide() {
+  const slide = document.querySelector('.slide-content');
+  if (!slide) return;
+  const slideWidth = 960;
+  const slideHeight = 540;
+  const scaleX = window.innerWidth / slideWidth;
+  const scaleY = window.innerHeight / slideHeight;
+  const scale = Math.min(scaleX, scaleY);
+  slide.style.width = slideWidth + 'px';
+  slide.style.height = slideHeight + 'px';
+  slide.style.transform = `scale(${scale})`;
+  slide.style.transformOrigin = 'center center';
+  slide.style.flexShrink = '0';
+}
+window.addEventListener('load', scaleSlide);
+window.addEventListener('resize', scaleSlide);
+</script>
+
+<div class="slide-content" style="background:#1A1A1A;">
+  <!-- 背景装饰 -->
+  <svg width="960" height="540" style="position:absolute;top:0;left:0;opacity:0.05;">
+    <defs>
+      <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+        <circle cx="15" cy="15" r="1.5" fill="#FFFFFF"/>
+      </pattern>
+    </defs>
+    <rect width="960" height="540" fill="url(#dots)"/>
+  </svg>
+  
+  <!-- 主标题 -->
+  <h1 style="position:absolute; left:40px; top:24px; margin:0; font-size:32px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">Message Types & Interface Definition</h1>
+  <svg width="200" height="3" style="position:absolute; left:40px; top:62px;">
+    <rect width="200" height="3" fill="#FFD700"/>
+  </svg>
+  
+  <!-- ROS2内置消息类型 -->
+  <div style="position:absolute; left:40px; top:90px; width:280px; height:200px; background:#2D2D2D; border-radius:8px; padding:14px; box-sizing:border-box; border-left:4px solid #FF6B6B;">
+    <h3 style="margin:0 0 10px 0; font-size:15px; font-weight:500; color:#FF6B6B; font-family:'Times New Roman', serif;">Built-in Message Types</h3>
+    <ul style="margin:0; padding-left:16px; font-size:11px; color:#FFFFFF; line-height:1.7; font-family:'Times New Roman', serif;">
+      <li style="margin-bottom:6px;"><strong style="color:#FFD700;">std_msgs:</strong> String, Int32, Float64, Bool, Header</li>
+      <li style="margin-bottom:6px;"><strong style="color:#FFD700;">sensor_msgs:</strong> Image, PointCloud2, Imu, LaserScan</li>
+      <li style="margin-bottom:6px;"><strong style="color:#FFD700;">nav_msgs:</strong> Odometry, Path, OccupancyGrid</li>
+      <li style="margin-bottom:6px;"><strong style="color:#FFD700;">geometry_msgs:</strong> Twist, Pose, Transform, Quaternion</li>
+    </ul>
+  </div>
+  
+  <!-- 自定义消息接口 -->
+  <div style="position:absolute; left:340px; top:90px; width:280px; height:200px; background:#2D2D2D; border-radius:8px; padding:14px; box-sizing:border-box; border-left:4px solid #83C5BE;">
+    <h3 style="margin:0 0 10px 0; font-size:15px; font-weight:500; color:#83C5BE; font-family:'Times New Roman', serif;">Custom .msg Files</h3>
+    <ul style="margin:0; padding-left:16px; font-size:11px; color:#FFFFFF; line-height:1.7; font-family:'Times New Roman', serif;">
+      <li style="margin-bottom:6px;"><strong>Definition:</strong> Field type and name pairs</li>
+      <li style="margin-bottom:6px;"><strong>Example:</strong></li>
+      <li style="margin-bottom:4px; padding-left:8px; font-family:monospace; color:#CCCCCC;">string name</li>
+      <li style="margin-bottom:4px; padding-left:8px; font-family:monospace; color:#CCCCCC;">int32[] data</li>
+      <li style="margin-bottom:4px; padding-left:8px; font-family:monospace; color:#CCCCCC;">geometry_msgs/Pose pose</li>
+    </ul>
+  </div>
+  
+  <!-- IDL接口定义 -->
+  <div style="position:absolute; left:640px; top:90px; width:280px; height:200px; background:#2D2D2D; border-radius:8px; padding:14px; box-sizing:border-box; border-left:4px solid #FFD700;">
+    <h3 style="margin:0 0 10px 0; font-size:15px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">IDL Interface Definition</h3>
+    <ul style="margin:0; padding-left:16px; font-size:11px; color:#FFFFFF; line-height:1.7; font-family:'Times New Roman', serif;">
+      <li style="margin-bottom:6px;"><strong>IDL:</strong> Interface Definition Language</li>
+      <li style="margin-bottom:6px;"><strong>ROS2:</strong> Uses OMG IDL standard</li>
+      <li style="margin-bottom:6px;"><strong>Conversion:</strong> .msg → .idl → C++/Python</li>
+      <li style="margin-bottom:6px;"><strong>Tools:</strong> rosidl_generate_interfaces</li>
+    </ul>
+  </div>
+  
+  <!-- Package管理 -->
+  <div style="position:absolute; left:40px; top:310px; width:280px; height:200px; background:#2D2D2D; border-radius:8px; padding:14px; box-sizing:border-box; border-left:4px solid #9B59B6;">
+    <h3 style="margin:0 0 10px 0; font-size:15px; font-weight:500; color:#9B59B6; font-family:'Times New Roman', serif;">Package Management</h3>
+    <ul style="margin:0; padding-left:16px; font-size:11px; color:#FFFFFF; line-height:1.7; font-family:'Times New Roman', serif;">
+      <li style="margin-bottom:6px;"><strong>Package:</strong> Unit of software distribution</li>
+      <li style="margin-bottom:6px;"><strong>CMakeLists:</strong> Build configuration</li>
+      <li style="margin-bottom:6px;"><strong>package.xml:</strong> Metadata and dependencies</li>
+      <li style="margin-bottom:6px;"><strong>msg/:</strong> Custom message directory</li>
+    </ul>
+  </div>
+  
+  <!-- 消息类型层次结构 -->
+  <div style="position:absolute; left:340px; top:310px; width:280px; height:200px; background:#252525; border-radius:8px; padding:14px; box-sizing:border-box;">
+    <h3 style="margin:0 0 12px 0; font-size:15px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">Type Hierarchy</h3>
+    <svg width="250" height="150" viewBox="0 0 250 150">
+      <!-- Base -->
+      <rect x="85" y="120" width="80" height="22" rx="4" fill="#3D3D3D"/>
+      <text x="125" y="135" text-anchor="middle" font-size="10" fill="#FFFFFF" font-family="Times New Roman">Primitive</text>
+      
+      <!-- Middle -->
+      <rect x="65" y="75" width="120" height="22" rx="4" fill="#3D3D3D" stroke="#83C5BE" stroke-width="1"/>
+      <text x="125" y="90" text-anchor="middle" font-size="10" fill="#83C5BE" font-family="Times New Roman">std_msgs</text>
+      
+      <!-- Top -->
+      <rect x="45" y="30" width="160" height="22" rx="4" fill="#3D3D3D" stroke="#FFD700" stroke-width="2"/>
+      <text x="125" y="45" text-anchor="middle" font-size="10" fill="#FFD700" font-family="Times New Roman">sensor_msgs / nav_msgs</text>
+      
+      <!-- Arrows -->
+      <path d="M125 110 L125 97" stroke="#83C5BE" stroke-width="2"/>
+      <path d="M125 65 L125 52" stroke="#FFD700" stroke-width="2"/>
+    </svg>
+  </div>
+  
+  <!-- 右侧图片 -->
+  <img src="imgs/slide-17-message-types.png" style="position:absolute; left:640px; top:310px; width:280px; height="200px; object-fit:cover; border-radius:8px; opacity:0.9;">
+  
+  <!-- 页码角标 -->
+  <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+    <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+    <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">17</text>
+  </svg>
+</div>

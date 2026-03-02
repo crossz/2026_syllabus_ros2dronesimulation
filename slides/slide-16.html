@@ -1,0 +1,138 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+.slide-content {
+  width: 960px;
+  height: 540px;
+  position: relative;
+  transform-origin: center center;
+}
+</style>
+<script>
+function scaleSlide() {
+  const slide = document.querySelector('.slide-content');
+  if (!slide) return;
+  const slideWidth = 960;
+  const slideHeight = 540;
+  const scaleX = window.innerWidth / slideWidth;
+  const scaleY = window.innerHeight / slideHeight;
+  const scale = Math.min(scaleX, scaleY);
+  slide.style.width = slideWidth + 'px';
+  slide.style.height = slideHeight + 'px';
+  slide.style.transform = `scale(${scale})`;
+  slide.style.transformOrigin = 'center center';
+  slide.style.flexShrink = '0';
+}
+window.addEventListener('load', scaleSlide);
+window.addEventListener('resize', scaleSlide);
+</script>
+
+<div class="slide-content" style="background:#1A1A1A;">
+  <!-- 背景装饰 -->
+  <svg width="960" height="540" style="position:absolute;top:0;left:0;opacity:0.05;">
+    <defs>
+      <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+        <circle cx="15" cy="15" r="1.5" fill="#FFFFFF"/>
+      </pattern>
+    </defs>
+    <rect width="960" height="540" fill="url(#dots)"/>
+  </svg>
+  
+  <!-- 主标题 -->
+  <h1 style="position:absolute; left:40px; top:24px; margin:0; font-size:32px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">Service: Request-Response Model</h1>
+  <svg width="200" height="3" style="position:absolute; left:40px; top:62px;">
+    <rect width="200" height="3" fill="#FFD700"/>
+  </svg>
+  
+  <!-- 核心概念 -->
+  <div style="position:absolute; left:40px; top:90px; width:280px; height:200px; background:#2D2D2D; border-radius:8px; padding:16px; box-sizing:border-box; border-left:4px solid #FF6B6B;">
+    <h3 style="margin:0 0 12px 0; font-size:16px; font-weight:500; color:#FF6B6B; font-family:'Times New Roman', serif;">Core Components</h3>
+    <ul style="margin:0; padding-left:18px; font-size:12px; color:#FFFFFF; line-height:1.8; font-family:'Times New Roman', serif;">
+      <li style="margin-bottom:8px;"><strong style="color:#83C5BE;">Service Client:</strong> Node that sends request</li>
+      <li style="margin-bottom:8px;"><strong style="color:#83C5BE;">Service Server:</strong> Node that handles request</li>
+      <li style="margin-bottom:8px;"><strong style="color:#FFD700;">Request:</strong> Input data for the service</li>
+      <li style="margin-bottom:8px;"><strong style="color:#FFD700;">Response:</strong> Output data from the service</li>
+    </ul>
+  </div>
+  
+  <!-- 同步阻塞特性 -->
+  <div style="position:absolute; left:340px; top:90px; width:280px; height:200px; background:#2D2D2D; border-radius:8px; padding:16px; box-sizing:border-box; border-left:4px solid #83C5BE;">
+    <h3 style="margin:0 0 12px 0; font-size:16px; font-weight:500; color:#83C5BE; font-family:'Times New Roman', serif;">Synchronous Blocking</h3>
+    <ul style="margin:0; padding-left:18px; font-size:12px; color:#FFFFFF; line-height:1.8; font-family:'Times New Roman', serif;">
+      <li style="margin-bottom:8px;"><strong>Blocking Call:</strong> Client waits for response</li>
+      <li style="margin-bottom:8px;"><strong>No Return Until:</strong> Service completes processing</li>
+      <li style="margin-bottom:8px;"><strong>Timeout:</strong> Can set wait timeout</li>
+      <li style="margin-bottom:8px;"><strong>Use Case:</strong> Commands that need result</li>
+    </ul>
+  </div>
+  
+  <!-- 适用场景 -->
+  <div style="position:absolute; left:640px; top:90px; width:280px; height:200px; background:#2D2D2D; border-radius:8px; padding:16px; box-sizing:border-box; border-left:4px solid #FFD700;">
+    <h3 style="margin:0 0 12px 0; font-size:16px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">Use Cases</h3>
+    <ul style="margin:0; padding-left:18px; font-size:12px; color:#FFFFFF; line-height:1.8; font-family:'Times New Roman', serif;">
+      <li style="margin-bottom:8px;"><strong>Query:</strong> Get robot state/info</li>
+      <li style="margin-bottom:8px;"><strong>Control:</strong> Execute action commands</li>
+      <li style="margin-bottom:8px;"><strong>Configure:</strong> Change parameters</li>
+      <li style="margin-bottom:8px;"><strong>Trigger:</strong> One-time actions</li>
+    </ul>
+  </div>
+  
+  <!-- Service流程图 -->
+  <div style="position:absolute; left:40px; top:310px; width:540px; height:200px; background:#252525; border-radius:8px; padding:16px; box-sizing:border-box;">
+    <h3 style="margin:0 0 12px 0; font-size:16px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">Service Communication Flow</h3>
+    <svg width="500" height="150" viewBox="0 0 500 150">
+      <!-- Client Node -->
+      <rect x="30" y="50" width="80" height="50" rx="6" fill="#2D2D2D" stroke="#FF6B6B" stroke-width="2"/>
+      <text x="70" y="80" text-anchor="middle" font-size="11" fill="#FFFFFF" font-family="Times New Roman">Client</text>
+      
+      <!-- Request Arrow -->
+      <path d="M110 75 L170 75" stroke="#FFD700" stroke-width="3"/>
+      <polygon points="165,75 175,70 175,80" fill="#FFD700"/>
+      <text x="140" y="65" text-anchor="middle" font-size="10" fill="#FFD700" font-family="Times New Roman">Request</text>
+      
+      <!-- Server Node -->
+      <rect x="250" y="50" width="80" height="50" rx="6" fill="#2D2D2D" stroke="#83C5BE" stroke-width="2"/>
+      <text x="290" y="80" text-anchor="middle" font-size="11" fill="#FFFFFF" font-family="Times New Roman">Server</text>
+      
+      <!-- Processing -->
+      <rect x="170" y="60" width="80" height="30" rx="4" fill="#3D3D3D"/>
+      <text x="210" y="80" text-anchor="middle" font-size="9" fill="#CCCCCC" font-family="Times New Roman">Processing</text>
+      
+      <!-- Response Arrow -->
+      <path d="M330 75 L390 75" stroke="#83C5BE" stroke-width="3"/>
+      <polygon points="385,70 395,75 385,80" fill="#83C5BE"/>
+      <text x="360" y="65" text-anchor="middle" font-size="10" fill="#83C5BE" font-family="Times New Roman">Response</text>
+      
+      <!-- Blocking indicator -->
+      <rect x="80" y="115" width="140" height="25" rx="4" fill="#FF6B6B" fill-opacity="0.3"/>
+      <text x="150" y="132" text-anchor="middle" font-size="10" fill="#FF6B6B" font-family="Times New Roman">BLOCKING WAIT</text>
+      
+      <!-- Non-blocking indicator -->
+      <rect x="280" y="115" width="140" height="25" rx="4" fill="#83C5BE" fill-opacity="0.3"/>
+      <text x="350" y="132" text-anchor="middle" font-size="10" fill="#83C5BE" font-family="Times New Roman">Return Result</text>
+    </svg>
+  </div>
+  
+  <!-- 右侧图片 -->
+  <img src="imgs/slide-16-service-model.png" style="position:absolute; left:600px; top:310px; width:320px; height:200px; object-fit:cover; border-radius:8px; opacity:0.9;">
+  
+  <!-- Topic vs Service 对比 -->
+  <div style="position:absolute; left:340px; top:310px; width:240px; height:200px; background:#252525; border-radius:8px; padding:14px; box-sizing:border-box; display:none;">
+  </div>
+  
+  <!-- 页码角标 -->
+  <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+    <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+    <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">16</text>
+  </svg>
+</div>

@@ -1,0 +1,153 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+.slide-content {
+  width: 960px;
+  height: 540px;
+  position: relative;
+  transform-origin: center center;
+}
+</style>
+<script>
+function scaleSlide() {
+  const slide = document.querySelector('.slide-content');
+  if (!slide) return;
+  const slideWidth = 960;
+  const slideHeight = 540;
+  const scaleX = window.innerWidth / slideWidth;
+  const scaleY = window.innerHeight / slideHeight;
+  const scale = Math.min(scaleX, scaleY);
+  slide.style.width = slideWidth + 'px';
+  slide.style.height = slideHeight + 'px';
+  slide.style.transform = `scale(${scale})`;
+  slide.style.transformOrigin = 'center center';
+  slide.style.flexShrink = '0';
+}
+window.addEventListener('load', scaleSlide);
+window.addEventListener('resize', scaleSlide);
+</script>
+
+<div class="slide-content" style="background: #1A1A1A;">
+  <!-- 背景装饰 -->
+  <svg width="960" height="540" style="position:absolute;top:0;left:0;">
+    <defs>
+      <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+        <circle cx="15" cy="15" r="1.5" fill="#83C5BE" opacity="0.15"/>
+      </pattern>
+    </defs>
+    <rect width="960" height="540" fill="url(#dots)"/>
+  </svg>
+  
+  <!-- 主标题 -->
+  <h1 style="position:absolute; left:40px; top:20px; margin:0; font-size:32px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">Gazebo Evolution History</h1>
+  <h2 style="position:absolute; left:40px; top:58px; margin:0; font-size:18px; font-weight:400; color:#83C5BE; font-family:'Times New Roman', serif;">From Classic to Harmonic</h2>
+  
+  <!-- 左侧时间线 -->
+  <div style="position:absolute; left:40px; top:110px; width:420px; height:380px;">
+    <!-- 时间线 -->
+    <svg width="420" height="4" style="position:absolute;top:30px;left:0;">
+      <rect width="420" height="4" rx="2" fill="#83C5BE" opacity="0.4"/>
+    </svg>
+    
+    <!-- 版本1: Gazebo Classic -->
+    <div style="position:absolute; top:0; left:0; width:130px;">
+      <svg width="20" height="20" style="position:absolute;top:22px;left:60px;">
+        <circle cx="10" cy="10" r="10" fill="#FFD700"/>
+      </svg>
+      <p style="position:absolute; top:0; left:0; margin:0; font-size:14px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">Classic</p>
+      <p style="position:absolute; top:50px; left:0; margin:0; font-size:11px; color:#FFFFFF; font-family:'Times New Roman', serif;">2002-2022</p>
+      <p style="position:absolute; top:70px; left:0; margin:0; width:130px; font-size:10px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.4;">The original Gazebo simulator. 20 years of development, ROS integration pioneer.</p>
+    </div>
+    
+    <!-- 版本2: Gazebo Ignition -->
+    <div style="position:absolute; top:0; left:145px; width:130px;">
+      <svg width="20" height="20" style="position:absolute;top:22px;left:60px;">
+        <circle cx="10" cy="10" r="10" fill="#83C5BE"/>
+      </svg>
+      <p style="position:absolute; top:0; left:0; margin:0; font-size:14px; font-weight:700; color:#83C5BE; font-family:'Times New Roman', serif;">Ignition</p>
+      <p style="position:absolute; top:50px; left:0; margin:0; font-size:11px; color:#FFFFFF; font-family:'Times New Roman', serif;">2018-2022</p>
+      <p style="position:absolute; top:70px; left:0; margin:0; width:130px; font-size:10px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.4;">New architecture. Modular design. Modern C++ core. Codenamed "Fortress".</p>
+    </div>
+    
+    <!-- 版本3: Gazebo Harmonic -->
+    <div style="position:absolute; top:0; left:290px; width:130px;">
+      <svg width="20" height="20" style="position:absolute;top:22px;left:60px;">
+        <circle cx="10" cy="10" r="10" fill="#FFFFFF"/>
+      </svg>
+      <p style="position:absolute; top:0; left:0; margin:0; font-size:14px; font-weight:700; color:#FFFFFF; font-family:'Times New Roman', serif;">Harmonic</p>
+      <p style="position:absolute; top:50px; left:0; margin:0; font-size:11px; color:#FFFFFF; font-family:'Times New Roman', serif;">2022-Now</p>
+      <p style="position:absolute; top:70px; left:0; margin:0; width:130px; font-size:10px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.4;">Current LTS version. Long-term support. gz-sim API. Fusion of Classic+Ignition.</p>
+    </div>
+    
+    <!-- Ubuntu绑定信息 -->
+    <div style="position:absolute; top:150px; left:0; width:420px;">
+      <svg width="420" height="2" style="position:absolute;top:8px;left:0;">
+        <rect width="420" height="2" fill="#FFD700" opacity="0.3"/>
+      </svg>
+      <p style="position:absolute; top:0; left:0; margin:0; font-size:13px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">Ubuntu Version Binding</p>
+    </div>
+    
+    <div style="position:absolute; top:180px; left:0; width:420px;">
+      <p style="margin:0; font-size:10px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.6;">
+        <span style="color:#83C5BE;">●</span> Gazebo Classic → Ubuntu 16.04/18.04/20.04<br>
+        <span style="color:#83C5BE;">●</span> Gazebo Ignition → Ubuntu 20.04/22.04<br>
+        <span style="color:#83C5BE;">●</span> Gazebo Harmonic → Ubuntu 22.04+ (Recommended)
+      </p>
+    </div>
+    
+    <!-- 物理引擎 -->
+    <div style="position:absolute; top:280px; left:0; width:420px;">
+      <svg width="420" height="2" style="position:absolute;top:8px;left:0;">
+        <rect width="420" height="2" fill="#83C5BE" opacity="0.3"/>
+      </svg>
+      <p style="position:absolute; top:0; left:0; margin:0; font-size:13px; font-weight:700; color:#83C5BE; font-family:'Times New Roman', serif;">Physics Engines Supported</p>
+    </div>
+    
+    <!-- 物理引擎列表 -->
+    <div style="position:absolute; top:310px; left:0; width:400px; display:flex; gap:8px; flex-wrap:wrap;">
+      <svg width="90" height="28" viewBox="0 0 90 28">
+        <rect width="90" height="28" rx="4" fill="#FFD700" fill-opacity="0.2"/>
+        <text x="45" y="16" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="600" fill="#FFD700">ODE</text>
+      </svg>
+      <svg width="90" height="28" viewBox="0 0 90 28">
+        <rect width="90" height="28" rx="4" fill="#83C5BE" fill-opacity="0.2"/>
+        <text x="45" y="16" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="600" fill="#83C5BE">Bullet</text>
+      </svg>
+      <svg width="90" height="28" viewBox="0 0 90 28">
+        <rect width="90" height="28" rx="4" fill="#FFFFFF" fill-opacity="0.2"/>
+        <text x="45" y="16" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="600" fill="#FFFFFF">Simbody</text>
+      </svg>
+      <svg width="90" height="28" viewBox="0 0 90 28">
+        <rect width="90" height="28" rx="4" fill="#FFD700" fill-opacity="0.15"/>
+        <text x="45" y="16" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="600" fill="#FFD700">DART</text>
+      </svg>
+    </div>
+    
+    <div style="position:absolute; top:350px; left:0; width:400px;">
+      <p style="margin:0; font-size:9px; color:#999999; font-family:'Times New Roman', serif; line-height:1.5;">
+        ODE: Open Dynamics Engine | Bullet: Real-time physics | Simbody: Multibody dynamics | DART: Dynamic Animation and Robotics Toolkit
+      </p>
+    </div>
+  </div>
+  
+  <!-- 右侧图片 -->
+  <div style="position:absolute; right:30px; top:100px; width:440px; height:380px; border:2px solid #83C5BE; border-radius:8px; overflow:hidden;">
+    <img src="imgs/slide23_gazebo_evolution.png" style="width:100%; height:100%; object-fit:cover;"/>
+  </div>
+  
+  <!-- 页码角标 -->
+  <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+    <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+    <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">23</text>
+  </svg>
+</div>

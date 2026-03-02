@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDS中间件详解</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+        .slide-content {
+            width: 960px;
+            height: 540px;
+            position: relative;
+            transform-origin: center center;
+            background: #1A1A1A;
+        }
+    </style>
+    <script>
+        function scaleSlide() {
+            const slide = document.querySelector('.slide-content');
+            if (!slide) return;
+            const slideWidth = 960;
+            const slideHeight = 540;
+            const scaleX = window.innerWidth / slideWidth;
+            const scaleY = window.innerHeight / slideHeight;
+            const scale = Math.min(scaleX, scaleY);
+            slide.style.width = slideWidth + 'px';
+            slide.style.height = slideHeight + 'px';
+            slide.style.transform = `scale(${scale})`;
+            slide.style.transformOrigin = 'center center';
+            slide.style.flexShrink = '0';
+        }
+        window.addEventListener('load', scaleSlide);
+        window.addEventListener('resize', scaleSlide);
+    </script>
+</head>
+<body>
+    <div class="slide-content" style="background: #1A1A1A;">
+        <!-- 背景装饰 -->
+        <svg width="960" height="540" style="position:absolute; top:0; left:0; opacity:0.05;">
+            <defs>
+                <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <circle cx="20" cy="20" r="2" fill="#83C5BE"/>
+                </pattern>
+            </defs>
+            <rect width="960" height="540" fill="url(#dots)"/>
+        </svg>
+        
+        <!-- 主标题 -->
+        <div style="position:absolute; left:40px; top:15px; width:880px; height:50px; background:#FFD700; border-radius:8px;">
+            <p style="position:absolute; left:0; top:0; width:880px; height:50px; margin:0; line-height:50px; text-align:center; font-size:26px; font-weight:700; color:#1A1A1A; font-family:'Times New Roman', serif;">DDS中间件：ROS2的核心秘密</p>
+        </div>
+        
+        <!-- DDS定义 -->
+        <div style="position:absolute; left:30px; top:80px; width:280px; height:100px; background:#2D2D2D; border:2px solid #FFD700; border-radius:12px;">
+            <p style="position:absolute; left:15px; top:12px; margin:0; font-size:16px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">DDS定义</p>
+            <p style="position:absolute; left:15px; top:40px; width:250px; margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:20px;">Data Distribution Service<br/>数据分发服务 - OMG标准</p>
+        </div>
+        
+        <!-- 自动发现机制 -->
+        <div style="position:absolute; left:330px; top:80px; width:280px; height:100px; background:#2D2D2D; border:2px solid #83C5BE; border-radius:12px;">
+            <p style="position:absolute; left:15px; top:12px; margin:0; font-size:16px; font-weight:700; color:#83C5BE; font-family:'Times New Roman', serif;">自动发现机制</p>
+            <p style="position:absolute; left:15px; top:40px; width:250px; margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:20px;">无需手动配置节点地址<br/>SPDP + SEDP 协议自动发现</p>
+        </div>
+        
+        <!-- QoS策略 -->
+        <div style="position:absolute; left:630px; top:80px; width:300px; height:100px; background:#2D2D2D; border:2px solid #FFD700; border-radius:12px;">
+            <p style="position:absolute; left:15px; top:12px; margin:0; font-size:16px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">QoS策略 (22种)</p>
+            <p style="position:absolute; left:15px; top:40px; width:270px; margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:20px;">可靠性、持久性、截止时间<br/>传输优先级、历史记录等</p>
+        </div>
+        
+        <!-- RTPS协议 -->
+        <div style="position:absolute; left:30px; top:200px; width:280px; height:100px; background:#2D2D2D; border:2px solid #83C5BE; border-radius:12px;">
+            <p style="position:absolute; left:15px; top:12px; margin:0; font-size:16px; font-weight:700; color:#83C5BE; font-family:'Times New Roman', serif;">RTPS协议</p>
+            <p style="position:absolute; left:15px; top:40px; width:250px; margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:20px;">Real-Time Publish-Subscribe<br/>实时发布订阅传输协议</p>
+        </div>
+        
+        <!-- 核心优势 -->
+        <div style="position:absolute; left:330px; top:200px; width:600px; height:100px; background:#252525; border-radius:12px;">
+            <p style="position:absolute; left:20px; top:12px; margin:0; font-size:16px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">ROS2为什么选择DDS？</p>
+            <div style="position:absolute; left:20px; top:40px; width:560px;">
+                <svg width="560" height="8" style="position:absolute; top:0; left:0;">
+                    <rect x="0" y="0" width="130" height="8" rx="4" fill="#FFD700"/>
+                    <rect x="140" y="0" width="130" height="8" rx="4" fill="#83C5BE"/>
+                    <rect x="280" y="0" width="130" height="8" rx="4" fill="#FFD700"/>
+                    <rect x="420" y="0" width="130" height="8" rx="4" fill="#83C5BE"/>
+                </svg>
+                <p style="position:absolute; left:0; top:15px; width:130px; margin:0; font-size:11px; color:#FFD700; text-align:center; font-family:'Times New Roman', serif;">工业级可靠性</p>
+                <p style="position:absolute; left:140px; top:15px; width:130px; margin:0; font-size:11px; color:#83C5BE; text-align:center; font-family:'Times New Roman', serif;">实时性能</p>
+                <p style="position:absolute; left:280px; top:15px; width:130px; margin:0; font-size:11px; color:#FFD700; text-align:center; font-family:'Times New Roman', serif;">分布式架构</p>
+                <p style="position:absolute; left:420px; top:15px; width:130px; margin:0; font-size:11px; color:#83C5BE; text-align:center; font-family:'Times New Roman', serif;">标准化接口</p>
+            </div>
+        </div>
+        
+        <!-- DDS网络拓扑图 -->
+        <div style="position:absolute; left:30px; top:320px; width:900px; height:200px; background:#252525; border-radius:12px; border:1px solid #444;">
+            <p style="position:absolute; left:30px; top:15px; margin:0; font-size:18px; font-weight:700; color:#FFFFFF; font-family:'Times New Roman', serif;">DDS网络拓扑结构</p>
+            
+            <!-- 中心节点 -->
+            <svg width="840" height="150" style="position:absolute; left:30px; top:45px;">
+                <!-- 全局数据空间 -->
+                <rect x="350" y="20" width="140" height="110" rx="8" fill="#2D2D2D" stroke="#83C5BE" stroke-width="2"/>
+                <text x="420" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="#83C5BE">Global Data</text>
+                <text x="420" y="90" text-anchor="middle" font-size="12" font-weight="700" fill="#83C5BE">Space</text>
+                
+                <!-- 节点1 -->
+                <rect x="30" y="40" width="90" height="60" rx="6" fill="#FFD700"/>
+                <text x="75" y="75" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#1A1A1A">Node 1</text>
+                <path d="M120 70 L340 70" stroke="#FFD700" stroke-width="2" stroke-dasharray="5,5"/>
+                
+                <!-- 节点2 -->
+                <rect x="30" y="110" width="90" height="35" rx="6" fill="#83C5BE"/>
+                <text x="75" y="130" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="700" fill="#1A1A1A">Node 2</text>
+                <path d="M120 130 L340 130" stroke="#83C5BE" stroke-width="2" stroke-dasharray="5,5"/>
+                
+                <!-- 节点3 -->
+                <rect x="720" y="40" width="90" height="60" rx="6" fill="#FFD700"/>
+                <text x="765" y="75" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#1A1A1A">Node 3</text>
+                <path d="M500 70 L720 70" stroke="#FFD700" stroke-width="2" stroke-dasharray="5,5"/>
+                
+                <!-- 节点4 -->
+                <rect x="720" y="110" width="90" height="35" rx="6" fill="#83C5BE"/>
+                <text x="765" y="130" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="700" fill="#1A1A1A">Node 4</text>
+                <path d="M500 130 L720 130" stroke="#83C5BE" stroke-width="2" stroke-dasharray="5,5"/>
+                
+                <!-- 发现协议标识 -->
+                <text x="420" y="140" text-anchor="middle" font-size="9" fill="#888888">SPDP (Simple Participant Discovery Protocol)</text>
+            </svg>
+        </div>
+        
+        <!-- 页码角标 -->
+        <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+            <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">11</text>
+        </svg>
+    </div>
+</body>
+</html>
