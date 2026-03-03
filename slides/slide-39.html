@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QoS策略：服务质量配置</title>
+  <style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+.slide-content {
+  width: 960px;
+  height: 540px;
+  position: relative;
+  transform-origin: center center;
+}
+</style>
+<script>
+function scaleSlide() {
+  const slide = document.querySelector('.slide-content');
+  if (!slide) return;
+  const slideWidth = 960;
+  const slideHeight = 540;
+  const scaleX = window.innerWidth / slideWidth;
+  const scaleY = window.innerHeight / slideHeight;
+  const scale = Math.min(scaleX, scaleY);
+  slide.style.width = slideWidth + 'px';
+  slide.style.height = slideHeight + 'px';
+  slide.style.transform = `scale(${scale})`;
+  slide.style.transformOrigin = 'center center';
+  slide.style.flexShrink = '0';
+}
+window.addEventListener('load', scaleSlide);
+window.addEventListener('resize', scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="background: #1A1A1A;">
+  <!-- 背景装饰 -->
+  <svg width="960" height="540" style="position:absolute;top:0;left:0;opacity:0.06;">
+    <defs>
+      <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+        <circle cx="15" cy="15" r="1.5" fill="#83C5BE"/>
+      </pattern>
+    </defs>
+    <rect width="960" height="540" fill="url(#dots)"/>
+  </svg>
+  
+  <!-- 主标题 -->
+  <p style="position:absolute; left:40px; top:28px; margin:0; font-size:26px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">QoS策略：针对不同传感器数据的服务质量配置</p>
+  
+  <!-- 左侧内容区 -->
+  <div style="position:absolute; left:40px; top:80px; width:420px; height:430px;">
+    <!-- QoS定义 -->
+    <div style="margin-bottom:12px;">
+      <p style="margin:0; font-size:16px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">QoS (Quality of Service)</p>
+      <p style="margin:4px 0 0 0; font-size:12px; color:#FFFFFF; font-family:'Times New Roman', serif;">ROS2 DDS中间件的服务质量策略配置</p>
+    </div>
+    
+    <!-- 四大策略 -->
+    <svg width="420" height="2" style="margin:8px 0;">
+      <rect width="420" height="2" fill="#83C5BE" fill-opacity="0.3"/>
+    </svg>
+    
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px;">
+      <!-- Reliability -->
+      <div style="background:#FFD700" fill-opacity="0.1" border="1px solid #FFD700" padding="8px">
+        <p style="margin:0; font-size:12px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">Reliability</p>
+        <p style="margin:2px 0 0 0; font-size:10px; color:#FFFFFF; font-family:'Times New Roman', serif;">可靠传输</p>
+        <p style="margin:2px 0 0 0; font-size:10px; color:#83C5BE; font-family:'Times New Roman', serif;">RELIABLE / BEST_EFFORT</p>
+      </div>
+      <!-- Durability -->
+      <div style="background:#83C5BE" fill-opacity="0.1" border="1px solid #83C5BE" padding="8px">
+        <p style="margin:0; font-size:12px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif;">Durability</p>
+        <p style="margin:2px 0 0 0; font-size:10px; color:#FFFFFF; font-family:'Times New Roman', serif;">持久性</p>
+        <p style="margin:2px 0 0 0; font-size:10px; color:#83C5BE; font-family:'Times New Roman', serif;">TRANSIENT_LOCAL / VOLATILE</p>
+      </div>
+      <!-- Deadline -->
+      <div style="background:#FFFFFF" fill-opacity="0.1" border="1px solid #FFFFFF" fill-opacity="0.3" padding="8px">
+        <p style="margin:0; font-size:12px; font-weight:600; color:#FFFFFF; font-family:'Times New Roman', serif;">Deadline</p>
+        <p style="margin:2px 0 0 0; font-size:10px; color:#FFFFFF; font-family:'Times New Roman', serif;">截止时间</p>
+        <p style="margin:2px 0 0 0; font-size:10px; color:#83C5BE; font-family:'Times New Roman', serif;">消息频率期望</p>
+      </div>
+      <!-- History -->
+      <div style="background:#FFFFFF" fill-opacity="0.1" border="1px solid #FFFFFF" fill-opacity="0.3" padding="8px">
+        <p style="margin:0; font-size:12px; font-weight:600; color:#FFFFFF; font-family:'Times New Roman', serif;">History</p>
+        <p style="margin:2px 0 0 0; font-size:10px; color:#FFFFFF; font-family:'Times New Roman', serif;">历史记录</p>
+        <p style="margin:2px 0 0 0; font-size:10px; color:#83C5BE; font-family:'Times New Roman', serif;">KEEP_LAST / KEEP_ALL</p>
+      </div>
+    </div>
+    
+    <!-- 案例说明 -->
+    <svg width="420" height="2" style="margin:12px 0 8px 0;">
+      <rect width="420" height="2" fill="#83C5BE" fill-opacity="0.3"/>
+    </svg>
+    <p style="margin:0; font-size:16px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">配置案例</p>
+    
+    <div style="margin-top:8px; display:flex; gap:12px;">
+      <div style="flex:1; padding:10px; background:#FFD700" fill-opacity="0.1" border="1px solid #FFD700">
+        <p style="margin:0; font-size:11px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">激光雷达 LiDAR</p>
+        <p style="margin:4px 0 0 0; font-size:10px; color:#FFFFFF; font-family:'Times New Roman', serif;">→ RELIABLE</p>
+        <p style="margin:2px 0 0 0; font-size:10px; color:#83C5BE; font-family:'Times New Roman', serif;">需要确保数据完整</p>
+      </div>
+      <div style="flex:1; padding:10px; background:#83C5BE" fill-opacity="0.1" border="1px solid #83C5BE">
+        <p style="margin:0; font-size:11px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif;">摄像头 Camera</p>
+        <p style="margin:4px 0 0 0; font-size:10px; color:#FFFFFF; font-family:'Times New Roman', serif;">→ BEST_EFFORT</p>
+        <p style="margin:2px 0 0 0; font-size:10px; color:#83C5BE; font-family:'Times New Roman', serif;">可容忍偶尔丢帧</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 右侧示意图 -->
+  <div style="position:absolute; left:480px; top:80px; width:440px; height:430px; background:#FFFFFF" fill-opacity="0.03" border="1px solid #83C5BE">
+    <img src="imgs/slide39_qos.png" style="width:100%; height:100%; object-fit:contain;"/>
+  </div>
+  
+  <!-- 页码角标 -->
+  <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+    <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+    <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A" font-family:'Times New Roman', serif">39</text>
+  </svg>
+</div>
+</body>
+</html>

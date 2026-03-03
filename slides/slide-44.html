@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>话题工具箱：ros2 topic命令详解</title>
+  <style>
+    html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center; background: #000; }
+    .slide-content { width: 960px; height: 540px; position: relative; transform-origin: center center; background: #1A1A1A; }
+    @font-face { font-family: 'Times New Roman'; src: local('Times New Roman'); }
+  </style>
+  <script>
+    function scaleSlide() {
+      const slide = document.querySelector('.slide-content');
+      if (!slide) return;
+      const scaleX = window.innerWidth / 960;
+      const scaleY = window.innerHeight / 540;
+      const scale = Math.min(scaleX, scaleY);
+      slide.style.transform = `scale(${scale})`;
+    }
+    window.addEventListener('load', scaleSlide);
+    window.addEventListener('resize', scaleSlide);
+  </script>
+</head>
+<body>
+  <div class="slide-content">
+    <!-- Background -->
+    <img src="imgs/ros2_topic.png" style="position:absolute; left:0; top:0; width:960px; height:540px; object-fit:cover; opacity:0.35;" alt="ros2 topic">
+    <div style="position:absolute; left:0; top:0; width:960px; height:540px; background:#1A1A1A; opacity:0.85;"></div>
+    
+    <!-- Title -->
+    <p style="position:absolute; left:30px; top:20px; margin:0; font-size:32px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">话题工具箱：ros2 topic命令详解</p>
+    
+    <!-- Left: Command List -->
+    <div style="position:absolute; left:30px; top:80px; width:440px; height:440px;">
+      <!-- Command 1 -->
+      <div style="margin-bottom:12px;">
+        <svg width="440" height="48" viewBox="0 0 440 48">
+          <rect width="440" height="48" rx="6" fill="#2A2A2A"/>
+          <text x="16" y="18" font-size="12" font-weight="600" fill="#83C5BE" font-family:'Times New Roman', serif">ros2 topic list</text>
+          <text x="16" y="36" font-size="10" fill="#AAAAAA" font-family:'Times New Roman', serif">列出所有活动话题</text>
+        </svg>
+      </div>
+      <!-- Command 2 -->
+      <div style="margin-bottom:12px;">
+        <svg width="440" height="48" viewBox="0 0 440 48">
+          <rect width="440" height="48" rx="6" fill="#2A2A2A"/>
+          <text x="16" y="18" font-size="12" font-weight="600" fill="#83C5BE" font-family:'Times New Roman', serif">ros2 topic echo /topic_name</text>
+          <text x="16" y="36" font-size="10" fill="#AAAAAA" font-family:'Times New Roman', serif">实时查看话题消息数据</text>
+        </svg>
+      </div>
+      <!-- Command 3 -->
+      <div style="margin-bottom:12px;">
+        <svg width="440" height="48" viewBox="0 0 440 48">
+          <rect width="440" height="48" rx="6" fill="#2A2A2A"/>
+          <text x="16" y="18" font-size="12" font-weight="600" fill="#83C5BE" font-family:'Times New Roman', serif">ros2 topic info /topic_name</text>
+          <text x="16" y="36" font-size="10" fill="#AAAAAA" font-family:'Times New Roman', serif">查看话题类型与发布者/订阅者</text>
+        </svg>
+      </div>
+      <!-- Command 4 -->
+      <div style="margin-bottom:12px;">
+        <svg width="440" height="48" viewBox="0 0 440 48">
+          <rect width="440" height="48" rx="6" fill="#2A2A2A"/>
+          <text x="16" y="18" font-size="12" font-weight="600" fill="#83C5BE" font-family:'Times New Roman', serif">ros2 topic hz /topic_name</text>
+          <text x="16" y="36" font-size="10" fill="#AAAAAA" font-family:'Times New Roman', serif">查看话题发布频率(Hz)</text>
+        </svg>
+      </div>
+      <!-- Command 5 -->
+      <div style="margin-bottom:12px;">
+        <svg width="440" height="48" viewBox="0 0 440 48">
+          <rect width="440" height="48" rx="6" fill="#2A2A2A"/>
+          <text x="16" y="18" font-size="12" font-weight="600" fill="#83C5BE" font-family:'Times New Roman', serif">ros2 topic pub /topic type "data"</text>
+          <text x="16" y="36" font-size="10" fill="#AAAAAA" font-family:'Times New Roman', serif">手动发布消息到指定话题</text>
+        </svg>
+      </div>
+    </div>
+    
+    <!-- Right: Quick Reference Table -->
+    <div style="position:absolute; left:490px; top:80px; width:440px; height:430px; background:#252525; border-radius:8px; padding:16px;">
+      <p style="margin:0 0 12px 0; font-size:16px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">常用命令速查表</p>
+      
+      <table style="width:100%; border-collapse:collapse; font-size:11px; color:#FFFFFF; font-family:'Times New Roman', serif;">
+        <tr style="background:#333;">
+          <th style="padding:6px; text-align:left; border:1px solid #444;">命令</th>
+          <th style="padding:6px; text-align:left; border:1px solid #444;">功能</th>
+          <th style="padding:6px; text-align:left; border:1px solid #444;">示例</th>
+        </tr>
+        <tr>
+          <td style="padding:6px; border:1px solid #444; color:#83C5BE;">list</td>
+          <td style="padding:6px; border:1px solid #444;">列出话题</td>
+          <td style="padding:6px; border:1px solid #444;">ros2 topic list</td>
+        </tr>
+        <tr style="background:#2a2a2a;">
+          <td style="padding:6px; border:1px solid #444; color:#83C5BE;">echo</td>
+          <td style="padding:6px; border:1px solid #444;">查看数据</td>
+          <td style="padding:6px; border:1px solid #444;">ros2 topic echo /chatter</td>
+        </tr>
+        <tr>
+          <td style="padding:6px; border:1px solid #444; color:#83C5BE;">info</td>
+          <td style="padding:6px; border:1px solid #444;">话题信息</td>
+          <td style="padding:6px; border:1px solid #444;">ros2 topic info /cmd_vel</td>
+        </tr>
+        <tr style="background:#2a2a2a;">
+          <td style="padding:6px; border:1px solid #444; color:#83C5BE;">hz</td>
+          <td style="padding:6px; border:1px solid #444;">发布频率</td>
+          <td style="padding:6px; border:1px solid #444;">ros2 topic hz /odom</td>
+        </tr>
+        <tr>
+          <td style="padding:6px; border:1px solid #444; color:#83C5BE;">pub</td>
+          <td style="padding:6px; border:1px solid #444;">发布消息</td>
+          <td style="padding:6px; border:1px solid #444;">ros2 topic pub ...</td>
+        </tr>
+        <tr style="background:#2a2a2a;">
+          <td style="padding:6px; border:1px solid #444; color:#83C5BE;">bw</td>
+          <td style="padding:6px; border:1px solid #444;">带宽占用</td>
+          <td style="padding:6px; border:1px solid #444;">ros2 topic bw /scan</td>
+        </tr>
+        <tr>
+          <td style="padding:6px; border:1px solid #444; color:#83C5BE;">delay</td>
+          <td style="padding:6px; border:1px solid #444;">传输延迟</td>
+          <td style="padding:6px; border:1px solid #444;">ros2 topic delay /image</td>
+        </tr>
+      </table>
+      
+      <!-- Tip Box -->
+      <div style="margin-top:16px; padding:10px; background:#FFD700; border-radius:4px;">
+        <p style="margin:0; font-size:11px; color:#1A1A1A; font-family:'Times New Roman', serif;"><strong>提示：</strong>使用 <code style="background:#1A1A1A; color:#83C5BE; padding:2px 4px; border-radius:2px;">--help</code> 查看完整参数，如 <code style="background:#1A1A1A; color:#83C5BE; padding:2px 4px; border-radius:2px;">ros2 topic echo --help</code></p>
+      </div>
+    </div>
+    
+    <!-- Page Number -->
+    <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+      <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+      <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">44</text>
+    </svg>
+  </div>
+</body>
+</html>

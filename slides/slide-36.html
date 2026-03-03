@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>外卖系统类比：理解Service</title>
+    <style>
+        html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center; background: #000; }
+        .slide-content { width: 960px; height: 540px; position: relative; transform-origin: center center; background: #1A1A1A; }
+    </style>
+    <script>
+        function scaleSlide() {
+            const slide = document.querySelector('.slide-content');
+            if (!slide) return;
+            const scale = Math.min(window.innerWidth / 960, window.innerHeight / 540);
+            slide.style.transform = `scale(${scale})`;
+        }
+        window.addEventListener('load', scaleSlide);
+        window.addEventListener('resize', scaleSlide);
+    </script>
+</head>
+<body>
+    <div class="slide-content">
+        <!-- 背景图 -->
+        <img src="imgs/service_ordering.png" alt="" style="position:absolute; left:480px; top:40px; width:440px; height:320px; object-fit:contain; opacity:0.9;">
+        
+        <!-- 顶部装饰 -->
+        <svg width="960" height="4" style="position:absolute; top:0; left:0;"><rect width="960" height="4" fill="#FFD700"/></svg>
+        
+        <!-- 主标题 -->
+        <h1 style="position:absolute; left:40px; top:30px; margin:0; font-size:28px; font-weight:500; color:#FFFFFF; font-family:'Times New Roman', serif;">
+            外卖系统类比：深入理解Service
+        </h1>
+        
+        <!-- 核心类比 -->
+        <div style="position:absolute; left:40px; top:90px; width:400px; background:#2A2A2A; padding:12px; border-left:3px solid #FFD700;">
+            <p style="margin:0 0 6px 0; font-size:15px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">Service = 点外卖过程</p>
+            <p style="margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.6;">
+                请求/响应(Request/Response)模式。顾客下单(Request) → 店铺确认(Response)，像调用服务并等待返回结果。
+            </p>
+        </div>
+        
+        <!-- 特点1 -->
+        <div style="position:absolute; left:40px; top:190px; width:400px; background:#2A2A2A; padding:12px; border-left:3px solid #83C5BE;">
+            <p style="margin:0 0 6px 0; font-size:15px; font-weight:500; color:#83C5BE; font-family:'Times New Roman', serif;">同步阻塞</p>
+            <p style="margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.6;">
+                等待店铺确认后才能继续。像ROS2中调用Service时，客户端会阻塞等待服务端响应完成。
+            </p>
+        </div>
+        
+        <!-- 特点2 -->
+        <div style="position:absolute; left:40px; top:290px; width:400px; background:#2A2A2A; padding:12px; border-left:3px solid #FFD700;">
+            <p style="margin:0 0 6px 0; font-size:15px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">一对一关系</p>
+            <p style="margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.6;">
+                一个订单对应一个处理。一次Service调用对应一个服务实例，不支持一对多广播。
+            </p>
+        </div>
+        
+        <!-- 特点3 -->
+        <div style="position:absolute; left:40px; top:390px; width:400px; background:#2A2A2A; padding:12px; border-left:3px solid #83C5BE;">
+            <p style="margin:0 0 6px 0; font-size:15px; font-weight:500; color:#83C5BE; font-family:'Times New Roman', serif;">典型应用场景</p>
+            <p style="margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.6;">
+                命令式交互：起飞、降落、停止任务、查询状态、获取配置等需要立即返回结果的场景。
+            </p>
+        </div>
+        
+        <!-- 页码 -->
+        <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+            <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">36</text>
+        </svg>
+    </div>
+</body>
+</html>

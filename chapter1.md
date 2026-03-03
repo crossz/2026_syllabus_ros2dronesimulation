@@ -7,11 +7,10 @@ header: ROS2+PX4 无人机仿真实践
 
 # 课程 Introduction
 
+## 产业学院
+
 - 企业项目驱动
 - 创新型学科竞赛
-
-
-
 
 
 | 产业学院 - 低空经济  | 学科竞赛 - 人工智能 |
@@ -46,7 +45,86 @@ header: ROS2+PX4 无人机仿真实践
 
 ---
 
+## 大模型时代
+
+### 需要什么能力，稀缺性在哪里
+
+- 编程不是没用了，而是下沉了。
+- know what 和 know how 都变得不重要了，know why 变成了关键能力。
+- 初级程序员几乎不需要了（这个很矛盾）。 
+
+
+**解决问题的能力+意识**
+
+**项目、实践、踩坑的经验是价值，而刷题不再是**
+
+--- 
+## 这门课要怎么上
+
+用 **大模型** 解决 **实际问题**
+
+_而不是教大家语法和编程_
+
+<br />
+
+> 怎么用、用哪些 **大模型**
+
+---
+
+## 怎么用、用哪些 **大模型**
+
+
+- [Arena AI Leaderboard](https://arena.ai/leaderboard)
+- [Artificial Analysis](https://artificialanalysis.ai/)
+
+<br />
+
+- **GLM-5**: 
+- **Kimi-K2.5**:
+- **Minimax-M2.5**:
+
+- Qwen3.5
+- Deepseek-v4?
+- Doubao???
+
+---
+
+## 版本更迭的挑战
+
+#### 参考书目
+
+1. 刘相权、张万杰，《机器人操作系统(ROS2)入门与实践》，机械工业出版社，2024年8月，ISBN：9787111758433
+2. 桑欣，《机器人操作系统(ROS2)入门与实践》，机械工业出版社，2024年7月，ISBN：9787111758068
+3. 高中华、胡乔生、李文君，《无人机操控技术》，机械工业出版社，2024年1月，ISBN：9787111740476
+4. 侯伟、靳紫轩，《ROS 2机器人操作系统与Gazebo机器人仿真》，清华大学出版社，2024年12月，ISBN：9787302702535
+
+---
+
+#### 在线资源
+
+- ROS2官方文档：https://docs.ros.org/en/jazzy/
+- PX4用户指南：https://docs.px4.io/main/en/
+- Gazebo Harmonic文档：https://gazebosim.org/docs/harmonic/
+- Nav2导航框架文档：https://docs.nav2.org/
+- 亚博Jetson Nano/Orin系列教程：https://www.yahboom.com/study/ROSMASTER-M1
+- 北航飞思实验室 Rflysim：https://rflysim.com/doc/
+- 浙大FAST Lab ego-planner-swarm：https://github.com/ZJU-FAST-Lab/ego-planner-swarm
+- 北大XTDrone2：https://github.com/andy-zhuo-02/XTDrone2
+- 阿木实验室 Prometheus V3
+- 鱼香ROS FishBot
+
+
+---
+
 # ROS2 简介
+
+
+## 开始之前
+
+- ROS2 的开发基本都是配置文件和代码，设置“小车”和“无人机”的模型都是用**代码+配置**声明的
+- git 对于 vibe coding 的重要性
+
+---
 
 ## ROS2 机器人操作系统
 

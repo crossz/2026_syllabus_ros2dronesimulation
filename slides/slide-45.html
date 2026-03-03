@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rqt_graph：机器人的X光片</title>
+  <style>
+    html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center; background: #000; }
+    .slide-content { width: 960px; height: 540px; position: relative; transform-origin: center center; background: #1A1A1A; }
+    @font-face { font-family: 'Times New Roman'; src: local('Times New Roman'); }
+  </style>
+  <script>
+    function scaleSlide() {
+      const slide = document.querySelector('.slide-content');
+      if (!slide) return;
+      const scaleX = window.innerWidth / 960;
+      const scaleY = window.innerHeight / 540;
+      const scale = Math.min(scaleX, scaleY);
+      slide.style.transform = `scale(${scale})`;
+    }
+    window.addEventListener('load', scaleSlide);
+    window.addEventListener('resize', scaleSlide);
+  </script>
+</head>
+<body>
+  <div class="slide-content">
+    <!-- Background -->
+    <img src="imgs/rqt_graph.png" style="position:absolute; left:0; top:0; width:960px; height:540px; object-fit:cover; opacity:0.3;" alt="rqt_graph">
+    <div style="position:absolute; left:0; top:0; width:960px; height:540px; background:#1A1A1A; opacity:0.8;"></div>
+    
+    <!-- Title -->
+    <p style="position:absolute; left:30px; top:20px; margin:0; font-size:32px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">rqt_graph：机器人的X光片</p>
+    
+    <!-- Left: Description -->
+    <div style="position:absolute; left:30px; top:80px; width:420px; height:430px;">
+      <!-- What is rqt_graph -->
+      <div style="margin-bottom:20px;">
+        <p style="margin:0 0 8px 0; font-size:18px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif;">什么是rqt_graph？</p>
+        <p style="margin:0; font-size:13px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.6;">rqt_graph是ROS2可视化的节点拓扑工具，被称为"机器人的X光片"，可以实时显示系统中所有节点的通讯关系。</p>
+      </div>
+      
+      <!-- How to Run -->
+      <div style="margin-bottom:20px;">
+        <p style="margin:0 0 8px 0; font-size:18px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif;">如何运行？</p>
+        <svg width="380" height="36" viewBox="0 0 380 36">
+          <rect width="380" height="36" rx="4" fill="#2A2A2A"/>
+          <text x="12" y="22" font-size="13" fill="#FFD700" font-family:'Times New Roman', serif">ros2 run rqt_graph rqt_graph</text>
+        </svg>
+      </div>
+      
+      <!-- Key Points -->
+      <div style="margin-bottom:16px;">
+        <p style="margin:0 0 8px 0; font-size:18px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif;">核心功能</p>
+        <ul style="margin:0; padding-left:20px;">
+          <li style="margin:6px 0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif;"><strong style="color:#FFD700;">可视化节点拓扑</strong> - 圆形=节点，箭头=话题流向</li>
+          <li style="margin:6px 0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif;"><strong style="color:#FFD700;">实时监控</strong> - 实时显示数据流向变化</li>
+          <li style="margin:6px 0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif;"><strong style="color:#FFD700;">调试神器</strong> - 快速定位通讯问题</li>
+          <li style="margin:6px 0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif;"><strong style="color:#FFD700;">过滤显示</strong> - 隐藏不需要的节点/话题</li>
+        </ul>
+      </div>
+      
+      <!-- Diagram Legend -->
+      <div style="padding:12px; background:#252525; border-radius:6px;">
+        <p style="margin:0 0 8px 0; font-size:14px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">图例</p>
+        <div style="display:flex; align-items:center; gap:20px; font-size:11px; color:#CCCCCC; font-family:'Times New Roman', serif;">
+          <div style="display:flex; align-items:center; gap:6px;"><circle cx="10" cy="10" r="8" fill="#83C5BE"/> 节点</div>
+          <div style="display:flex; align-items:center; gap:6px;"><rect x="2" y="4" width="16" height="12" rx="2" fill="#FFD700"/> 话题</div>
+          <div style="display:flex; align-items:center; gap:6px;"><path d="M0 10 L20 10 M15 5 L20 10 L15 15" stroke="#FFFFFF" stroke-width="2" fill="none"/> 通讯方向</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right: Example -->
+    <div style="position:absolute; left:470px; top:80px; width:460px; height:430px; background:#1F1F1F; border:2px solid #333; border-radius:8px; padding:16px;">
+      <p style="margin:0 0 12px 0; font-size:16px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">典型节点关系图示例</p>
+      
+      <!-- Node Graph SVG -->
+      <svg width="420" height="280" viewBox="0 0 420 280">
+        <!-- Topic Boxes -->
+        <rect x="140" y="20" width="140" height="30" rx="4" fill="#FFD700"/>
+        <text x="210" y="40" text-anchor="middle" font-size="11" fill="#1A1A1A" font-family:'Times New Roman', serif">/cmd_vel</text>
+        
+        <rect x="30" y="120" width="100" height="30" rx="4" fill="#83C5BE"/>
+        <text x="80" y="140" text-anchor="middle" font-size="11" fill="#1A1A1A" font-family:'Times New Roman', serif">/odom</text>
+        
+        <rect x="290" y="120" width="100" height="30" rx="4" fill="#83C5BE"/>
+        <text x="340" y="140" text-anchor="middle" font-size="11" fill="#1A1A1A" font-family:'Times New Roman', serif">/scan</text>
+        
+        <rect x="140" y="230" width="140" height="30" rx="4" fill="#83C5BE"/>
+        <text x="210" y="250" text-anchor="middle" font-size="11" fill="#1A1A1A" font-family:'Times New Roman', serif">/image</text>
+        
+        <!-- Nodes -->
+        <circle cx="80" cy="80" r="22" fill="#2A2A2A" stroke="#83C5BE" stroke-width="2"/>
+        <text x="80" y="84" text-anchor="middle" font-size="9" fill="#FFFFFF" font-family:'Times New Roman', serif">teleop</text>
+        
+        <circle cx="340" cy="80" r="22" fill="#2A2A2A" stroke="#83C5BE" stroke-width="2"/>
+        <text x="340" y="84" text-anchor="middle" font-size="9" fill="#FFFFFF" font-family:'Times New Roman', serif">controller</text>
+        
+        <circle cx="80" cy="190" r="22" fill="#2A2A2A" stroke="#83C5BE" stroke-width="2"/>
+        <text x="80" y="194" text-anchor="middle" font-size="9" fill="#FFFFFF" font-family:'Times New Roman', serif">odom_pub</text>
+        
+        <circle cx="340" cy="190" r="22" fill="#2A2A2A" stroke="#83C5BE" stroke-width="2"/>
+        <text x="340" y="194" text-anchor="middle" font-size="9" fill="#FFFFFF" font-family:'Times New Roman', serif">laser</text>
+        
+        <circle cx="210" cy="300" r="22" fill="#2A2A2A" stroke="#83C5BE""/>
+        <text x="210" y="304" stroke-width="2 text-anchor="middle" font-size="9" fill="#FFFFFF" font-family:'Times New Roman', serif">camera</text>
+        
+        <!-- Arrows -->
+        <path d="M90 58 L90 100" stroke="#FFFFFF" stroke-width="1.5" marker-end="url(#arrowhead)" fill="none"/>
+        <path d="M140 35 L150 65" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+        <path d="M280 35 L270 65" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+        <path d="M80 168 L80 120" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+        <path d="M340 168 L340 120" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+        <path d="M140 235 L175 220" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+        
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#FFFFFF"/>
+          </marker>
+        </defs>
+      </svg>
+      
+      <!-- Interpretation -->
+      <p style="margin:8px 0 0 0; font-size:11px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.5;">teleop发布/cmd_vel → controller订阅 | odom_pub发布/odom | laser发布/scan | camera发布/image</p>
+    </div>
+    
+    <!-- Page Number -->
+    <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+      <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+      <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">45</text>
+    </svg>
+  </div>
+</body>
+</html>

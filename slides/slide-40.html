@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生命周期节点(Lifecycle)</title>
+  <style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+.slide-content {
+  width: 960px;
+  height: 540px;
+  position: relative;
+  transform-origin: center center;
+}
+</style>
+<script>
+function scaleSlide() {
+  const slide = document.querySelector('.slide-content');
+  if (!slide) return;
+  const slideWidth = 960;
+  const slideHeight = 540;
+  const scaleX = window.innerWidth / slideWidth;
+  const scaleY = window.innerHeight / slideHeight;
+  const scale = Math.min(scaleX, scaleY);
+  slide.style.width = slideWidth + 'px';
+  slide.style.height = slideHeight + 'px';
+  slide.style.transform = `scale(${scale})`;
+  slide.style.transformOrigin = 'center center';
+  slide.style.flexShrink = '0';
+}
+window.addEventListener('load', scaleSlide);
+window.addEventListener('resize', scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="background: #1A1A1A;">
+  <!-- 背景装饰 -->
+  <svg width="960" height="540" style="position:absolute;top:0;left:0;opacity:0.06;">
+    <defs>
+      <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+        <circle cx="15" cy="15" r="1.5" fill="#83C5BE"/>
+      </pattern>
+    </defs>
+    <rect width="960" height="540" fill="url(#dots)"/>
+  </svg>
+  
+  <!-- 主标题 -->
+  <p style="position:absolute; left:40px; top:28px; margin:0; font-size:28px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">生命周期节点(Lifecycle)</p>
+  
+  <!-- 左侧内容区 -->
+  <div style="position:absolute; left:40px; top:80px; width:420px; height:430px;">
+    <!-- 状态机 -->
+    <div style="margin-bottom:12px;">
+      <p style="margin:0; font-size:16px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">生命周期状态机</p>
+      <p style="margin:4px 0 0 0; font-size:12px; color:#FFFFFF; font-family:'Times New Roman', serif;">确定性启动与关闭流程</p>
+    </div>
+    
+    <!-- 四状态 -->
+    <svg width="420" height="2" style="margin:8px 0;">
+      <rect width="420" height="2" fill="#83C5BE" fill-opacity="0.3"/>
+    </svg>
+    
+    <div style="display:flex; justify-content:space-between; margin:12px 0;">
+      <!-- Unconfigured -->
+      <div style="text-align:center; width:90px;">
+        <svg width="80" height="50" viewBox="0 0 80 50">
+          <rect width="80" height="50" rx="6" fill="#FFFFFF" fill-opacity="0.1" stroke="#FFFFFF" stroke-width="1"/>
+          <text x="40" y="25" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="600" fill="#FFFFFF" font-family:'Times New Roman', serif">Unconfigured</text>
+        </svg>
+        <p style="margin:4px 0 0 0; font-size:9px; color:#83C5BE; font-family:'Times New Roman', serif;">初始未配置</p>
+      </div>
+      <!-- 箭头1 -->
+      <div style="display:flex; align-items:center;">
+        <svg width="30" height="16" viewBox="0 0 30 16">
+          <path d="M0 8 L22 8 M18 3 L24 8 L18 13" stroke="#FFD700" stroke-width="2" fill="none"/>
+        </svg>
+      </div>
+      <!-- Inactive -->
+      <div style="text-align:center; width:90px;">
+        <svg width="80" height="50" viewBox="0 0 80 50">
+          <rect width="80" height="50" rx="6" fill="#FFD700" fill-opacity="0.2" stroke="#FFD700" stroke-width="1"/>
+          <text x="40" y="25" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="600" fill="#FFD700" font-family:'Times New Roman', serif">Inactive</text>
+        </svg>
+        <p style="margin:4px 0 0 0; font-size:9px; color:#83C5BE; font-family:'Times New Roman', serif;">已配置未激活</p>
+      </div>
+      <!-- 箭头2 -->
+      <div style="display:flex; align-items:center;">
+        <svg width="30" height="16" viewBox="0 0 30 16">
+          <path d="M0 8 L22 8 M18 3 L24 8 L18 13" stroke="#FFD700" stroke-width="2" fill="none"/>
+        </svg>
+      </div>
+      <!-- Active -->
+      <div style="text-align:center; width:90px;">
+        <svg width="80" height="50" viewBox="0 0 80 50">
+          <rect width="80" height="50" rx="6" fill="#83C5BE" fill-opacity="0.2" stroke="#83C5BE" stroke-width="1"/>
+          <text x="40" y="25" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="600" fill="#83C5BE" font-family:'Times New Roman', serif">Active</text>
+        </svg>
+        <p style="margin:4px 0 0 0; font-size:9px; color:#83C5BE; font-family:'Times New Roman', serif;">运行中</p>
+      </div>
+    </div>
+    
+    <div style="display:flex; justify-content:center; margin:8px 0 16px 0;">
+      <!-- 箭头向下 -->
+      <svg width="16" height="30" viewBox="0 0 16 30">
+        <path d="M8 0 L8 22 M3 17 L8 23 L13 17" stroke="#83C5BE" stroke-width="2" fill="none"/>
+      </svg>
+    </div>
+    
+    <div style="text-align:center;">
+      <!-- Finalized -->
+      <div style="text-align:center; display:inline-block;">
+        <svg width="100" height="50" viewBox="0 0 100 50">
+          <rect width="100" height="50" rx="6" fill="#FFFFFF" fill-opacity="0.05" stroke="#FFFFFF" stroke-width="1" stroke-opacity="0.5"/>
+          <text x="50" y="25" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="600" fill="#FFFFFF" fill-opacity="0.6" font-family:'Times New Roman', serif">Finalized</text>
+        </svg>
+        <p style="margin:4px 0 0 0; font-size:9px; color:#83C5BE; font-family:'Times New Roman', serif;">已终止</p>
+      </div>
+    </div>
+    
+    <!-- 回调函数 -->
+    <svg width="420" height="2" style="margin:16px 0 8px 0;">
+      <rect width="420" height="2" fill="#83C5BE" fill-opacity="0.3"/>
+    </svg>
+    <p style="margin:0; font-size:16px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">回调函数</p>
+    
+    <div style="margin-top:8px; display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+      <div style="padding:8px; background:#FFD700" fill-opacity="0.1" border="1px solid #FFD700">
+        <p style="margin:0; font-size:10px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">onConfigure</p>
+        <p style="margin:2px 0 0 0; font-size:9px; color:#FFFFFF; font-family:'Times New Roman', serif;">配置参数</p>
+      </div>
+      <div style="padding:8px; background:#83C5BE" fill-opacity="0.1" border="1px solid #83C5BE">
+        <p style="margin:0; font-size:10px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif;">onActivate</p>
+        <p style="margin:2px 0 0 0; font-size:9px; color:#FFFFFF; font-family:'Times New Roman', serif;">激活节点</p>
+      </div>
+      <div style="padding:8px; background:#FFFFFF" fill-opacity="0.1" border="1px solid #FFFFFF" fill-opacity="0.3">
+        <p style="margin:0; font-size:10px; font-weight:600; color:#FFFFFF; font-family:'Times New Roman', serif;">onDeactivate</p>
+        <p style="margin:2px 0 0 0; font-size:9px; color:#FFFFFF; font-family:'Times New Roman', serif;">停用节点</p>
+      </div>
+      <div style="padding:8px; background:#FFFFFF" fill-opacity="0.1" border="1px solid #FFFFFF" fill-opacity="0.3">
+        <p style="margin:0; font-size:10px; font-weight:600; color:#FFFFFF; font-family:'Times New Roman', serif;">onCleanup</p>
+        <p style="margin:2px 0 0 0; font-size:9px; color:#FFFFFF; font-family:'Times New Roman', serif;">清理资源</p>
+      </div>
+    </div>
+    
+    <!-- 应用场景 -->
+    <p style="margin:12px 0 0 0; font-size:11px; color:#83C5BE; font-family:'Times New Roman', serif;">工业机器人控制：确保安全启停</p>
+  </div>
+  
+  <!-- 右侧示意图 -->
+  <div style="position:absolute; left:480px; top:80px; width:440px; height:430px; background:#FFFFFF" fill-opacity="0.03" border="1px solid #83C5BE">
+    <img src="imgs/slide40_lifecycle.png" style="width:100%; height:100%; object-fit:contain;"/>
+  </div>
+  
+  <!-- 页码角标 -->
+  <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+    <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+    <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A" font-family:'Times New Roman', serif">40</text>
+  </svg>
+</div>
+</body>
+</html>

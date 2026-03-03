@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节点Node：最小功能单元</title>
+    <style>
+        html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center; background: #000; }
+        .slide-content { width: 960px; height: 540px; position: relative; transform-origin: center center; background: #1A1A1A; }
+    </style>
+    <script>
+        function scaleSlide() {
+            const slide = document.querySelector('.slide-content');
+            if (!slide) return;
+            const scale = Math.min(window.innerWidth / 960, window.innerHeight / 540);
+            slide.style.transform = `scale(${scale})`;
+        }
+        window.addEventListener('load', scaleSlide);
+        window.addEventListener('resize', scaleSlide);
+    </script>
+</head>
+<body>
+    <div class="slide-content">
+        <!-- 背景装饰 -->
+        <img src="imgs/node_diagram.png" alt="" style="position:absolute; left:480px; top:40px; width:440px; height:320px; object-fit:contain; opacity:0.9;">
+        
+        <!-- 顶部装饰条 -->
+        <svg width="960" height="4" style="position:absolute; top:0; left:0;"><rect width="960" height="4" fill="#FFD700"/></svg>
+        
+        <!-- 主标题 -->
+        <h1 style="position:absolute; left:40px; top:30px; margin:0; font-size:28px; font-weight:500; color:#FFFFFF; font-family:'Times New Roman', serif;">
+            节点(Node)：最小功能单元的设计哲学
+        </h1>
+        
+        <!-- 知识点卡片1 -->
+        <div style="position:absolute; left:40px; top:90px; width:400px; background:#2A2A2A; padding:12px; border-left:3px solid #FFD700;">
+            <p style="margin:0 0 6px 0; font-size:15px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">什么是ROS2节点</p>
+            <p style="margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.6;">
+                节点是ROS2中独立运行的可执行程序，是系统的最小功能单元。每个节点负责特定任务，通过话题、服务与其他节点通信。
+            </p>
+        </div>
+        
+        <!-- 知识点卡片2 -->
+        <div style="position:absolute; left:40px; top:190px; width:400px; background:#2A2A2A; padding:12px; border-left:3px solid #83C5BE;">
+            <p style="margin:0 0 6px 0; font-size:15px; font-weight:500; color:#83C5BE; font-family:'Times New Roman', serif;">单一职责原则</p>
+            <p style="margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.6;">
+                一个节点只做一件事。如摄像头节点只负责采集图像，图像处理节点只负责分析，两者通过Topic通信。
+            </p>
+        </div>
+        
+        <!-- 知识点卡片3 -->
+        <div style="position:absolute; left:40px; top:290px; width:400px; background:#2A2A2A; padding:12px; border-left:3px solid #FFD700;">
+            <p style="margin:0 0 6px 0; font-size:15px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">节点 vs 进程</p>
+            <p style="margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.6;">
+                节点是逻辑单元，一个进程可以包含多个节点。节点概念让ROS2比传统进程间通信更灵活、更解耦。
+            </p>
+        </div>
+        
+        <!-- 知识点卡片4 -->
+        <div style="position:absolute; left:40px; top:390px; width:400px; background:#2A2A2A; padding:12px; border-left:3px solid #83C5BE;">
+            <p style="margin:0 0 6px 0; font-size:15px; font-weight:500; color:#83C5BE; font-family:'Times New Roman', serif;">匿名发布机制</p>
+            <p style="margin:0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.6;">
+                发布者无需知道订阅者存在，实现真正的解耦。发布者只管发布数据，订阅者自行决定是否接收处理。
+            </p>
+        </div>
+        
+        <!-- 右侧补充信息 -->
+        <div style="position:absolute; left:480px; top:370px; width:440px;">
+            <svg width="440" height="2" style="margin-bottom:10px;"><rect width="440" height="2" fill="#83C5BE" opacity="0.5"/></svg>
+            <p style="margin:0 0 8px 0; font-size:14px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">节点命名规范</p>
+            <p style="margin:0; font-size:12px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.6;">
+                /namespace/node_name<br>
+                例: /drone1/sensors/camera<br>
+                支持命名空间隔离和多节点实例
+            </p>
+        </div>
+        
+        <!-- 页码 -->
+        <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+            <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">34</text>
+        </svg>
+    </div>
+</body>
+</html>

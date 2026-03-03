@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker容器化ROS2开发</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+        .slide-content {
+            width: 960px;
+            height: 540px;
+            position: relative;
+            transform-origin: center center;
+            background: #1A1A1A;
+        }
+    </style>
+    <script>
+        function scaleSlide() {
+            const slide = document.querySelector('.slide-content');
+            if (!slide) return;
+            const slideWidth = 960;
+            const slideHeight = 540;
+            const scaleX = window.innerWidth / slideWidth;
+            const scaleY = window.innerHeight / slideHeight;
+            const scale = Math.min(scaleX, scaleY);
+            slide.style.width = slideWidth + 'px';
+            slide.style.height = slideHeight + 'px';
+            slide.style.transform = `scale(${scale})`;
+            slide.style.transformOrigin = 'center center';
+            slide.style.flexShrink = '0';
+        }
+        window.addEventListener('load', scaleSlide);
+        window.addEventListener('resize', scaleSlide);
+    </script>
+</head>
+<body>
+    <div class="slide-content">
+        <!-- Background pattern -->
+        <svg width="100%" height="100%" style="position:absolute;top:0;left:0;pointer-events:none;opacity:0.04;">
+            <defs>
+                <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+                    <path d="M30 0L0 0 0 30" fill="none" stroke="#FFD700" stroke-width="1"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)"/>
+        </svg>
+        
+        <!-- Title section -->
+        <svg width="960" height="80" style="position:absolute;top:0;left:0;">
+            <rect width="960" height="80" fill="#1A1A1A"/>
+            <rect width="960" height="4" fill="#FFD700"/>
+        </svg>
+        
+        <!-- Main title -->
+        <h1 style="position:absolute;left:30px;top:20px;margin:0;font-size:30px;font-weight:600;color:#FFD700;font-family:'Times New Roman',serif;">Docker容器化ROS2开发</h1>
+        <p style="position:absolute;left:30px;top:55px;margin:0;font-size:14px;color:#83C5BE;font-family:'Times New Roman',serif;">Week 2 - Docker-based ROS2 Development</p>
+        
+        <!-- Left content area -->
+        <div style="position:absolute;left:30px;top:95px;width:420px;height:420px;">
+            <!-- Section 1: Docker优势 -->
+            <div style="margin-bottom:16px;">
+                <svg width="420" height="4" style="margin-bottom:8px;">
+                    <rect width="80" height="4" fill="#FFD700"/>
+                    <rect width="420" height="1" fill="#83C5BE" fill-opacity="0.3" y="3"/>
+                </svg>
+                <p style="margin:0;font-size:15px;font-weight:600;color:#FFFFFF;font-family:'Times New Roman',serif;">Docker优势</p>
+                <div style="display:flex;gap:10px;margin-top:4px;">
+                    <div style="flex:1;background:#2A2A2A;padding:8px;border-radius:4px;text-align:center;">
+                        <p style="margin:0;font-size:20px;color:#FFD700;font-family:'Times New Roman',serif;">&#x1F512;</p>
+                        <p style="margin:2px 0 0 0;font-size:10px;color:#83C5BE;font-family:'Times New Roman',serif;">环境隔离</p>
+                    </div>
+                    <div style="flex:1;background:#2A2A2A;padding:8px;border-radius:4px;text-align:center;">
+                        <p style="margin:0;font-size:20px;color:#83C5BE;font-family:'Times New Roman',serif;">&#x1F680;</p>
+                        <p style="margin:2px 0 0 0;font-size:10px;color:#83C5BE;font-family:'Times New Roman',serif;">可移植性</p>
+                    </div>
+                    <div style="flex:1;background:#2A2A2A;padding:8px;border-radius:4px;text-align:center;">
+                        <p style="margin:0;font-size:20px;color:#FFFFFF;font-family:'Times New Roman',serif;">&#x2699;</p>
+                        <p style="margin:2px 0 0 0;font-size:10px;color:#83C5BE;font-family:'Times New Roman',serif;">可重复性</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 2: ROS2官方Docker镜像 -->
+            <div style="margin-bottom:16px;">
+                <svg width="420" height="4" style="margin-bottom:8px;">
+                    <rect width="140" height="4" fill="#FFD700"/>
+                    <rect width="420" height="1" fill="#83C5BE" fill-opacity="0.3" y="3"/>
+                </svg>
+                <p style="margin:0;font-size:15px;font-weight:600;color:#FFFFFF;font-family:'Times New Roman',serif;">ROS2官方Docker镜像</p>
+                <div style="background:#2A2A2A;padding:8px 10px;border-radius:4px;margin-top:4px;border-left:2px solid #FFD700;">
+                    <p style="margin:0;font-size:11px;color:#CCCCCC;font-family:'Courier New',monospace;">docker pull osrf/ros:humble-desktop</p>
+                    <p style="margin:2px 0 0 0;font-size:11px;color:#CCCCCC;font-family:'Courier New',monospace;">docker run -it osrf/ros:humble-desktop</p>
+                </div>
+            </div>
+            
+            <!-- Section 3: nvidia-docker与GPU加速 -->
+            <div style="margin-bottom:16px;">
+                <svg width="420" height="4" style="margin-bottom:8px;">
+                    <rect width="140" height="4" fill="#FFD700"/>
+                    <rect width="420" height="1" fill="#83C5BE" fill-opacity="0.3" y="3"/>
+                </svg>
+                <p style="margin:0;font-size:15px;font-weight:600;color:#FFFFFF;font-family:'Times New Roman',serif;">nvidia-docker与GPU加速</p>
+                <p style="margin:4px 0 0 0;font-size:11px;color:#CCCCCC;font-family:'Times New Roman',serif;">docker run --gpus all -it \</p>
+                <p style="margin:0 0 0 16px;font-size:11px;color:#83C5BE;font-family:'Times New Roman',serif;">osrf/ros:humble-desktop</p>
+                <p style="margin:2px 0 0 0;font-size:10px;color:#FFD700;font-family:'Times New Roman',serif;">Gazebo仿真性能提升</p>
+            </div>
+            
+            <!-- Section 4: Docker-compose编排 -->
+            <div>
+                <svg width="420" height="4" style="margin-bottom:8px;">
+                    <rect width="140" height="4" fill="#FFD700"/>
+                    <rect width="420" height="1" fill="#83C5BE" fill-opacity="0.3" y="3"/>
+                </svg>
+                <p style="margin:0;font-size:15px;font-weight:600;color:#FFFFFF;font-family:'Times New Roman',serif;">Docker-compose多容器编排</p>
+                <div style="background:#2A2A2A;padding:8px 10px;border-radius:4px;margin-top:4px;border-left:2px solid #83C5BE;">
+                    <p style="margin:0;font-size:10px;color:#CCCCCC;font-family:'Courier New',monospace;">services:</p>
+                    <p style="margin:0 0 0 12px;font-size:10px;color:#CCCCCC;font-family:'Courier New',monospace;">ros2:</p>
+                    <p style="margin:0 0 0 24px;font-size:10px;color:#CCCCCC;font-family:'Courier New',monospace;">image: osrf/ros:humble</p>
+                    <p style="margin:0 0 0 12px;font-size:10px;color:#CCCCCC;font-family:'Courier New',monospace;">gazebo:</p>
+                    <p style="margin:0 0 0 24px;font-size:10px;color:#CCCCCC;font-family:'Courier New',monospace;">image: osrf/gazebo:garden</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right image area -->
+        <div style="position:absolute;left:470px;top:95px;width:460px;height:420px;">
+            <img src="imgs/slide31-visual.png" alt="Docker ROS2" style="width:100%;height:100%;object-fit:cover;border-radius:8px;border:2px solid #83C5BE;"/>
+            
+            <!-- Docker status -->
+            <div style="position:absolute;top:10px;left:10px;background:rgba(26,26,26,0.9);padding:6px 10px;border-radius:4px;">
+                <p style="margin:0;font-size:10px;color:#FFD700;font-family:'Times New Roman',serif;">Docker Container</p>
+            </div>
+        </div>
+        
+        <!-- Bottom accent -->
+        <svg width="960" height="4" style="position:absolute;bottom:60px;left:0;">
+            <rect width="960" height="2" fill="#83C5BE" fill-opacity="0.3"/>
+        </svg>
+        
+        <!-- Key points -->
+        <div style="position:absolute;bottom:15px;left:30px;width:900px;height:40px;display:flex;align-items:center;gap:20px;">
+            <svg width="12" height="12">
+                <circle cx="6" cy="6" r="6" fill="#FFD700"/>
+            </svg>
+            <span style="font-size:11px;color:#83C5BE;font-family:'Times New Roman',serif;">Docker</span>
+            <svg width="12" height="12">
+                <circle cx="6" cy="6" r="6" fill="#83C5BE"/>
+            </svg>
+            <span style="font-size:11px;color:#83C5BE;font-family:'Times New Roman',serif;">nvidia-docker</span>
+            <svg width="12" height="12">
+                <circle cx="6" cy="6" r="6" fill="#FFFFFF"/>
+            </svg>
+            <span style="font-size:11px;color:#83C5BE;font-family:'Times New Roman',serif;">Gazebo</span>
+            <svg width="12" height="12">
+                <circle cx="6" cy="6" r="6" fill="#FFD700"/>
+            </svg>
+            <span style="font-size:11px;color:#83C5BE;font-family:'Times New Roman',serif;">Compose</span>
+        </div>
+        
+        <!-- Page number badge -->
+        <svg style="position:absolute;right:32px;bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+            <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">31</text>
+        </svg>
+    </div>
+</body>
+</html>

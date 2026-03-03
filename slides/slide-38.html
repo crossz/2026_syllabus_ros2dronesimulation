@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Action通讯：为什么需要反馈与取消</title>
+  <style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+.slide-content {
+  width: 960px;
+  height: 540px;
+  position: relative;
+  transform-origin: center center;
+}
+</style>
+<script>
+function scaleSlide() {
+  const slide = document.querySelector('.slide-content');
+  if (!slide) return;
+  const slideWidth = 960;
+  const slideHeight = 540;
+  const scaleX = window.innerWidth / slideWidth;
+  const scaleY = window.innerHeight / slideHeight;
+  const scale = Math.min(scaleX, scaleY);
+  slide.style.width = slideWidth + 'px';
+  slide.style.height = slideHeight + 'px';
+  slide.style.transform = `scale(${scale})`;
+  slide.style.transformOrigin = 'center center';
+  slide.style.flexShrink = '0';
+}
+window.addEventListener('load', scaleSlide);
+window.addEventListener('resize', scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="background: #1A1A1A;">
+  <!-- 背景装饰 -->
+  <svg width="960" height="540" style="position:absolute;top:0;left:0;opacity:0.06;">
+    <defs>
+      <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+        <circle cx="15" cy="15" r="1.5" fill="#83C5BE"/>
+      </pattern>
+    </defs>
+    <rect width="960" height="540" fill="url(#dots)"/>
+  </svg>
+  
+  <!-- 主标题 -->
+  <p style="position:absolute; left:40px; top:28px; margin:0; font-size:28px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">Action通讯：为什么需要反馈与取消？</p>
+  
+  <!-- 左侧内容区 -->
+  <div style="position:absolute; left:40px; top:80px; width:420px; height:430px;">
+    <!-- 适用场景 -->
+    <div style="margin-bottom:12px;">
+      <p style="margin:0; font-size:16px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">Action适用场景</p>
+      <p style="margin:4px 0 0 0; font-size:13px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.5;">长时间运行任务(Long-running Tasks)</p>
+      <p style="margin:2px 0 0 0; font-size:12px; color:#83C5BE; font-family:'Times New Roman', serif;">可被取消的任务、需要进度反馈</p>
+    </div>
+    
+    <!-- 三要素 -->
+    <div style="margin-bottom:12px;">
+      <svg width="420" height="2" style="margin:8px 0;">
+        <rect width="420" height="2" fill="#83C5BE" fill-opacity="0.3"/>
+      </svg>
+      <p style="margin:0; font-size:16px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">三要素 (Three Elements)</p>
+      <div style="margin-top:6px; display:flex; gap:8px;">
+        <svg width="130" height="36" viewBox="0 0 130 36">
+          <rect width="130" height="36" rx="4" fill="#FFD700" fill-opacity="0.2"/>
+          <text x="65" y="18" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="600" fill="#FFD700" font-family:'Times New Roman', serif">Goal 目标</text>
+        </svg>
+        <svg width="130" height="36" viewBox="0 0 130 36">
+          <rect width="130" height="36" rx="4" fill="#83C5BE" fill-opacity="0.2"/>
+          <text x="65" y="18" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="600" fill="#83C5BE" font-family:'Times New Roman', serif">Feedback 反馈</text>
+        </svg>
+        <svg width="130" height="36" viewBox="0 0 130 36">
+          <rect width="130" height="36" rx="4" fill="#FFFFFF" fill-opacity="0.15"/>
+          <text x="65" y="18" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="600" fill="#FFFFFF" font-family:'Times New Roman', serif">Result 结果</text>
+        </svg>
+      </div>
+    </div>
+    
+    <!-- 无人机案例 -->
+    <div style="margin-bottom:12px;">
+      <svg width="420" height="2" style="margin:8px 0;">
+        <rect width="420" height="2" fill="#83C5BE" fill-opacity="0.3"/>
+      </svg>
+      <p style="margin:0; font-size:16px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">无人机任务案例</p>
+      <div style="margin-top:6px;">
+        <div style="display:flex; align-items:center; margin:4px 0;">
+          <svg width="20" height="20" viewBox="0 0 20 20">
+            <circle cx="10" cy="10" r="8" stroke="#FFD700" stroke-width="1.5" fill="none"/>
+            <path d="M6 10 L9 13 L14 7" stroke="#FFD700" stroke-width="1.5" fill="none"/>
+          </svg>
+          <span style="margin-left:8px; font-size:12px; color:#FFFFFF; font-family:'Times New Roman', serif;">起飞 → 飞行中实时位置反馈 → 降落</span>
+        </div>
+        <div style="display:flex; align-items:center; margin:4px 0;">
+          <svg width="20" height="20" viewBox="0 0 20 20">
+            <circle cx="10" cy="10" r="8" stroke="#83C5BE" stroke-width="1.5" fill="none"/>
+            <path d="M10 6 L10 14 M6 10 L14 10" stroke="#83C5BE" stroke-width="1.5"/>
+          </svg>
+          <span style="margin-left:8px; font-size:12px; color:#83C5BE; font-family:'Times New Roman', serif;">取消机制：任务中断能力</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Service vs Action -->
+    <div>
+      <svg width="420" height="2" style="margin:8px 0;">
+        <rect width="420" height="2" fill="#83C5BE" fill-opacity="0.3"/>
+      </svg>
+      <p style="margin:0; font-size:16px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">Service vs Action 对比</p>
+      <div style="margin-top:6px; display:flex; gap:20px;">
+        <div style="flex:1;">
+          <p style="margin:0; font-size:12px; color:#83C5BE; font-family:'Times New Roman', serif;">Service</p>
+          <p style="margin:2px 0 0 0; font-size:11px; color:#FFFFFF; font-family:'Times New Roman', serif; opacity:0.7;">同步请求响应</p>
+          <p style="margin:2px 0 0 0; font-size:11px; color:#FFFFFF; font-family:'Times New Roman', serif; opacity:0.7;">短时操作</p>
+        </div>
+        <div style="flex:1;">
+          <p style="margin:0; font-size:12px; color:#FFD700; font-family:'Times New Roman', serif;">Action</p>
+          <p style="margin:2px 0 0 0; font-size:11px; color:#FFFFFF; font-family:'Times New Roman', serif; opacity:0.7;">异步目标反馈</p>
+          <p style="margin:2px 0 0 0; font-size:11px; color:#FFFFFF; font-family:'Times New Roman', serif; opacity:0.7;">长时任务/可取消</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 右侧示意图 -->
+  <div style="position:absolute; left:480px; top:80px; width:440px; height:430px; background:#FFFFFF" fill-opacity="0.03" border="1px solid #83C5BE">
+    <img src="imgs/slide38_action.png" style="width:100%; height:100%; object-fit:contain;"/>
+  </div>
+  
+  <!-- 页码角标 -->
+  <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+    <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+    <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A" font-family:'Times New Roman', serif">38</text>
+  </svg>
+</div>
+</body>
+</html>

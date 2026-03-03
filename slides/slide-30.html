@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仿真环境网络配置</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+        .slide-content {
+            width: 960px;
+            height: 540px;
+            position: relative;
+            transform-origin: center center;
+            background: #1A1A1A;
+        }
+    </style>
+    <script>
+        function scaleSlide() {
+            const slide = document.querySelector('.slide-content');
+            if (!slide) return;
+            const slideWidth = 960;
+            const slideHeight = 540;
+            const scaleX = window.innerWidth / slideWidth;
+            const scaleY = window.innerHeight / slideHeight;
+            const scale = Math.min(scaleX, scaleY);
+            slide.style.width = slideWidth + 'px';
+            slide.style.height = slideHeight + 'px';
+            slide.style.transform = `scale(${scale})`;
+            slide.style.transformOrigin = 'center center';
+            slide.style.flexShrink = '0';
+        }
+        window.addEventListener('load', scaleSlide);
+        window.addEventListener('resize', scaleSlide);
+    </script>
+</head>
+<body>
+    <div class="slide-content">
+        <!-- Background pattern -->
+        <svg width="100%" height="100%" style="position:absolute;top:0;left:0;pointer-events:none;opacity:0.04;">
+            <defs>
+                <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+                    <path d="M30 0L0 0 0 30" fill="none" stroke="#FFD700" stroke-width="1"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)"/>
+        </svg>
+        
+        <!-- Title section -->
+        <svg width="960" height="80" style="position:absolute;top:0;left:0;">
+            <rect width="960" height="80" fill="#1A1A1A"/>
+            <rect width="960" height="4" fill="#FFD700"/>
+        </svg>
+        
+        <!-- Main title -->
+        <h1 style="position:absolute;left:30px;top:20px;margin:0;font-size:32px;font-weight:600;color:#FFD700;font-family:'Times New Roman',serif;">仿真环境网络配置</h1>
+        <p style="position:absolute;left:30px;top:55px;margin:0;font-size:14px;color:#83C5BE;font-family:'Times New Roman',serif;">Week 2 - Network Configuration for Simulation</p>
+        
+        <!-- Left content area -->
+        <div style="position:absolute;left:30px;top:95px;width:420px;height:420px;">
+            <!-- Section 1: 多机通信需求 -->
+            <div style="margin-bottom:16px;">
+                <svg width="420" height="4" style="margin-bottom:8px;">
+                    <rect width="100" height="4" fill="#FFD700"/>
+                    <rect width="420" height="1" fill="#83C5BE" fill-opacity="0.3" y="3"/>
+                </svg>
+                <p style="margin:0;font-size:15px;font-weight:600;color:#FFFFFF;font-family:'Times New Roman',serif;">多机通信需求</p>
+                <p style="margin:4px 0 0 0;font-size:12px;color:#CCCCCC;font-family:'Times New Roman',serif;line-height:1.5;">英特航空无人机集群仿真</p>
+                <p style="margin:2px 0 0 0;font-size:11px;color:#83C5BE;font-family:'Times New Roman',serif;">Multi-UAV swarm simulation requires</p>
+                <p style="margin:2px 0 0 0;font-size:11px;color:#83C5BE;font-family:'Times New Roman',serif;">reliable network communication</p>
+            </div>
+            
+            <!-- Section 2: ROS_DOMAIN_ID设置 -->
+            <div style="margin-bottom:16px;">
+                <svg width="420" height="4" style="margin-bottom:8px;">
+                    <rect width="120" height="4" fill="#FFD700"/>
+                    <rect width="420" height="1" fill="#83C5BE" fill-opacity="0.3" y="3"/>
+                </svg>
+                <p style="margin:0;font-size:15px;font-weight:600;color:#FFFFFF;font-family:'Times New Roman',serif;">ROS_DOMAIN_ID设置</p>
+                <div style="background:#2A2A2A;padding:8px 10px;border-radius:4px;margin-top:4px;border-left:2px solid #FFD700;">
+                    <p style="margin:0;font-size:11px;color:#CCCCCC;font-family:'Courier New',monospace;"># Bashrc</p>
+                    <p style="margin:2px 0 0 0;font-size:11px;color:#FFD700;font-family:'Courier New',monospace;">export ROS_DOMAIN_ID=42</p>
+                </div>
+                <p style="margin:4px 0 0 0;font-size:10px;color:#83C5BE;font-family:'Times New Roman',serif;">范围: 0-232, 默认: 0</p>
+            </div>
+            
+            <!-- Section 3: 环境变量配置 -->
+            <div style="margin-bottom:16px;">
+                <svg width="420" height="4" style="margin-bottom:8px;">
+                    <rect width="120" height="4" fill="#FFD700"/>
+                    <rect width="420" height="1" fill="#83C5BE" fill-opacity="0.3" y="3"/>
+                </svg>
+                <p style="margin:0;font-size:15px;font-weight:600;color:#FFFFFF;font-family:'Times New Roman',serif;">环境变量配置</p>
+                <p style="margin:4px 0 0 0;font-size:11px;color:#CCCCCC;font-family:'Times New Roman',serif;">ROS_LOCALHOST_ONLY=1</p>
+                <p style="margin:2px 0 0 0;font-size:10px;color:#83C5BE;font-family:'Times New Roman',serif;">仅本地通信, 增强安全性</p>
+            </div>
+            
+            <!-- Section 4: 防火墙与端口 -->
+            <div>
+                <svg width="420" height="4" style="margin-bottom:8px;">
+                    <rect width="120" height="4" fill="#FFD700"/>
+                    <rect width="420" height="1" fill="#83C5BE" fill-opacity="0.3" y="3"/>
+                </svg>
+                <p style="margin:0;font-size:15px;font-weight:600;color:#FFFFFF;font-family:'Times New Roman',serif;">防火墙与端口配置</p>
+                <ul style="margin:4px 0 0 0;padding-left:16px;font-size:11px;color:#CCCCCC;font-family:'Times New Roman',serif;line-height:1.8;">
+                    <li>UDP端口: 7400-7600 (DDS)</li>
+                    <li>TCP端口: 22 (SSH)</li>
+                    <li>ufw allow/protect规则</li>
+                </ul>
+                <p style="margin:4px 0 0 0;font-size:10px;color:#FFD700;font-family:'Times New Roman',serif;">常见问题: hostname/ping检测</p>
+            </div>
+        </div>
+        
+        <!-- Right image area -->
+        <div style="position:absolute;left:470px;top:95px;width:460px;height:420px;">
+            <img src="imgs/slide30-visual.png" alt="Network Configuration" style="width:100%;height:100%;object-fit:cover;border-radius:8px;border:2px solid #83C5BE;"/>
+            
+            <!-- Network status -->
+            <div style="position:absolute;bottom:10px;left:10px;right:10px;background:rgba(26,26,26,0.9);padding:8px 12px;border-radius:4px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span style="font-size:10px;color:#83C5BE;font-family:'Times New Roman',serif;">Network Status</span>
+                    <span style="font-size:10px;color:#FFD700;font-family:'Times New Roman',serif;">Connected</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom accent -->
+        <svg width="960" height="4" style="position:absolute;bottom:60px;left:0;">
+            <rect width="960" height="2" fill="#83C5BE" fill-opacity="0.3"/>
+        </svg>
+        
+        <!-- Key points -->
+        <div style="position:absolute;bottom:15px;left:30px;width:900px;height:40px;display:flex;align-items:center;gap:20px;">
+            <svg width="12" height="12">
+                <circle cx="6" cy="6" r="6" fill="#FFD700"/>
+            </svg>
+            <span style="font-size:11px;color:#83C5BE;font-family:'Times New Roman',serif;">ROS_DOMAIN_ID</span>
+            <svg width="12" height="12">
+                <circle cx="6" cy="6" r="6" fill="#83C5BE"/>
+            </svg>
+            <span style="font-size:11px;color:#83C5BE;font-family:'Times New Roman',serif;">DDS</span>
+            <svg width="12" height="12">
+                <circle cx="6" cy="6" r="6" fill="#FFFFFF"/>
+            </svg>
+            <span style="font-size:11px;color:#83C5BE;font-family:'Times New Roman',serif;">UDP/TCP</span>
+            <svg width="12" height="12">
+                <circle cx="6" cy="6" r="6" fill="#FFD700"/>
+            </svg>
+            <span style="font-size:11px;color:#83C5BE;font-family:'Times New Roman',serif;">Firewall</span>
+        </div>
+        
+        <!-- Page number badge -->
+        <svg style="position:absolute;right:32px;bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+            <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">30</text>
+        </svg>
+    </div>
+</body>
+</html>

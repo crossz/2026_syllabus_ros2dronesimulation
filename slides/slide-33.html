@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第三周 - ROS2通信机制</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+        .slide-content {
+            width: 960px;
+            height: 540px;
+            position: relative;
+            transform-origin: center center;
+            background: #1A1A1A;
+        }
+    </style>
+    <script>
+        function scaleSlide() {
+            const slide = document.querySelector('.slide-content');
+            if (!slide) return;
+            const slideWidth = 960;
+            const slideHeight = 540;
+            const scaleX = window.innerWidth / slideWidth;
+            const scaleY = window.innerHeight / slideHeight;
+            const scale = Math.min(scaleX, scaleY);
+            slide.style.width = slideWidth + 'px';
+            slide.style.height = slideHeight + 'px';
+            slide.style.transform = `scale(${scale})`;
+            slide.style.transformOrigin = 'center center';
+            slide.style.flexShrink = '0';
+        }
+        window.addEventListener('load', scaleSlide);
+        window.addEventListener('resize', scaleSlide);
+    </script>
+</head>
+<body>
+    <div class="slide-content">
+        <!-- 背景装饰 -->
+        <img src="imgs/week3_title.png" alt="" style="position:absolute; left:0; top:0; width:960px; height:540px; object-fit:cover; opacity:0.35;">
+        
+        <!-- 顶部装饰条 -->
+        <svg width="960" height="4" style="position:absolute; top:0; left:0;">
+            <rect width="960" height="4" fill="#FFD700"/>
+        </svg>
+        
+        <!-- 主标题 -->
+        <h1 style="position:absolute; left:60px; top:120px; margin:0; font-size:72px; font-weight:500; color:#FFFFFF; font-family:'Times New Roman', serif; letter-spacing:8px;">
+            第三周
+        </h1>
+        
+        <!-- 副标题 -->
+        <h2 style="position:absolute; left:60px; top:210px; margin:0; font-size:32px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">
+            ROS2通信机制
+        </h2>
+        
+        <!-- 英文副标题 -->
+        <h3 style="position:absolute; left:60px; top:260px; margin:0; font-size:20px; font-weight:400; color:#83C5BE; font-family:'Times New Roman', serif; letter-spacing:2px;">
+            ROS2 Communication Mechanism
+        </h3>
+        
+        <!-- 分隔线 -->
+        <svg width="400" height="3" style="position:absolute; left:60px; top:310px;">
+            <rect width="400" height="3" fill="#83C5BE"/>
+        </svg>
+        
+        <!-- 课程目标 -->
+        <div style="position:absolute; left:60px; top:340px; width:400px;">
+            <p style="margin:0 0 8px 0; font-size:16px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">
+                课程目标 / Learning Objectives
+            </p>
+            <ul style="margin:0; padding-left:20px; font-size:14px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.8;">
+                <li>理解ROS2节点(Node)的设计哲学</li>
+                <li>掌握Topic发布/订阅通信模式</li>
+                <li>掌握Service请求/响应通信模式</li>
+                <li>了解DDS中间件的核心原理</li>
+            </ul>
+        </div>
+        
+        <!-- 学习重点 -->
+        <div style="position:absolute; left:520px; top:340px; width:380px;">
+            <p style="margin:0 0 8px 0; font-size:16px; font-weight:500; color:#FFD700; font-family:'Times New Roman', serif;">
+                学习重点 / Key Points
+            </p>
+            <ul style="margin:0; padding-left:20px; font-size:14px; color:#FFFFFF; font-family:'Times New Roman', serif; line-height:1.8;">
+                <li>节点是ROS2的最小功能单元</li>
+                <li>Topic实现多对多异步通信</li>
+                <li>Service实现一对一同步通信</li>
+                <li>DDS去中心化自动发现机制</li>
+            </ul>
+        </div>
+        
+        <!-- 底部装饰 -->
+        <svg width="960" height="4" style="position:absolute; bottom:0; left:0;">
+            <rect width="960" height="4" fill="#83C5BE"/>
+        </svg>
+    </div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第四周：话题通讯实战与可视化调试</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+    }
+    .slide-content {
+      width: 960px;
+      height: 540px;
+      position: relative;
+      transform-origin: center center;
+      background: #1A1A1A;
+    }
+    @font-face {
+      font-family: 'Times New Roman';
+      src: local('Times New Roman');
+    }
+  </style>
+  <script>
+    function scaleSlide() {
+      const slide = document.querySelector('.slide-content');
+      if (!slide) return;
+      const scaleX = window.innerWidth / 960;
+      const scaleY = window.innerHeight / 540;
+      const scale = Math.min(scaleX, scaleY);
+      slide.style.transform = `scale(${scale})`;
+    }
+    window.addEventListener('load', scaleSlide);
+    window.addEventListener('resize', scaleSlide);
+  </script>
+</head>
+<body>
+  <div class="slide-content">
+    <!-- Background Image -->
+    <img src="imgs/week4_title.png" style="position:absolute; left:0; top:0; width:960px; height:540px; object-fit:cover;" alt="Week 4 Title">
+    
+    <!-- Dark Overlay -->
+    <div style="position:absolute; left:0; top:0; width:960px; height:540px; background:#1A1A1A; opacity:0.75;"></div>
+    
+    <!-- Main Title -->
+    <p style="position:absolute; left:60px; top:80px; margin:0; font-size:72px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">第四周</p>
+    
+    <!-- Subtitle -->
+    <p style="position:absolute; left:60px; top:170px; margin:0; font-size:28px; font-weight:400; color:#FFFFFF; font-family:'Times New Roman', serif;">话题通讯实战与可视化调试</p>
+    
+    <!-- Divider -->
+    <svg style="position:absolute; left:60px; top:220px;" width="280" height="3" viewBox="0 0 280 3">
+      <rect width="280" height="3" rx="1.5" fill="#FFD700"/>
+    </svg>
+    
+    <!-- Course Objectives Box -->
+    <div style="position:absolute; left:60px; top:250px; width:400px; height:220px; background:#2A2A2A; border-left:4px solid #83C5BE; padding:20px;">
+      <p style="margin:0; font-size:18px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">课程目标</p>
+      <ul style="margin:12px 0 0 0; padding-left:20px;">
+        <li style="margin:8px 0; font-size:14px; color:#FFFFFF; font-family:'Times New Roman', serif;">掌握ROS2话题命令行工具</li>
+        <li style="margin:8px 0; font-size:14px; color:#FFFFFF; font-family:'Times New Roman', serif;">学会使用rqt_graph可视化系统</li>
+        <li style="margin:8px 0; font-size:14px; color:#FFFFFF; font-family:'Times New Roman', serif;">编写Python发布者与订阅者节点</li>
+      </ul>
+    </div>
+    
+    <!-- Learning Focus Box -->
+    <div style="position:absolute; left:480px; top:250px; width:400px; height:220px; background:#2A2A2A; border-left:4px solid #FFD700; padding:20px;">
+      <p style="margin:0; font-size:18px; font-weight:600; color:#83C5BE; font-family:'Times New Roman', serif;">学习重点</p>
+      <ul style="margin:12px 0 0 0; padding-left:20px;">
+        <li style="margin:8px 0; font-size:14px; color:#FFFFFF; font-family:'Times New Roman', serif;">ros2 topic list/echo/info/hz/pub</li>
+        <li style="margin:8px 0; font-size:14px; color:#FFFFFF; font-family:'Times New Roman', serif;">rqt_graph节点拓扑分析</li>
+        <li style="margin:8px 0; font-size:14px; color:#FFFFFF; font-family:'Times New Roman', serif;">MinimalPublisher代码实现</li>
+        <li style="margin:8px 0; font-size:14px; color:#FFFFFF; font-family:'Times New Roman', serif;">MinimalSubscriber代码实现</li>
+      </ul>
+    </div>
+    
+    <!-- Week Indicator -->
+    <svg style="position:absolute; right:32px; bottom:24px;" width="48" height="48" viewBox="0 0 48 48">
+      <circle cx="24" cy="24" r="24" fill="#83C5BE"/>
+      <text x="24" y="24" text-anchor="middle" dominant-baseline="central" font-size="18" font-weight="600" fill="#1A1A1A">04</text>
+    </svg>
+  </div>
+</body>
+</html>

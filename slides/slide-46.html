@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python编程实战：编写发布者节点</title>
+  <style>
+    html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center; background: #000; }
+    .slide-content { width: 960px; height: 540px; position: relative; transform-origin: center center; background: #1A1A1A; }
+    @font-face { font-family: 'Times New Roman'; src: local('Times New Roman'); }
+  </style>
+  <script>
+    function scaleSlide() {
+      const slide = document.querySelector('.slide-content');
+      if (!slide) return;
+      const scaleX = window.innerWidth / 960;
+      const scaleY = window.innerHeight / 540;
+      const scale = Math.min(scaleX, scaleY);
+      slide.style.transform = `scale(${scale})`;
+    }
+    window.addEventListener('load', scaleSlide);
+    window.addEventListener('resize', scaleSlide);
+  </script>
+</head>
+<body>
+  <div class="slide-content">
+    <!-- Background -->
+    <img src="imgs/publisher_node.png" style="position:absolute; left:0; top:0; width:960px; height:540px; object-fit:cover; opacity:0.25;" alt="publisher">
+    <div style="position:absolute; left:0; top:0; width:960px; height:540px; background:#1A1A1A; opacity:0.85;"></div>
+    
+    <!-- Title -->
+    <p style="position:absolute; left:30px; top:16px; margin:0; font-size:30px; font-weight:700; color:#FFD700; font-family:'Times New Roman', serif;">Python编程实战：编写发布者节点</p>
+    
+    <!-- Left: Steps -->
+    <div style="position:absolute; left:30px; top:70px; width:440px; height:450px;">
+      <!-- Step 1 -->
+      <div style="margin-bottom:10px;">
+        <svg width="440" height="52" viewBox="0 0 440 52">
+          <rect width="440" height="52" rx="6" fill="#2A2A2A"/>
+          <circle cx="28" cy="26" r="14" fill="#83C5BE"/>
+          <text x="28" y="30" text-anchor="middle" font-size="12" font-weight="600" fill="#1A1A1A">1</text>
+          <text x="52" y="20" font-size="13" font-weight="600" fill="#FFD700" font-family:'Times New Roman', serif">导入依赖</text>
+          <text x="52" y="36" font-size="10" fill="#CCCCCC" font-family:'Times New Roman', serif">import rclpy from rclpy.node import Node</text>
+        </svg>
+      </div>
+      
+      <!-- Step 2 -->
+      <div style="margin-bottom:10px;">
+        <svg width="440" height="52" viewBox="0 0 440 52">
+          <rect width="440" height="52" rx="6" fill="#2A2A2A"/>
+          <circle cx="28" cy="26" r="14" fill="#83C5BE"/>
+          <text x="28" y="30" text-anchor="middle" font-size="12" font-weight="600" fill="#1A1A1A">2</text>
+          <text x="52" y="20" font-size="13" font-weight="600" fill="#FFD700" font-family:'Times New Roman', serif">导入消息类型</text>
+          <text x="52" y="36" font-size="10" fill="#CCCCCC" font-family:'Times New Roman', serif">from std_msgs.msg import String</text>
+        </svg>
+      </div>
+      
+      <!-- Step 3 -->
+      <div style="margin-bottom:10px;">
+        <svg width="440" height="52" viewBox="0 0 440 52">
+          <rect width="440" height="52" rx="6" fill="#2A2A2A"/>
+          <circle cx="28" cy="26" r="14" fill="#83C5BE"/>
+          <text x="28" y="30" text-anchor="middle" font-size="12" font-weight="600" fill="#1A1A1A">3</text>
+          <text x="52" y="20" font-size="13" font-weight="600" fill="#FFD700" font-family:'Times New Roman', serif">创建节点类</text>
+          <text x="52" y="36" font-size="10" fill="#CCCCCC" font-family:'Times New Roman', serif">class MinimalPublisher(Node)</text>
+        </svg>
+      </div>
+      
+      <!-- Step 4 -->
+      <div style="margin-bottom:10px;">
+        <svg width="440" height="52" viewBox="0 0 440 52">
+          <rect width="440" height="52" rx="6" fill="#2A2A2A"/>
+          <circle cx="28" cy="26" r="14" fill="#83C5BE"/>
+          <text x="28" y="30" text-anchor="middle" font-size="12" font-weight="600" fill="#1A1A1A">4</text>
+          <text x="52" y="20" font-size="13" font-weight="600" fill="#FFD700" font-family:'Times New Roman', serif">创建发布者</text>
+          <text x="52" y="36" font-size="10" fill="#CCCCCC" font-family:'Times New Roman', serif">self.create_publisher(String, 'topic', 10)</text>
+        </svg>
+      </div>
+      
+      <!-- Step 5 -->
+      <div style="margin-bottom:10px;">
+        <svg width="440" height="52" viewBox="0 0 440 52">
+          <rect width="440" height="52" rx="6" fill="#2A2A2A"/>
+          <circle cx="28" cy="26" r="14" fill="#83C5BE"/>
+          <text x="28" y="30" text-anchor="middle" font-size="12" font-weight="600" fill="#1A1A1A">5</text>
+          <text x="52" y="20" font-size="13" font-weight="600" fill="#FFD700" font-family:'Times New Roman', serif">创建定时器</text>
+          <text x="52" y="36" font-size="10" fill="#CCCCCC" font-family:'Times New Roman', serif">self.create_timer(0.5, self.timer_callback)</text>
+        </svg>
+      </div>
+      
+      <!-- Step 6 -->
+      <div>
+        <svg width="440" height="52" viewBox="0 0 440 52">
+          <rect width="440" height="52" rx="6" fill="#2A2A2A"/>
+          <circle cx="28" cy="26" r="14" fill="#83C5BE"/>
+          <text x="28" y="30" text-anchor="middle" font-size="12" font-weight="600" fill="#1A1A1A">6</text>
+          <text x="52" y="20" font-size="13" font-weight="600" fill="#FFD700" font-family:'Times New Roman', serif">发布消息</text>
+          <text x="52" y="36" font-size="10" fill="#CCCCCC" font-family:'Times New Roman', serif">self.publisher.publish(msg)</text>
+        </svg>
+      </div>
+    </div>
+    
+    <!-- Right: Code Example -->
+    <div style="position:absolute; left:485px; top:70px; width:450px; height:450px; background:#0D1117; border:1px solid #30363D; border-radius:8px; padding:12px; overflow:hidden;">
+      <p style="margin:0 0 8px 0; font-size:14px; font-weight:600; color:#FFD700; font-family:'Times New Roman', serif;">完整代码示例</p>
+      
+      <pre style="margin:0; font-size:9px; color:#C9D1D9; font-family:'Courier New', monospace; line-height:1.4; white-space:pre-wrap;">
+<span style="color:#8B949E;"># minimal_publisher.py</span>
+<span style="color:#FF7B72;">import</span> rclpy
+<span style="color:#FF7B72;">from</span> rclpy.node <span style="color:#FF7B72;">import</span> Node
+<span style="color:#FF7B72;">from</span> std_msgs.msg <span style="color:#FF7B72;">import</span> String
+
+<span style="color:#FF7B72;">class</span> <span style="color:#D2A8FF;">MinimalPublisher</span>(Node):
+    <span style="color:#79C0FF;">def __init__(self):</span>
+        <span style="color:#8B949E;"># 初始化节点</span>
+        <span style="color:#FF7B72;">super</span>().__init__(<span style="color:#A5D6FF;">'minimal_publisher'</span>)
+        
+        <span style="color:#8B949E;"># 创建发布者</span>
+        self.publisher = <span style="color:#FF7B72;">self</span>.create_publisher(
+            String, <span style="color:#A5D6FF;">'chatter'</span>, <span style="color:#A5D6FF;">10</span>)
+        
+        <span style="color:#8B949E;"># 创建定时器(0.5秒)</span>
+        timer_period = <span style="color:#A5D6FF;">0.5</span>
+        self.timer = <span style="color:#FF7B72;">self</span>.create_timer(
+            timer_period, <span style="color:#FF7B72;">self</span>.timer_callback)
+        self.i = <span style="color:#A5D6FF;">0</span>
+
+    <span style="color:#79C0FF;">def timer_callback(self):</span>
+        <span style="color:#8B949E;"># 定时发布消息</span>
+        msg = String()
+        msg.data = <span style="color:#A5D6FF;">f'Hello World: {self.i}'</span>
+        <span style="color:#FF7B72;">self</span>.publisher.publish(msg)
+        <span style="color:#8B949E;">self.get_logger().info(</span>
+            <span style="color:#A5D6FF;">f'Publishing: "{msg.data}"'</span><span style="color:#8B949E;">)</span>
+        <span style="color:#FF7B72;">self</span>.i += <span style="color:#A5D6FF;">1</span>
+
+<span style="color:#FF7B72;">def</span> <span style="color:#D2A8FF;">main</span>(args=None):
+    rclpy.init(args=args)
+    node = MinimalPublisher()
+    
+    <span style="color:#8B949E;"># 保持节点运行</span>
+    <span style="color:#FF7B72;">try</span>:
+        rclpy.spin(node)
+    <span style="color:#FF7B72;">except</span> KeyboardInterrupt:
+        <span style="color:#FF7B72;">pass</span>
+    <span style="color:#FF7B72;">finally</span>:
+        node.destroy_node()
+        rclpy.shutdown()
+
+<span style="color:#FF7B72;">if</span> __name__ == <span style="color:#A5D6FF;">'__main__'</span>:
+    main()
+      </pre>
+    </div>
+    
+    <!-- Page Number -->
+    <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+      <circle cx="18" cy="18" r="18" fill="#FFD700"/>
+      <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1A1A1A">46</text>
+    </svg>
+  </div>
+</body>
+</html>
