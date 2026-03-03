@@ -168,7 +168,6 @@ ros2 run turtlesim turtle_teleop_key
 ```json
 {
     "ROS.Distro": "humble",
-    "ros.distro": "humble",
     "C_Cpp.default.configurationProvider": "ms-vscode.cpptools"
 }
 ```
