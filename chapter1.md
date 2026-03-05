@@ -1,5 +1,5 @@
 ---
-marp: false
+marp: true
 theme: default
 paginate: true
 header: ROS2+PX4 无人机仿真实践
@@ -12,6 +12,7 @@ header: ROS2+PX4 无人机仿真实践
 - 企业项目驱动
 - 创新型学科竞赛
 
+要的是项目和结果，而不是做了多少作业。
 
 | 产业学院 - 低空经济  | 学科竞赛 - 人工智能 |
 | ---                | ---              |
@@ -32,73 +33,33 @@ header: ROS2+PX4 无人机仿真实践
   <img src="./assets/week1-3.png" height="600">
 </div> -->
 
-![](w1-1.png)
-![](w1-2.png)
+![[assets/week1/w1-1.png]]
+
+![[assets/week1/w1-2.png]]
+
 
 ---
 <!-- header: "ROS2+PX4 无人机仿真实践 - 课程内容" -->
 
+![[assets/week1/week1-3-roadmap.png]]
 
-![课程内容](notebooklm-sitemap.png)
+> 原计划（如下）
+
+![[assets/week1/004.png]]
 
 > ROS2 基本都是通过代码或者脚本进行配置的，适合大模型 Vibe Coding
 
----
-
-## 大模型时代
-
-### 需要什么能力，稀缺性在哪里
-
-- 编程不是没用了，而是下沉了。
-- know what 和 know how 都变得不重要了，know why 变成了关键能力。
-- 初级程序员几乎不需要了（这个很矛盾）。 
-
-
-**解决问题的能力+意识**
-
-**项目、实践、踩坑的经验是价值，而刷题不再是**
-
 --- 
-## 这门课要怎么上
 
-用 **大模型** 解决 **实际问题**
+# 课程挑战
 
-_而不是教大家语法和编程_
+1. 软件迭代和硬件迭代
+2. 大模型写代码的能力
 
-<br />
-
-> 怎么用、用哪些 **大模型**
 
 ---
 
-## 怎么用、用哪些 **大模型**
-
-- [Arena AI Leaderboard](https://arena.ai/leaderboard)
-- [Artificial Analysis](https://artificialanalysis.ai/)
-
-<br />
-
-- **GLM-5**: 
-- **Kimi-K2.5**:
-- **Minimax-M2.5**:
-
-- Qwen3.5
-- Deepseek-v4?
-- Doubao???
-
----
-
-## 版本更迭的挑战
-
-#### 参考书目
-
-1. 刘相权、张万杰，《机器人操作系统(ROS2)入门与实践》，机械工业出版社，2024年8月，ISBN：9787111758433
-2. 桑欣，《机器人操作系统(ROS2)入门与实践》，机械工业出版社，2024年7月，ISBN：9787111758068
-3. 高中华、胡乔生、李文君，《无人机操控技术》，机械工业出版社，2024年1月，ISBN：9787111740476
-4. 侯伟、靳紫轩，《ROS 2机器人操作系统与Gazebo机器人仿真》，清华大学出版社，2024年12月，ISBN：9787302702535
-
----
-
+## 1. 版本更迭的挑战
 #### 在线资源
 
 - ROS2官方文档：https://docs.ros.org/en/jazzy/
@@ -112,6 +73,134 @@ _而不是教大家语法和编程_
 - 阿木实验室 Prometheus V3
 - 鱼香ROS FishBot
 
+---
+
+#### 参考书目
+
+1. 刘相权、张万杰，《机器人操作系统(ROS2)入门与实践》，机械工业出版社，2024年8月，ISBN：9787111758433
+2. 桑欣，《机器人操作系统(ROS2)入门与实践》，机械工业出版社，2024年7月，ISBN：9787111758068
+
+
+3. 高中华、胡乔生、李文君，《无人机操控技术》，机械工业出版社，2024年1月，ISBN：9787111740476
+4. 侯伟、靳紫轩，《ROS 2机器人操作系统与Gazebo机器人仿真》，清华大学出版社，2024年12月，ISBN：9787302702535
+
+---
+
+**亚博Jetson Nano/Orin系列教程：https://www.yahboom.com/study/ROSMASTER-M1**
+
+![[assets/week1/w1-5-rosmasterm1.png]]
+
+---
+#### 硬件的更新迭代
+
+2024年软件发生了很大变化
+
+硬件方面：
+- 俄乌中的无人机才开始投入现代战争
+- 激光雷达的断崖式降价
+
+
+---
+## 2. 大模型的使用
+
+- 2.1 需要什么能力，稀缺性在哪里
+- 2.2 这门课要怎么上
+
+
+---
+
+
+### 2.1 需要什么能力，稀缺性在哪里
+
+- 编程不是没用了，而是下沉了。
+- know what 和 know how 都变得不重要了，know why 变成了关键能力。
+- 初级程序员几乎不需要了（这个很矛盾）。 [去哪踩坑](https://www.douyin.com/video/7600271646745758985)
+
+#### 解决问题的能力+意识
+
+[高中生进入职场](https://www.douyin.com/video/7595102543580007695)
+
+
+**项目、实践、踩坑的经验是价值，而刷题不再是**
+
+> 硅谷最近出现高中生高管，中国大模型企业年轻化、低学历化
+
+---
+
+#### 大模型时代 vs 互联网时代
+
+- 团队平均年龄的问题
+	智谱 vs minimax
+
+- 企业文化、团队文化
+	大厂 vs 小龙
+	> 涌现式“规划”
+	> qwen 3月最新调整
+
+kimi 杨植麟：
+![[assets/week1/w1-6-yang.png]]
+
+> qwen 林俊旸: [[assets/week1/005-qwen.png]] [[assets/week1/006-qwen.png]]
+
+----
+
+大疆 - 李泽湘
+
+传统做作业和考试，已经没用了。
+
+[李泽湘-新工科](https://www.bilibili.com/video/BV1WJnbzREeq/?spm_id_from=333.1387.favlist.content.click&vd_source=b1a0758c4fa58bd173140f614858c591)
+
+---
+
+### 2.2 这门课要怎么上
+
+用 **大模型** 解决 **实际问题**
+
+_而不是教大家语法和编程_
+
+<br />
+
+> 怎么用、用哪些 **大模型**
+
+---
+
+#### 怎么用、用哪些 **大模型**
+
+
+- **GLM-5**: 
+- **Kimi-K2.5**:
+- **Minimax-M2.5**:
+
+- Qwen3.5
+- Deepseek-v4?
+- Doubao???
+
+> 参考各大模型生成的课件 PPT
+
+---
+#### 排名
+
+- [Arena AI Leaderboard](https://arena.ai/leaderboard)
+- [Artificial Analysis](https://artificialanalysis.ai/)
+
+![[assets/week1/w1-4-rank1.png]]
+
+![[assets/week1/w1-4-rank2.png]]
+
+![[assets/week1/w1-4-rank3.png]]
+
+![[assets/week1/w1-4-rank4.png]]
+
+---
+
+#### Vibe Coding -> Agentic Coding
+
+- Claude Code
+	是什么，为什么
+- Opencode 和 各种 Code
+	都有哪些？
+
+> 实践：什么是异步编程
 
 ---
 
@@ -122,6 +211,9 @@ _而不是教大家语法和编程_
 
 - ROS2 的开发基本都是配置文件和代码，设置“小车”和“无人机”的模型都是用**代码+配置**声明的
 - git 对于 vibe coding 的重要性
+
+
+> 参考：infographics 的介绍
 
 ---
 
@@ -161,6 +253,7 @@ _而不是教大家语法和编程_
 - 核心API稳定
 - 支持多平台 (Linux/Windows/macOS)
 - 集成工具完善，安全性设计
+
 
 ---
 
@@ -221,6 +314,19 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-a
 ```
 
 ---
+国内安装
+1. 续上页
+```bash
+# 国内安装
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] \
+  https://mirrors.tuna.tsinghua.edu.cn/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | \
+  sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+```
+2. 采用 fishros 的安装
+
+
+
+---
 
 ### 2.3 安装ROS2包
 
@@ -234,7 +340,7 @@ sudo apt install ros-humble-desktop
 # 基础版安装
 sudo apt install ros-humble-ros-base
 
-# 开发工具
+# 开发工具（之后按需安装）
 sudo apt install ros-dev-tools
 ```
 
@@ -255,7 +361,7 @@ source ~/.bashrc
 printenv | grep ROS
 
 # 启动小海龟demo
-ros2 run turtlesim turtle_simulator
+ros2 run turtlesim turtlesim_node
 
 # 启动键盘控制(新终端)
 ros2 run turtlesim turtle_teleop_key
@@ -271,26 +377,18 @@ ros2 run turtlesim turtle_teleop_key
 
 ### 1.2 常用插件
 
-| 插件 | 功能 |
-|------|------|
-| C/C++ | C/C++代码补全、调试 |
-| Python | Python开发支持 |
-| ROS | ROS功能支持 |
-| Markdown All in One | Markdown编辑 |
-| Marp | PPT预览 |
+| 插件     | 功能                           |
+| ------ | ---------------------------- |
+| C/C++  | C/C++代码补全、调试                 |
+| Python | Python开发支持                   |
+| ROS    | ROS功能支持                      |
+| LLM相关的 | trae、code buddy、qoder，cline等 |
+
 
 ---
-
-### 1.3 VSCode ROS配置
-
-```json
-{
-    "ROS.Distro": "humble",
-    "C_Cpp.default.configurationProvider": "ms-vscode.cpptools"
-}
-```
-
 ### 1.4 创建ROS2工作空间
+
+workspace 或 ws
 
 ```bash
 # 创建工作空间
@@ -307,10 +405,12 @@ source install/setup.bash
 所有开发的基础环境
 
 - 操作系统: Ubuntu 22.04 LTS (Jammy Jellyfish)。
+
 - 编译与构建工具:
 build-essential: 包含GCC, G++, make等基础编译工具。
 cmake: 跨平台的构建系统生成工具，ROS 2项目必备。
 git: 版本控制工具，用于克隆代码仓库。
+
 - 其他工具:
 python3-colcon-common-extensions: Colcon构建工具的扩展，更便捷的命令。
 python3-rosdep: ROS依赖管理工具。
