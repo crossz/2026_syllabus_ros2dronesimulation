@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python编程实战：编写订阅者节点</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+        .slide-content {
+            width: 960px;
+            height: 540px;
+            position: relative;
+            transform-origin: center center;
+            background: #1A1A1A;
+        }
+    </style>
+    <script>
+        function scaleSlide() {
+            const slide = document.querySelector('.slide-content');
+            if (!slide) return;
+            const slideWidth = 960;
+            const slideHeight = 540;
+            const scaleX = window.innerWidth / slideWidth;
+            const scaleY = window.innerHeight / slideHeight;
+            const scale = Math.min(scaleX, scaleY);
+            slide.style.width = slideWidth + 'px';
+            slide.style.height = slideHeight + 'px';
+            slide.style.transform = `scale(${scale})`;
+            slide.style.transformOrigin = 'center center';
+            slide.style.flexShrink = '0';
+        }
+        window.addEventListener('load', scaleSlide);
+        window.addEventListener('resize', scaleSlide);
+    </script>
+</head>
+<body>
+    <div class="slide-content">
+        <!-- 背景装饰 -->
+        <svg width="960" height="540" style="position:absolute; top:0; left:0;">
+            <defs>
+                <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+                    <circle cx="15" cy="15" r="1" fill="#FFD700" fill-opacity="0.1"/>
+                </pattern>
+            </defs>
+            <rect width="960" height="540" fill="url(#dots)"/>
+        </svg>
+        
+        <!-- 顶部装饰条 -->
+        <div style="position:absolute; top:0; left:0; width:960px; height:4px; background:#FFD700;"></div>
+        
+        <!-- 主标题 -->
+        <h1 style="position:absolute; left:30px; top:20px; margin:0; font-size:28px; color:#FFD700; font-weight:600; font-family:'Times New Roman', serif;">Python编程实战：编写订阅者节点</h1>
+        
+        <!-- 左侧内容区 -->
+        <div style="position:absolute; left:30px; top:70px; width:420px; height:450px;">
+            <!-- 订阅者创建 -->
+            <div style="position:absolute; left:0; top:0; width:420px; height:85px; background:#2A2A2A; border-radius:8px; border-left:4px solid #83C5BE;">
+                <h3 style="position:absolute; left:15px; top:8px; margin:0; font-size:14px; color:#83C5BE; font-weight:600; font-family:'Times New Roman', serif;">1. 订阅者创建</h3>
+                <p style="position:absolute; left:15px; top:32px; margin:0; font-size:11px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.5;">self.create_subscription(</p>
+                <p style="position:absolute; left:15px; top:48px; margin:0; font-size:11px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.5;">&nbsp;&nbsp;MsgType, 'topic_name', self.callback, 10)</p>
+            </div>
+            
+            <!-- 回调函数定义 -->
+            <div style="position:absolute; left:0; top:95px; width:420px; height:85px; background:#2A2A2A; border-radius:8px; border-left:4px solid #83C5BE;">
+                <h3 style="position:absolute; left:15px; top:8px; margin:0; font-size:14px; color:#83C5BE; font-weight:600; font-family:'Times New Roman', serif;">2. 回调函数定义</h3>
+                <p style="position:absolute; left:15px; top:32px; margin:0; font-size:11px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.5;">def callback(self, msg):</p>
+                <p style="position:absolute; left:15px; top:48px; margin:0; font-size:11px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.5;">&nbsp;&nbsp;# 处理接收到的消息</p>
+            </div>
+            
+            <!-- 消息处理逻辑 -->
+            <div style="position:absolute; left:0; top:190px; width:420px; height:85px; background:#2A2A2A; border-radius:8px; border-left:4px solid #83C5BE;">
+                <h3 style="position:absolute; left:15px; top:8px; margin:0; font-size:14px; color:#83C5BE; font-weight:600; font-family:'Times New Roman', serif;">3. 消息处理逻辑</h3>
+                <p style="position:absolute; left:15px; top:32px; margin:0; font-size:11px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.5;">data = msg.data</p>
+                <p style="position:absolute; left:15px; top:48px; margin:0; font-size:11px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.5;">self.get_logger().info(f'Received: {data}')</p>
+            </div>
+            
+            <!-- 对比框 -->
+            <div style="position:absolute; left:0; top:285px; width:420px; height:140px; background:#2A2A2A; border-radius:8px; border-left:4px solid #FFD700;">
+                <h3 style="position:absolute; left:15px; top:8px; margin:0; font-size:14px; color:#FFD700; font-weight:600; font-family:'Times New Roman', serif;">发布者 vs 订阅者对比</h3>
+                <div style="position:absolute; left:15px; top:35px; width:180px; height:90px; background:#1A1A1A; border-radius:6px;">
+                    <p style="position:absolute; left:10px; top:8px; margin:0; font-size:11px; color:#FFD700; font-weight:600; font-family:'Times New Roman', serif;">Publisher</p>
+                    <p style="position:absolute; left:10px; top:28px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.6;">create_publisher()</p>
+                    <p style="position:absolute; left:10px; top:50px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.6;">publish(msg)</p>
+                </div>
+                <div style="position:absolute; right:15px; top:35px; width:180px; height:90px; background:#1A1A1A; border-radius:6px;">
+                    <p style="position:absolute; left:10px; top:8px; margin:0; font-size:11px; color:#83C5BE; font-weight:600; font-family:'Times New Roman', serif;">Subscriber</p>
+                    <p style="position:absolute; left:10px; top:28px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.6;">create_subscription()</p>
+                    <p style="position:absolute; left:10px; top:50px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.6;">callback(msg)</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 右侧图片区 -->
+        <div style="position:absolute; right:30px; top:70px; width:460px; height:380px; background:#2A2A2A; border-radius:12px; overflow:hidden;">
+            <img src="imgs/slide47_ros2_subscriber.png" alt="ROS2订阅者节点" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        
+        <!-- 代码示例框 -->
+        <div style="position:absolute; right:30px; top:460px; width:460px; height:70px; background:#2A2A2A; border-radius:8px; border:1px solid #3A3A3A;">
+            <p style="position:absolute; left:15px; top:10px; margin:0; font-size:10px; color:#83C5BE; font-family:'Times New Roman', serif; line-height:1.6;">import rclpy</p>
+            <p style="position:absolute; left:15px; top:30px; margin:0; font-size:10px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.6;">from std_msgs.msg import String</p>
+            <p style="position:absolute; left:15px; top:50px; margin:0; font-size:10px; color:#FFD700; font-family:'Times New Roman', serif; line-height:1.6;">rclpy.init(); node = rclpy.node.Node('sub'); rclpy.spin(node)</p>
+        </div>
+        
+        <!-- 底部装饰 -->
+        <svg width="960" height="3" style="position:absolute; bottom:50px; left:0;">
+            <rect width="960" height="3" fill="#3A3A3A"/>
+        </svg>
+        
+        <!-- 页码 -->
+        <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+            <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#FFFFFF">47</text>
+        </svg>
+    </div>
+</body>
+</html>

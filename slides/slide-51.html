@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gazebo仿真与真实机器人的桥梁</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+        .slide-content {
+            width: 960px;
+            height: 540px;
+            position: relative;
+            transform-origin: center center;
+            background: #1A1A1A;
+        }
+    </style>
+    <script>
+        function scaleSlide() {
+            const slide = document.querySelector('.slide-content');
+            if (!slide) return;
+            const slideWidth = 960;
+            const slideHeight = 540;
+            const scaleX = window.innerWidth / slideWidth;
+            const scaleY = window.innerHeight / slideHeight;
+            const scale = Math.min(scaleX, scaleY);
+            slide.style.width = slideWidth + 'px';
+            slide.style.height = slideHeight + 'px';
+            slide.style.transform = `scale(${scale})`;
+            slide.style.transformOrigin = 'center center';
+            slide.style.flexShrink = '0';
+        }
+        window.addEventListener('load', scaleSlide);
+        window.addEventListener('resize', scaleSlide);
+    </script>
+</head>
+<body>
+    <div class="slide-content">
+        <!-- 背景装饰 -->
+        <svg width="960" height="540" style="position:absolute; top:0; left:0;">
+            <defs>
+                <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+                    <circle cx="15" cy="15" r="1" fill="#FFD700" fill-opacity="0.1"/>
+                </pattern>
+            </defs>
+            <rect width="960" height="540" fill="url(#dots)"/>
+        </svg>
+        
+        <!-- 顶部装饰条 -->
+        <div style="position:absolute; top:0; left:0; width:960px; height:4px; background:#FFD700;"></div>
+        
+        <!-- 主标题 -->
+        <h1 style="position:absolute; left:30px; top:20px; margin:0; font-size:28px; color:#FFD700; font-weight:600; font-family:'Times New Roman', serif;">Gazebo仿真与真实机器人的桥梁</h1>
+        
+        <!-- 左侧内容区 -->
+        <div style="position:absolute; left:30px; top:70px; width:420px; height:450px;">
+            <!-- 仿真与现实差异 -->
+            <div style="position:absolute; left:0; top:0; width:420px; height:130px; background:#2A2A2A; border-radius:8px; border-left:4px solid #83C5BE;">
+                <h3 style="position:absolute; left:15px; top:8px; margin:0; font-size:14px; color:#83C5BE; font-weight:600; font-family:'Times New Roman', serif;">1. 仿真与现实的差异</h3>
+                <div style="position:absolute; left:15px; top:35px; width:185px; height:85px; background:#1A1A1A; border-radius:6px;">
+                    <p style="position:absolute; left:10px; top:8px; margin:0; font-size:11px; color:#FFD700; font-weight:600; font-family:'Times New Roman', serif;">物理模型</p>
+                    <p style="position:absolute; left:10px; top:28px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.6;">理想化: 摩擦力/惯性/碰撞</p>
+                    <p style="position:absolute; left:10px; top:46px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.6;">真实: 非线性摩擦/弹性/磨损</p>
+                    <p style="position:absolute; left:10px; top:64px; margin:0; font-size:9px; color:#888888; font-family:'Times New Roman', serif;">仿真 ≠ 现实</p>
+                </div>
+                <div style="position:absolute; right:15px; top:35px; width:185px; height:85px; background:#1A1A1A; border-radius:6px;">
+                    <p style="position:absolute; left:10px; top:8px; margin:0; font-size:11px; color:#83C5BE; font-weight:600; font-family:'Times New Roman', serif;">传感器噪声</p>
+                    <p style="position:absolute; left:10px; top:28px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.6;">理想: 精确数据/无延迟</p>
+                    <p style="position:absolute; left:10px; top:46px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.6;">真实: 热噪声/运动模糊/丢帧</p>
+                    <p style="position:absolute; left:10px; top:64px; margin:0; font-size:9px; color:#888888; font-family:'Times New Roman', serif;">需添加噪声模型</p>
+                </div>
+            </div>
+            
+            <!-- 迁移方法 -->
+            <div style="position:absolute; left:0; top:140px; width:420px; height:65px; background:#2A2A2A; border-radius:8px; border-left:4px solid #83C5BE;">
+                <h3 style="position:absolute; left:15px; top:8px; margin:0; font-size:14px; color:#83C5BE; font-weight:600; font-family:'Times New Roman', serif;">2. 从仿真到真实机器人的迁移</h3>
+                <p style="position:absolute; left:15px; top:28px; margin:0; font-size:11px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.5;">统一接口: /cmd_vel (Twist) &nbsp; /odom (Odometry) &nbsp; 相同Topic即可无缝切换</p>
+            </div>
+            
+            <!-- Gazebo插件系统 -->
+            <div style="position:absolute; left:0; top:215px; width:420px; height:65px; background:#2A2A2A; border-radius:8px; border-left:4px solid #FFD700;">
+                <h3 style="position:absolute; left:15px; top:8px; margin:0; font-size:14px; color:#FFD700; font-weight:600; font-family:'Times New Roman', serif;">3. Gazebo插件系统</h3>
+                <p style="position:absolute; left:15px; top:28px; margin:0; font-size:11px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.5;">libgazebo_ros_diff_drive.so (差速驱动) &nbsp; libgazebo_ros_laser.so (激光)</p>
+            </div>
+            
+            <!-- 参数调优 -->
+            <div style="position:absolute; left:0; top:290px; width:420px; height:65px; background:#2A2A2A; border-radius:8px; border-left:4px solid #FFD700;">
+                <h3 style="position:absolute; left:15px; top:8px; margin:0; font-size:14px; color:#FFD700; font-weight:600; font-family:'Times New Roman', serif;">4. 仿真环境参数调优</h3>
+                <p style="position:absolute; left:15px; top:28px; margin:0; font-size:11px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.5;">World文件: 地面摩擦/重力/时间步长 &nbsp; SDF模型: 惯性矩阵/碰撞边界</p>
+            </div>
+            
+            <!-- 案例 -->
+            <div style="position:absolute; left:0; top:365px; width:420px; height:75px; background:#2A2A2A; border-radius:8px; border-left:4px solid #FFD700;">
+                <h3 style="position:absolute; left:15px; top:8px; margin:0; font-size:14px; color:#FFD700; font-weight:600; font-family:'Times New Roman', serif;">5. 英特航空仿真测试流程</h3>
+                <p style="position:absolute; left:15px; top:28px; margin:0; font-size:10px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.6;">Gazebo仿真验证 -> 性能调优 -> 迁移真实机器人 -> 现场测试 -> 迭代优化</p>
+                <p style="position:absolute; left:15px; top:52px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif;">仿真节省90%开发成本 | 真实机器人测试高风险高价值</p>
+            </div>
+        </div>
+        
+        <!-- 右侧图片区 -->
+        <div style="position:absolute; right:30px; top:70px; width:460px; height:380px; background:#2A2A2A; border-radius:12px; overflow:hidden;">
+            <img src="imgs/slide51_gazebo.png" alt="Gazebo仿真" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        
+<!-- 补充说明 -->
+        <div style="position:absolute; right:30px; top:460px; width:460px; height:70px; background:#2A2A2A; border-radius:8px; border:1px solid #3A3A3A;">
+            <p style="position:absolute; left:15px; top:10px; margin:0; font-size:10px; color:#83C5Be; font-family:'Times New Roman', serif; line-height:1.6;">命令: gazebo / ros2 launch gazebo_ros gazebo.launch.py</p>
+            <p style="position:absolute; left:15px; top:32px; margin:0; font-size:10px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.6;">仿真优势: 安全测试极限工况 / 快速迭代算法 / 并行仿真多个场景 / 零硬件损耗</p>
+            <p style="position:absolute; left:15px; top:52px; margin:0; font-size:10px; color:#FFD700; font-family:'Times New Roman', serif; line-height:1.6;">Bridge: ros2 run ros_gz_bridge parameter_bridge /cmd_vel@geometry_msgs/Twist[gz.msgs.Twist</p>
+        </div>
+        
+        <!-- 底部装饰 -->
+        <svg width="960" height="3" style="position:absolute; bottom:50px; left:0;">
+            <rect width="960" height="3" fill="#3A3A3A"/>
+        </svg>
+        
+        <!-- 页码 -->
+        <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+            <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#FFFFFF">51</text>
+        </svg>
+    </div>
+</body>
+</html>

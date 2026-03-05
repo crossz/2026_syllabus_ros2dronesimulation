@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第四周知识点总结</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+        .slide-content {
+            width: 960px;
+            height: 540px;
+            position: relative;
+            transform-origin: center center;
+            background: #1A1A1A;
+        }
+    </style>
+    <script>
+        function scaleSlide() {
+            const slide = document.querySelector('.slide-content');
+            if (!slide) return;
+            const slideWidth = 960;
+            const slideHeight = 540;
+            const scaleX = window.innerWidth / slideWidth;
+            const scaleY = window.innerHeight / slideHeight;
+            const scale = Math.min(scaleX, scaleY);
+            slide.style.width = slideWidth + 'px';
+            slide.style.height = slideHeight + 'px';
+            slide.style.transform = `scale(${scale})`;
+            slide.style.transformOrigin = 'center center';
+            slide.style.flexShrink = '0';
+        }
+        window.addEventListener('load', scaleSlide);
+        window.addEventListener('resize', scaleSlide);
+    </script>
+</head>
+<body>
+    <div class="slide-content">
+        <!-- 背景装饰 -->
+        <svg width="960" height="540" style="position:absolute; top:0; left:0;">
+            <defs>
+                <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+                    <circle cx="15" cy="15" r="1" fill="#FFD700" fill-opacity="0.1"/>
+                </pattern>
+            </defs>
+            <rect width="960" height="540" fill="url(#dots)"/>
+        </svg>
+        
+        <!-- 顶部装饰条 -->
+        <div style="position:absolute; top:0; left:0; width:960px; height:4px; background:#FFD700;"></div>
+        
+        <!-- 主标题 -->
+        <h1 style="position:absolute; left:30px; top:20px; margin:0; font-size:28px; color:#FFD700; font-weight:600; font-family:'Times New Roman', serif;">第四周知识点总结</h1>
+        
+        <!-- 知识点卡片区 -->
+        <div style="position:absolute; left:30px; top:70px; width:900px; height:420px;">
+            
+            <!-- 第一行知识点 -->
+            <!-- ros2 topic命令 -->
+            <div style="position:absolute; left:0; top:0; width:215px; height:130px; background:#2A2A2A; border-radius:10px; border-top:3px solid #83C5BE;">
+                <svg width="32" height="32" style="position:absolute; left:15px; top:12px;" viewBox="0 0 24 24" fill="none" stroke="#83C5BE" stroke-width="2">
+                    <path d="M4 4h16v16H4z"/>
+                    <path d="M4 10h16"/>
+                    <path d="M10 4v16"/>
+                </svg>
+                <p style="position:absolute; left:15px; top:50px; margin:0; font-size:12px; color:#83C5BE; font-weight:600; font-family:'Times New Roman', serif;">ros2 topic命令</p>
+                <p style="position:absolute; left:15px; top:70px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.5;">list / echo / hz / bw</p>
+                <p style="position:absolute; left:15px; top:95px; margin:0; font-size:9px; color:#888888; font-family:'Times New Roman', serif;">话题调试工具</p>
+            </div>
+            
+            <!-- rqt_graph -->
+            <div style="position:absolute; left:230px; top:0; width:215px; height:130px; background:#2A2A2A; border-radius:10px; border-top:3px solid #83C5BE;">
+                <svg width="32" height="32" style="position:absolute; left:15px; top:12px;" viewBox="0 0 24 24" fill="none" stroke="#83C5BE" stroke-width="2">
+                    <circle cx="6" cy="6" r="3"/>
+                    <circle cx="18" cy="6" r="3"/>
+                    <circle cx="12" cy="18" r="3"/>
+                    <path d="M9 6h6"/>
+                    <path d="M9 9l3 6"/>
+                    <path d="M15 9l-3 6"/>
+                </svg>
+                <p style="position:absolute; left:15px; top:50px; margin:0; font-size:12px; color:#83C5BE; font-weight:600; font-family:'Times New Roman', serif;">rqt_graph</p>
+                <p style="position:absolute; left:15px; top:70px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.5;">可视化节点通信图</p>
+                <p style="position:absolute; left:15px; top:95px; margin:0; font-size:9px; color:#888888; font-family:'Times New Roman', serif;">系统架构分析</p>
+            </div>
+            
+            <!-- Python发布者/订阅者 -->
+            <div style="position:absolute; left:460px; top:0; width:215px; height:130px; background:#2A2A2A; border-radius:10px; border-top:3px solid #FFD700;">
+                <svg width="32" height="32" style="position:absolute; left:15px; top:12px;" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2">
+                    <path d="M16 18l6-6-6-6"/>
+                    <path d="M8 6l-6 6 6 6"/>
+                </svg>
+                <p style="position:absolute; left:15px; top:50px; margin:0; font-size:12px; color:#FFD700; font-weight:600; font-family:'Times New Roman', serif;">Python编程</p>
+                <p style="position:absolute; left:15px; top:70px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.5;">create_publisher()</p>
+                <p style="position:absolute; left:15px; top:88px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.5;">create_subscription()</p>
+            </div>
+            
+            <!-- Twist控制 -->
+            <div style="position:absolute; left:690px; top:0; width:215px; height:130px; background:#2A2A2A; border-radius:10px; border-top:3px solid #FFD700;">
+                <svg width="32" height="32" style="position:absolute; left:15px; top:12px;" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M8 12h8"/>
+                    <path d="M12 8v8"/>
+                </svg>
+                <p style="position:absolute; left:15px; top:50px; margin:0; font-size:12px; color:#FFD700; font-weight:600; font-family:'Times New Roman', serif;">Twist控制指令</p>
+                <p style="position:absolute; left:15px; top:70px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.5;">linear.x / angular.z</p>
+                <p style="position:absolute; left:15px; top:88px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.5;">/cmd_vel 话题</p>
+            </div>
+            
+            <!-- 第二行知识点 -->
+            <!-- 模块化设计 -->
+            <div style="position:absolute; left:0; top:145px; width:440px; height:130px; background:#2A2A2A; border-radius:10px; border-top:3px solid #83C5BE;">
+                <svg width="32" height="32" style="position:absolute; left:15px; top:12px;" viewBox="0 0 24 24" fill="none" stroke="#83C5BE" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"/>
+                    <rect x="14" y="3" width="7" height="7"/>
+                    <rect x="14" y="14" width="7" height="7"/>
+                    <rect x="3" y="14" width="7" height="7"/>
+                </svg>
+                <p style="position:absolute; left:15px; top:50px; margin:0; font-size:12px; color:#83C5BE; font-weight:600; font-family:'Times New Roman', serif;">模块化设计原则</p>
+                <p style="position:absolute; left:15px; top:70px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.6;">高内聚低耦合 &nbsp; Package作为模块单元</p>
+                <p style="position:absolute; left:15px; top:90px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.6;">接口标准化 &nbsp; 节点组合与工作流</p>
+                <p style="position:absolute; left:15px; top:110px; margin:0; font-size:9px; color:#888888; font-family:'Times New Roman', serif;">英特航空无人机系统模块化案例</p>
+            </div>
+            
+            <!-- rviz2可视化 -->
+            <div style="position:absolute; left:460px; top:145px; width:215px; height:130px; background:#2A2A2A; border-radius:10px; border-top:3px solid #83C5BE;">
+                <svg width="32" height="32" style="position:absolute; left:15px; top:12px;" viewBox="0 0 24 24" fill="none" stroke="#83C5BE" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <p style="position:absolute; left:15px; top:50px; margin:0; font-size:12px; color:#83C5BE; font-weight:600; font-family:'Times New Roman', serif;">rviz2可视化</p>
+                <p style="position:absolute; left:15px; top:70px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.5;">3D显示平台</p>
+                <p style="position:absolute; left:15px; top:88px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.5;">Image/LaserScan/PointCloud</p>
+                <p style="position:absolute; left:15px; top:106px; margin:0; font-size:9px; color:#888888; font-family:'Times New Roman', serif;">保存/加载配置</p>
+            </div>
+            
+            <!-- Gazebo仿真 -->
+            <div style="position:absolute; left:690px; top:145px; width:215px; height:130px; background:#2A2A2A; border-radius:10px; border-top:3px solid #FFD700;">
+                <svg width="32" height="32" style="position:absolute; left:15px; top:12px;" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <ellipse cx="12" cy="12" rx="10" ry="4"/>
+                    <path d="M12 2a10 10 0 0 1 0 20"/>
+                </svg>
+                <p style="position:absolute; left:15px; top:50px; margin:0; font-size:12px; color:#FFD700; font-weight:600; font-family:'Times New Roman', serif;">Gazebo仿真</p>
+                <p style="position:absolute; left:15px; top:70px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.5;">物理仿真引擎</p>
+                <p style="position:absolute; left:15px; top:88px; margin:0; font-size:10px; color:#AAAAAA; font-family:'Times New Roman', serif; line-height:1.5;">仿真到真实迁移</p>
+                <p style="position:absolute; left:15px; top:106px; margin:0; font-size:9px; color:#888888; font-family:'Times New Roman', serif;">参数调优测试流程</p>
+            </div>
+            
+            <!-- 底部总结 -->
+            <div style="position:absolute; left:0; top:290px; width:900px; height:100px; background:#1A1A1A; border-radius:10px; border:2px solid #3A3A3A;">
+                <p style="position:absolute; left:30px; top:15px; margin:0; font-size:14px; color:#FFD700; font-weight:600; font-family:'Times New Roman', serif;">本周核心技能掌握</p>
+                <p style="position:absolute; left:30px; top:40px; margin:0; font-size:11px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.8;">
+                    <span style="color:#83C5BE;">调试工具:</span> ros2 topic / rqt_graph &nbsp;|&nbsp; 
+                    <span style="color:#83C5BE;">编程:</span> Python发布者/订阅者 &nbsp;|&nbsp; 
+                    <span style="color:#FFD700;">控制:</span> Twist消息 &nbsp;|&nbsp; 
+                    <span style="color:#FFD700;">设计:</span> 模块化思维
+                </p>
+                <p style="position:absolute; left:30px; top:68px; margin:0; font-size:11px; color:#CCCCCC; font-family:'Times New Roman', serif; line-height:1.8;">
+                    <span style="color:#83C5BE;">可视化:</span> rviz2 &nbsp;|&nbsp; 
+                    <span style="color:#83C5BE;">仿真:</span> Gazebo &nbsp;|&nbsp; 
+                    <span style="color:#888888;">核心: 理解ROS2通信机制 + 独立开发节点能力</span>
+                </p>
+            </div>
+        </div>
+        
+        <!-- 右侧图片 -->
+        <div style="position:absolute; right:30px; top:320px; width:200px; height:160px; background:#2A2A2A; border-radius:12px; overflow:hidden;">
+            <img src="imgs/slide52_summary.png" alt="知识点总结" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        
+        <!-- 底部装饰 -->
+        <svg width="960" height="3" style="position:absolute; bottom:50px; left:0;">
+            <rect width="960" height="3" fill="#3A3A3A"/>
+        </svg>
+        
+        <!-- 页码 -->
+        <svg style="position:absolute; right:32px; bottom:24px;" width="36" height="36" viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="18" fill="#83C5BE"/>
+            <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#FFFFFF">52</text>
+        </svg>
+    </div>
+</body>
+</html>

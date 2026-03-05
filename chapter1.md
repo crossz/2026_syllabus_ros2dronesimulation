@@ -1,5 +1,5 @@
 ---
-marp: true
+marp: false
 theme: default
 paginate: true
 header: ROS2+PX4 无人机仿真实践
@@ -27,19 +27,19 @@ header: ROS2+PX4 无人机仿真实践
 <!-- header: "ROS2+PX4 无人机仿真实践 - 学科竞赛" -->
 
 
-<div align="center">
-  <img src="./assets/week1-2.png" height="600">
+<!-- <div align="center">
   <img src="./assets/week1-1.png" height="600">
   <img src="./assets/week1-3.png" height="600">
+</div> -->
 
-</div>
-
+![](w1-1.png)
+![](w1-2.png)
 
 ---
 <!-- header: "ROS2+PX4 无人机仿真实践 - 课程内容" -->
 
 
-![课程内容](./assets/notebooklm-sitemap.png)
+![课程内容](notebooklm-sitemap.png)
 
 > ROS2 基本都是通过代码或者脚本进行配置的，适合大模型 Vibe Coding
 
@@ -72,7 +72,6 @@ _而不是教大家语法和编程_
 ---
 
 ## 怎么用、用哪些 **大模型**
-
 
 - [Arena AI Leaderboard](https://arena.ai/leaderboard)
 - [Artificial Analysis](https://artificialanalysis.ai/)
