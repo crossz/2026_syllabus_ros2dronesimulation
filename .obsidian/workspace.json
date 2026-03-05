@@ -8,7 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "9029818deedfa240",
+            "id": "9b457c15c16d19af",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -89,6 +89,21 @@
         "type": "tabs",
         "children": [
           {
+            "id": "e2a96a12565636b5",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "chapter1.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of chapter1"
+            }
+          },
+          {
             "id": "b45902a7809967d7",
             "type": "leaf",
             "state": {
@@ -137,7 +152,7 @@
             }
           },
           {
-            "id": "a3ec1b861fc362cf",
+            "id": "43091c467b43520b",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -149,24 +164,8 @@
               "icon": "lucide-archive",
               "title": "All properties"
             }
-          },
-          {
-            "id": "e2a96a12565636b5",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "chapter1.md",
-                "followCursor": false,
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-list",
-              "title": "Outline of chapter1"
-            }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
@@ -184,20 +183,22 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "9029818deedfa240",
+  "active": "9b457c15c16d19af",
   "lastOpenFiles": [
+    "飞行智能控制仿真与场景实践（产业）2026 教学大纲.md",
+    "README.md",
+    "chapter1.md",
+    "assets/week1/w1-3-roadmap.png",
+    "PixPin_quick_2026-03-05_21-59.png",
+    "assets/week1/w1-9-lidarprice.png",
+    "assets/week1/PixPin_quick_2026-03-05_21-59.png",
     "~$chapter1.pptx",
     "assets/week1/w1-6-yang.png",
     "assets/week1/006-qwen.png",
-    "chapter1.md",
     "assets/week1/005-qwen.png",
-    "assets/week1/week1-3-roadmap.png",
     "assets/week1/w1-2.png",
     "assets/week1/w1-5-rosmasterm1.png",
     "assets/week1/w1-4-rank4.png",
-    "assets/week1/w1-4-rank3.png",
-    "assets/week1/w1-4-rank2.png",
-    "assets/week1/w1-4-rank1.png",
     "Untitled.base",
     "~$智能控制仿真与场景实践（产业）2026 教学大纲.docx",
     "chapter1.pptx",
@@ -207,8 +208,6 @@
     "slides/slide-50.html",
     "slides/slide-49.html",
     "slides/slide-48.html",
-    "slides/slide-47.html",
-    "assets/week1",
-    "README.md"
+    "slides/slide-47.html"
   ]
 }

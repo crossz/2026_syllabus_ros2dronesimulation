@@ -41,7 +41,7 @@ header: ROS2+PX4 无人机仿真实践
 ---
 <!-- header: "ROS2+PX4 无人机仿真实践 - 课程内容" -->
 
-![[assets/week1/week1-3-roadmap.png]]
+![[assets/week1/w1-3-roadmap.png]]
 
 > 原计划（如下）
 
@@ -99,6 +99,7 @@ header: ROS2+PX4 无人机仿真实践
 - 俄乌中的无人机才开始投入现代战争
 - 激光雷达的断崖式降价
 
+![[assets/week1/w1-9-lidarprice.png]]
 
 ---
 ## 2. 大模型的使用
@@ -127,6 +128,24 @@ header: ROS2+PX4 无人机仿真实践
 
 ---
 
+#### 机会到底在哪里
+
+[2025 Anthropic 的黑客松](https://www.biji.com/note/share_note/rBWK74o1wO6Aw)
+
+- **参与规模**：500名开发者，基于**Opus 4.6**和**Claude Code**开发。
+- **开发周期**：一周。
+- **核心成果**：5个Agent落地项目获奖，**无AI聊天助手类项目**。
+- **核心洞察**：AI产品的最大机会**不在AI圈子内部**，而在传统行业的信息处理场景中。
+
+**(一) 冠军项目：建筑许可审批加速工具**
+**(二) 亚军项目：儿童编程教育工具**
+**(三) 季军项目：心脏科诊疗随访工具**
+
+> 开发者非传统开发人员居多
+> Anthropic 是什么公司，什么意思，其最近热点的动态有哪些
+
+
+---
 #### 大模型时代 vs 互联网时代
 
 - 团队平均年龄的问题
@@ -196,11 +215,14 @@ _而不是教大家语法和编程_
 #### Vibe Coding -> Agentic Coding
 
 - Claude Code
-	是什么，为什么
+	是什么，为什么；以及后续的 OpenClaw 为什么能带飞 Mac Mini 的销量
 - Opencode 和 各种 Code
 	都有哪些？
 
-> 实践：什么是异步编程
+![[assets/week1/w1-8-claudecodeandshell.png]]
+
+> 稍后实践：什么是异步编程
+
 
 ---
 
@@ -254,6 +276,11 @@ _而不是教大家语法和编程_
 - 支持多平台 (Linux/Windows/macOS)
 - 集成工具完善，安全性设计
 
+---
+### 【实践】用 “Code” 实现一个异步编程的 demo
+
+1. 安装某一个 Code 工具（注意用什么工具安装的）
+2. 实现 Agentic 的方式编写代码和说明文档（注意文档的形式和样式）
 
 ---
 
@@ -428,3 +455,5 @@ git config --global user.email "your@email.com"
 ssh-keygen -t ed25519 -C "your@email.com"
 cat ~/.ssh/id_ed25519.pub  # 添加到GitHub
 ```
+
+> 用 Claude Code 或 Opencode 进行 git 操作
