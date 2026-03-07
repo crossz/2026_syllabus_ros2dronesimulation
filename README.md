@@ -35,6 +35,7 @@ header: ROS2+PX4 无人机仿真实践
 - 无实时操作系统(RTOS)支持
 - 核心API不稳定
 - 几乎只支持Linux，集成开发工具不完善
+- ROS Master 的潜在单点故障
 
 #### ROS2 改进
 
@@ -147,59 +148,15 @@ ros2 run turtlesim turtle_teleop_key
 
 # ROS2 集成开发环境搭建
 
-## 1. VSCode 安装与配置
+## 1. 大模型的 agentic coding
 
-### 1.1 安装VSCode
-
-### 1.2 常用插件
-
-| 插件 | 功能 |
-|------|------|
-| C/C++ | C/C++代码补全、调试 |
-| Python | Python开发支持 |
-| ROS | ROS功能支持 |
-| Markdown All in One | Markdown编辑 |
-| Marp | PPT预览 |
+- Claude Code 和 Open Code
+- model and API
 
 ---
+## 2. Git配置
 
-### 1.3 VSCode ROS配置
-
-```json
-{
-    "ROS.Distro": "humble",
-    "C_Cpp.default.configurationProvider": "ms-vscode.cpptools"
-}
-```
-
-### 1.4 创建ROS2工作空间
-
-```bash
-# 创建工作空间
-mkdir -p ~/ros2_ws/src
-cd ~/ros2_ws
-colcon build
-source install/setup.bash
-```
-
----
-
-## 2. C++ 开发环境（简介）
-
-所有开发的基础环境
-
-- 操作系统: Ubuntu 22.04 LTS (Jammy Jellyfish)。
-- 编译与构建工具:
-build-essential: 包含GCC, G++, make等基础编译工具。
-cmake: 跨平台的构建系统生成工具，ROS 2项目必备。
-git: 版本控制工具，用于克隆代码仓库。
-- 其他工具:
-python3-colcon-common-extensions: Colcon构建工具的扩展，更便捷的命令。
-python3-rosdep: ROS依赖管理工具。
-
----
-
-## 3. Git配置
+git 是虚拟机开发必备
 
 ```bash
 # 配置Git

@@ -14,24 +14,18 @@ header: ROS2+PX4 无人机仿真实践
 
 要的是项目和结果，而不是做了多少作业。
 
-| 产业学院 - 低空经济  | 学科竞赛 - 人工智能 |
-| ---                | ---              |
-| 物流吊运            | 等级高、赛事多；赛题灵活、创新性强  |
-| 智能巡检            | 机器人（无人机）控制 |
-| 无人机消杀          | 自主规划、避障等特殊场景和任务 |
-| 集群表演等          | 集群协作 |
+| 产业学院 - 低空经济 | 学科竞赛 - 人工智能       |
+| ----------- | ----------------- |
+| 物流吊运        | 等级高、赛事多；赛题灵活、创新性强 |
+| 智能巡检        | 机器人（无人机）控制        |
+| 无人机消杀       | 自主规划、避障等特殊场景和任务   |
+| 集群表演等       | 集群协作              |
 
 > 英特航空的真实业务场景
 
 ---
 
 <!-- header: "ROS2+PX4 无人机仿真实践 - 学科竞赛" -->
-
-
-<!-- <div align="center">
-  <img src="./assets/week1-1.png" height="600">
-  <img src="./assets/week1-3.png" height="600">
-</div> -->
 
 ![[assets/week1/w1-1.png]]
 
@@ -42,10 +36,6 @@ header: ROS2+PX4 无人机仿真实践
 <!-- header: "ROS2+PX4 无人机仿真实践 - 课程内容" -->
 
 ![[assets/week1/w1-3-roadmap.png]]
-
-> 原计划（如下）
-
-![[assets/week1/004.png]]
 
 > ROS2 基本都是通过代码或者脚本进行配置的，适合大模型 Vibe Coding
 
@@ -223,6 +213,28 @@ _而不是教大家语法和编程_
 
 > 稍后实践：什么是异步编程
 
+---
+
+#### CLAUDE CODE 或 OPEN CODE 安装
+
+先安装 node.js 24, [官网](https://nodejs.org/en/download)
+```bash
+# Download and install nvm:
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+
+# in lieu of restarting the shell
+\. "$HOME/.nvm/nvm.sh"
+
+# Download and install Node.js:
+nvm install 24
+
+# Verify the Node.js version:
+node -v # Should print "v24.14.0".
+
+# Verify npm version:
+npm -v # Should print "11.9.0".
+
+```
 
 ---
 
@@ -267,6 +279,7 @@ _而不是教大家语法和编程_
 - 无实时操作系统(RTOS)支持
 - 核心API不稳定
 - 几乎只支持Linux，集成开发工具不完善
+- ROS Master 的潜在单点故障
 
 #### ROS2 改进
 
@@ -279,27 +292,10 @@ _而不是教大家语法和编程_
 ---
 ### 【实践】用 “Code” 实现一个异步编程的 demo
 
+什么语言以事件驱动为主要技术特点
+
 1. 安装某一个 Code 工具（注意用什么工具安装的）
 2. 实现 Agentic 的方式编写代码和说明文档（注意文档的形式和样式）
-
----
-
-### 4. ROS2 组成
-
-#### 4.1 计算图
-
-- **节点(Node)**: 独立运行的程序模块
-- **话题(Topic)**: 异步通信机制
-- **服务(Service)**: 同步通信机制
-- **动作(Action)**: 可取消的同步机制
-- **参数(Parameter)**: 节点配置参数
-
-#### 4.2 生态系统
-
-- **rcl**: ROS客户端库
-- **rclcpp**: C++客户端库，**rclpy**: Python客户端库
-- **rviz2**: 3D可视化工具
-- **gazebo**: 仿真平台
 
 ---
 
@@ -398,53 +394,15 @@ ros2 run turtlesim turtle_teleop_key
 
 # ROS2 集成开发环境搭建
 
-## 1. VSCode 安装与配置
+## 1. 大模型的 agentic coding
 
-### 1.1 安装VSCode
-
-### 1.2 常用插件
-
-| 插件     | 功能                           |
-| ------ | ---------------------------- |
-| C/C++  | C/C++代码补全、调试                 |
-| Python | Python开发支持                   |
-| ROS    | ROS功能支持                      |
-| LLM相关的 | trae、code buddy、qoder，cline等 |
-
+- Claude Code 和 Open Code
+- model and API
 
 ---
-### 1.4 创建ROS2工作空间
+## 2. Git配置
 
-workspace 或 ws
-
-```bash
-# 创建工作空间
-mkdir -p ~/ros2_ws/src
-cd ~/ros2_ws
-colcon build
-source install/setup.bash
-```
-
----
-
-## 2. C++ 开发环境（简介）
-
-所有开发的基础环境
-
-- 操作系统: Ubuntu 22.04 LTS (Jammy Jellyfish)。
-
-- 编译与构建工具:
-build-essential: 包含GCC, G++, make等基础编译工具。
-cmake: 跨平台的构建系统生成工具，ROS 2项目必备。
-git: 版本控制工具，用于克隆代码仓库。
-
-- 其他工具:
-python3-colcon-common-extensions: Colcon构建工具的扩展，更便捷的命令。
-python3-rosdep: ROS依赖管理工具。
-
----
-
-## 3. Git配置
+git 是虚拟机开发必备
 
 ```bash
 # 配置Git
@@ -457,3 +415,4 @@ cat ~/.ssh/id_ed25519.pub  # 添加到GitHub
 ```
 
 > 用 Claude Code 或 Opencode 进行 git 操作
+---
