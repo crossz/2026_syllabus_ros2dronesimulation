@@ -67,6 +67,18 @@ _而不是教大家语法和编程_
 
 > 参考各大模型生成的课件 PPT
 
+---
+# ROS2 集成开发环境搭建
+
+
+
+
+
+---
+## 1. 大模型的 agentic coding
+
+- Claude Code 和 Open Code
+- model and API
 
 
 
@@ -87,7 +99,8 @@ _而不是教大家语法和编程_
 
 #### CLAUDE CODE 或 OPEN CODE 安装
 
-先安装 node.js 24, [官网](https://nodejs.org/en/download)
+
+1. 先安装 node.js 24, [官网](https://nodejs.org/en/download)
 ```bash
 # Download and install nvm:
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
@@ -106,14 +119,23 @@ npm -v # Should print "11.9.0".
 
 ```
 
+2. 安装 claude code 或者 opencode
 
----
-# ROS2 集成开发环境搭建
+https://www.npmjs.com/
 
-## 1. 大模型的 agentic coding
+```bash
+npm i -g @anthropic-ai/claude-code
+```
 
-- Claude Code 和 Open Code
-- model and API
+```bash
+npm i -g opencode-ai
+```
+
+3. 配置
+`.claude/settings.json`
+`.config/opencode/opencode.json`
+
+
 
 ---
 ## 2. Git配置

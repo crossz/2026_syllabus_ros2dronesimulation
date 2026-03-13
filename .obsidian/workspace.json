@@ -8,29 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "9b457c15c16d19af",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "assets/week1/005-qwen.png"
-              },
-              "icon": "lucide-image",
-              "title": "005-qwen"
-            }
-          },
-          {
-            "id": "37cc71ab6cc8c463",
+            "id": "3f8ec46b75ac59bc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "chapter2.md",
+                "file": "chapter1-2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "chapter2"
+              "title": "chapter1-2"
             }
           }
         ]
@@ -90,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 292.5110321044922
   },
   "right": {
     "id": "6fac88fc3bd0c2e8",
@@ -106,13 +94,23 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "assets/week1/005-qwen.png",
+                "file": "chapter1-2.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 005-qwen"
+              "title": "Outline of chapter1-2"
+            }
+          },
+          {
+            "id": "3b8204f80c9d2541",
+            "type": "leaf",
+            "state": {
+              "type": "highlights-sidebar",
+              "state": {},
+              "icon": "highlighter",
+              "title": "Highlights"
             }
           },
           {
@@ -176,12 +174,22 @@
               "icon": "lucide-archive",
               "title": "All properties"
             }
+          },
+          {
+            "id": "52ad714f70ae3794",
+            "type": "leaf",
+            "state": {
+              "type": "annotations-outline",
+              "state": {},
+              "icon": "message-square",
+              "title": "Enhanced Annotations"
+            }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 223.5
+    "width": 206.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -192,39 +200,39 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "bases:Create new base": false,
-      "marp-slides:Show Slide Preview": false
+      "marp-slides:Show Slide Preview": false,
+      "sidebar-highlights:Open highlights": false
     }
   },
-  "active": "9b457c15c16d19af",
+  "active": "3f8ec46b75ac59bc",
   "lastOpenFiles": [
-    "assets/week1/004.png",
-    "assets/week1/005-qwen.png",
-    "assets/week1/003.jpg",
-    "assets/week1/002.jpg",
+    "Goal.md",
     "chapter1-2.md",
-    "chapter1.md",
     "chapter2.md",
-    "README.md",
+    "slides/imgs/slide10-ros2-architecture.png",
+    "slides/imgs/slide10_ros2_architecture.png",
     "chapter中未讲部分.md",
-    "教学进度表.md",
-    "slides/assets/cover-bg.jpg",
-    "assets/week1/w1-9-lidarprice.png",
-    "assets/week1/w1-8-claudecodeandshell.png",
-    "assets/week1/w1-7-macmini.png",
-    "assets/week1/w1-6-yang.png",
-    "assets/week1/w1-5-rosmasterm1.png",
-    "assets/week1/w1-4-rank2.png",
+    "chapter1.md",
     "飞行智能控制仿真与场景实践（产业）2026 教学大纲.md",
+    "教学进度表.md",
+    "assets/week2/w2-2_wpr.png",
+    "assets/week2/w2-3_wpr.png",
+    "assets/week2/w2-1-course-goal-airsim.png",
+    "assets/week2/PixPin_quick_2026-03-11_12-34.png",
+    "assets/week2/w2-1_course-goal.png",
+    "assets/week2/w2-2.png",
+    "assets/week2/w2-3.png",
+    "assets/week2/w2-infra.png",
+    "assets/week2",
+    "README.md",
     "~$chapter1.pptx",
     "Untitled.base",
     "~$智能控制仿真与场景实践（产业）2026 教学大纲.docx",
     "chapter1.pptx",
-    "untitled.md",
     "slides/slide-52.html",
     "slides/slide-51.html",
     "slides/slide-50.html",
     "slides/slide-49.html",
-    "slides/slide-48.html",
-    "slides/slide-47.html"
+    "slides/slide-48.html"
   ]
 }

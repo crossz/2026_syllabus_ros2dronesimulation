@@ -76,5 +76,16 @@ sudo ufw allow 7401/udp
 sudo ufw disable
 ```
 
-
 ----
+
+
+## QGroundControl | QGC 连接
+
+如果要在windows上的 QGC链接虚拟机中的 gazebo，需要设置环境变量
+
+```bash
+export PX4_SIM_HOST_ADDR=192.168.1.101
+make px4_sitl gz_x500
+```
+
+如此，不必需要在同一个linux实例中运行 QGC（和 gazebo一起）
