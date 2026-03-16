@@ -17,30 +17,6 @@
 
 
 ---
-#### 大模型时代 vs 互联网时代
-
-- 团队平均年龄的问题
-	智谱 vs minimax
-
-- 企业文化、团队文化
-	大厂 vs 小龙
-	> 涌现式“规划”
-	> qwen 3月最新调整
-
-kimi 杨植麟：
-![[assets/week1/w1-6-yang.png]]
-
-> qwen 林俊旸: [[assets/week1/005-qwen.png]] [[assets/week1/006-qwen.png]]
-
-----
-
-大疆 - 李泽湘
-
-传统做作业和考试，已经没用了。
-
-[李泽湘-新工科](https://www.bilibili.com/video/BV1WJnbzREeq/?spm_id_from=333.1387.favlist.content.click&vd_source=b1a0758c4fa58bd173140f614858c591)
-
----
 
 ### 2.2 这门课要怎么上
 
@@ -52,29 +28,14 @@ _而不是教大家语法和编程_
 
 > 怎么用、用哪些 **大模型**
 
----
-
-#### 怎么用、用哪些 **大模型**
-
-
-- **GLM-5**: 
-- **Kimi-K2.5**:
-- **Minimax-M2.5**:
-
-- Qwen3.5
-- Deepseek-v4?
-- Doubao???
-
-> 参考各大模型生成的课件 PPT
 
 ---
-# ROS2 集成开发环境搭建
+# ROS2 开发（LLM based）
 
+1. 面向百度、qq群编程 -> 面向豆包编程
+2. vibe coding
+3. agentic coding
 
-
-
-
----
 ## 1. 大模型的 agentic coding
 
 - Claude Code 和 Open Code

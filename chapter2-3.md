@@ -1,326 +1,38 @@
-ROS2通信机制
+大模型工具
+Gazebo，rviz2
 
-# ==ROS 架构图==[^1]
 
-![[slides/imgs/slide10-ros2-architecture.png]]
-```
-┌─────────────────────────────────────┐
-│         应用程序 (Nodes)              │
-├─────────────────────────────────────┤
-│    rclcpp (C++) / rclpy (Python)   │
-├─────────────────────────────────────┤
-│         rcl (C 接口层)               │
-├─────────────────────────────────────┤
-│      **RMW (中间件接口层)**           │  ← 这一层 interface
-├─────────────────────────────────────┤
-│    DDS 实现 (Fast DDS, Cyclone DDS) │
-└─────────────────────────────────────┘
+## 大模型的选择
 
-```
+#### 问题导向的新工科
 
-#### ROS2 组成
+大疆 - 李泽湘
 
-- **节点(Node)**: 独立运行的程序模块
-- **话题(Topic)**: 异步通信机制
-- **服务(Service)**: 同步通信机制
-- **动作(Action)**: 可取消的同步机制
-- **参数(Parameter)**: 节点配置参数
+传统做作业和考试，已经没用了。
 
-#### 生态系统
-
-- **rcl**: ROS客户端库
-- **rclcpp**: C++客户端库，**rclpy**: Python客户端库
-- **rviz2**: 3D可视化工具
-- **gazebo**: 仿真平台
+[李泽湘-新工科](https://www.bilibili.com/video/BV1WJnbzREeq/?spm_id_from=333.1387.favlist.content.click&vd_source=b1a0758c4fa58bd173140f614858c591)
 
 
 ---
+#### 大模型时代 vs 互联网时代
 
 
-# ROS2 工作空间
 
-## 1. 工作空间概念
+- 团队平均年龄的问题
+	智谱 vs minimax
 
-- **工作空间(Workspace)**: 存放ROS2项目源码和编译结果的目录
-- **src**: 源码目录
-- **install**: 安装目录 (编译后)
-- **build**: 编译目录 (编译后)
-- **log**: 日志目录
+- 企业文化、团队文化
+	大厂 vs 小龙
+	> 涌现式“规划”
+	> qwen 3月最新调整
 
-```
-ros2_ws/
-├── src/
-│   ├── package1/
-│   └── package2/
-├── build/
-├── install/
-└── log/
-```
+kimi 杨植麟：
+![[assets/week1/w1-6-yang.png]]
 
----
+> qwen 林俊旸: [[assets/week1/005-qwen.png]] [[assets/week1/006-qwen.png]]
 
-## 2. 创建工作空间
 
-### 2.1 新建工作空间
-
-```bash
-# 创建目录结构
-mkdir -p ~/ros2_ws/src
-cd ~/ros2_ws
-
-# 初始化 (可选)
-# source /opt/ros/humble/setup.bash
-# ros2 pkg create my_package
-```
-
-### 2.2 编译工作空间
-
-```bash
-# 编译所有包
-colcon build
-
-# 编译指定包
-colcon build --packages-select my_package
-
-# 编译时安装依赖
-colcon build --packages-up-to my_package
-
-# 编译单个包(重新编译)
-colcon build --packages-select my_package --cmake-force-configure
-```
-
----
-
-### 2.3 环境设置
-
-```bash
-# source install目录
-source install/setup.bash
-
-# 自动加载 (添加到.bashrc)
-echo "source ~/ros2_ws/install/setup.bash" >> ~/.bashrc
-
-# 检查环境变量
-echo $ROS_DISTRO
-ros2 pkg list | grep my_package
-```
-
----
-
-## 3. 重叠工作空间
-
-```bash
-# 多个工作空间叠加
-source /opt/ros/humble/setup.bash
-source ~/ros2_ws/install/setup.bash
-
-# 覆盖优先级: 后source的优先
-# 移除覆盖
-ros2 pkg list | grep -v ~/ros2_ws/install
-```
-
----
-
-# ROS2 功能包
-
-## 1. 功能包概念
-
-- ==**功能包(Package)**: ROS2代码组织的基本单元==
-- 每个功能包包含: 源码、配置文件、launch文件、参数文件
-
-### 功能包结构
-
-```
-my_package/
-├── src/              # C++源码
-├── scripts/          # Python脚本
-├── include/          # 头文件
-├── launch/           # launch文件
-├── params/           # 参数文件
-├── urdf/             # URDF文件
-├── rviz/             # rviz配置
-├── CMakeLists.txt   # C++编译配置
-└── package.xml       # 包清单
-```
-
----
-
-## 2. 创建功能包
-
-### 2.1 C++功能包
-
-```bash
-ros2 pkg create --build-type ament_cmake my_cpp_pkg \
-    --dependencies rclcpp std_msgs
-```
-
-### 2.2 Python功能包
-
-```bash
-ros2 pkg create --build-type ament_python my_py_pkg \
-    --dependencies rclpy std_msgs
-```
-
-### 2.3 查看功能包信息
-
-```bash
-ros2 pkg list                      # 列出所有包
-ros2 pkg list | grep <name>       # 查找包
-ros2 pkg executables <pkg>         # 列出可执行文件
-ros2 pkg prefix <pkg>             # 包安装路径
-ros2 pkg xml <pkg>                # 包XML信息
-```
-
----
-
-## 3. 功能包结构示例
-
-### 3.1 C++包结构
-
-```
-cpp_package/
-├── src/
-│   └── my_node.cpp
-├── include/
-├── CMakeLists.txt
-└── package.xml
-```
-
-### 3.2 Python包结构
-
-```
-py_package/
-├── py_package/
-│   └── __init__.py
-├── resource/
-├── test/
-├── setup.py
-├── setup.cfg
-└── package.xml
-```
-
----
-
-# ROS2 节点
-
-## 1. 节点概念
-
-- **节点(Node)**: ROS2中独立运行的可执行程序
-- 节点之间通过**话题(Topic)**、**服务(Service)**、**动作(Action)**通信
-- 每个节点负责单一功能模块
-- 节点可以分布在不同主机上
-
-### 节点特点
-
-- 可执行程序
-- 独立运行进程
-- 最小化设计原则
-- 便于复用和测试
-
----
-
-## 2. C++ 节点示例
-
-### 2.1 最简单节点
-
-```cpp
-#include "rclcpp/rclcpp.hpp"
-
-int main(int argc, char * argv[])
-{
-    rclcpp::init(argc, argv);
-    RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Hello ROS2");
-    rclcpp::shutdown();
-    return 0;
-}
-```
-
-### 2.2 完整节点示例
-
-```cpp
-#include "rclcpp/rclcpp.hpp"
-
-class MinimalNode : public rclcpp::Node
-{
-public:
-    MinimalNode() : Node("minimal_node")
-    {
-        RCLCPP_INFO(this->get_logger(), "Node started");
-    }
-};
-
-int main(int argc, char * argv[])
-{
-    rclcpp::init(argc, argv);
-    rclcpp::spin(std::make_shared<MinimalNode>());
-    rclcpp::shutdown();
-    return 0;
-}
-```
-
----
-
-## 3. Python 节点示例
-
-### 3.1 最简单节点（不推荐）
-
-```python
-import rclpy
-from rclpy.node import Node
-
-def main(args=None):
-    rclpy.init(args=args)
-    node = Node('minimal_node')
-    node.get_logger().info('Hello ROS2')
-    rclpy.shutdown()
-
-if __name__ == '__main__':
-    main()
-```
-
-### 3.2 OOP节点（推荐）
-
-```python
-import rclpy
-from rclpy.node import Node
-
-class MinimalNode(Node):
-    def __init__(self):
-        super().__init__('minimal_node')
-        self.get_logger().info('Node started')
-
-def main(args=None):
-    rclpy.init(args=args)
-    node = MinimalNode()
-    rclpy.spin(node)
-    rclpy.shutdown()
-
-if __name__ == '__main__':
-    main()
-```
-
----
-
-## 4. 节点操作命令
-
-```bash
-# 启动节点
-ros2 run <package> <executable>
-
-# 列出运行中的节点
-ros2 node list
-
-# 查看节点信息
-ros2 node info /<node_name>
-
-# 重映射节点名称
-ros2 run pkg node --ros-args -r __node:=new_name
-
-# 查看节点订阅/发布/服务
-ros2 node info /<node_name>
-```
-
----
+----
 
 # ROS2 话题通讯
 
@@ -1541,5 +1253,3 @@ Node(
     arguments=['1', '0', '0', '0', '0', '0', 'world', 'base_link']
 )
 ```
-
-[^1]: RMW 还有一层抽象

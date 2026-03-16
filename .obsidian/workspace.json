@@ -8,7 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "3f8ec46b75ac59bc",
+            "id": "c953dab6296b0d89",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -20,8 +20,51 @@
               "icon": "lucide-file",
               "title": "chapter1-2"
             }
+          },
+          {
+            "id": "3f8ec46b75ac59bc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "chapter2.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "chapter2"
+            }
+          },
+          {
+            "id": "e9c3f954c483567c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "chapter3.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "chapter3"
+            }
+          },
+          {
+            "id": "2cada460de736900",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "教学进度表.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "教学进度表"
+            }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -94,13 +137,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "chapter1-2.md",
+                "file": "教学进度表.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of chapter1-2"
+              "title": "Outline of 教学进度表"
             }
           },
           {
@@ -189,7 +232,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 206.5
+    "width": 250.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -204,17 +247,21 @@
       "sidebar-highlights:Open highlights": false
     }
   },
-  "active": "3f8ec46b75ac59bc",
+  "active": "2cada460de736900",
   "lastOpenFiles": [
-    "Goal.md",
     "chapter1-2.md",
     "chapter2.md",
+    "chapter3.md",
+    "教学进度表.md",
+    "飞行智能控制仿真与场景实践（产业）2026 教学大纲.md",
+    "chapter2-3.md",
+    "README.md",
+    "hello.py",
+    "Goal.md",
     "slides/imgs/slide10-ros2-architecture.png",
     "slides/imgs/slide10_ros2_architecture.png",
     "chapter中未讲部分.md",
     "chapter1.md",
-    "飞行智能控制仿真与场景实践（产业）2026 教学大纲.md",
-    "教学进度表.md",
     "assets/week2/w2-2_wpr.png",
     "assets/week2/w2-3_wpr.png",
     "assets/week2/w2-1-course-goal-airsim.png",
@@ -224,7 +271,6 @@
     "assets/week2/w2-3.png",
     "assets/week2/w2-infra.png",
     "assets/week2",
-    "README.md",
     "~$chapter1.pptx",
     "Untitled.base",
     "~$智能控制仿真与场景实践（产业）2026 教学大纲.docx",
@@ -232,7 +278,6 @@
     "slides/slide-52.html",
     "slides/slide-51.html",
     "slides/slide-50.html",
-    "slides/slide-49.html",
-    "slides/slide-48.html"
+    "slides/slide-49.html"
   ]
 }
