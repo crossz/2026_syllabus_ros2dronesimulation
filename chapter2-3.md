@@ -1,5 +1,6 @@
-大模型工具
-Gazebo，rviz2
+- 大模型工具
+- ros2 run & launch (git 中的demo)
+- Gazebo，rviz2
 
 
 ## 大模型的选择
@@ -16,20 +17,25 @@ Gazebo，rviz2
 ---
 #### 大模型时代 vs 互联网时代
 
-
-
 - 团队平均年龄的问题
 	智谱 vs minimax
 
 - 企业文化、团队文化
 	大厂 vs 小龙
-	> 涌现式“规划”
-	> qwen 3月最新调整
+	> 涌现式“规划”: minimax, kimi
+	> qwen 3月，团队最新调整
+
+minimax 闫俊杰:
+AI 公司并不是重新复制一个互联网公司
 
 kimi 杨植麟：
-![[assets/week1/w1-6-yang.png]]
+互联网创业是规划出来的，没有明显的技术瓶颈；
+AI 创业是涌现式的，每个版本都有多个技术瓶颈；要自下而上，让模型和能力涌现出来。
+[[assets/week1/w1-6-yang.png]]
 
-> qwen 林俊旸: [[assets/week1/005-qwen.png]] [[assets/week1/006-qwen.png]]
+qwen 林俊旸:
+[[assets/week1/005-qwen.png]] 
+[[assets/week1/006-qwen.png]]
 
 
 ----
