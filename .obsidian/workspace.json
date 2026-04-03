@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "教学进度表-大纲.md",
+                "file": "chapter4-turtulebot3-Gazebo → SLAM → Nav2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "教学进度表-大纲"
+              "title": "chapter4-turtulebot3-Gazebo → SLAM → Nav2"
             }
           }
         ],
@@ -232,13 +232,18 @@
   },
   "active": "1cb28273971d7c1c",
   "lastOpenFiles": [
-    "chapter中未讲部分.md",
+    "chapter4-参考-自定义改造 - waypoints movement.md",
+    "chapter4-turtulebot3-Gazebo → SLAM → Nav2.md",
+    "chapter5-PX4+GQC vs ROS2+Rviz2+Nav2.md",
+    "chapter4-5.md",
+    "chapter3-turtulebot4.md",
     "chapter3.md",
+    "Untitled.md",
+    "教学进度表-大纲.md",
+    "chapter中未讲部分.md",
     "chapter2.md",
     "chapter1-2.md",
     "chapter2-3.md",
-    "教学进度表-大纲.md",
-    "chapter5-PX4+GQC vs ROS2+Rviz2+Nav2.md",
     "assets/week5/kimi/simple-compare.png",
     "assets/week5/orkClaw/drone.jpg",
     "assets/week5/minimax/ros2_microros_nav2_architecture.png",
@@ -250,13 +255,9 @@
     "assets/week5/orkClaw",
     "assets/week5/orkClaw/ugv.jpg",
     "assets/week5/orkClaw/px4vsugv.jpg",
-    "chapter4-turtulebot3-Gazebo → SLAM → Nav2.md",
     "assets/week5",
-    "chapter4-5.md",
     "README.md",
-    "chapter4-参考-自定义改造 - waypoints movement.md",
     "chapter4-turtulebot3-slamtoolbox-nav2111.md",
-    "chapter3-turtulebot4.md",
     "chapter1.md",
     "assets/week1/006-qwen.png",
     "assets/week1/w1-6-yang.png",

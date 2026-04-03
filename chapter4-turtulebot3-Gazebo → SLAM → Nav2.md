@@ -73,8 +73,8 @@ ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
 slam_toolbox 使用 **YAML 配置文件**，不使用 Lua 脚本。  
 系统默认配置文件位于：
 
-```
-/opt/ros/$ROS_DISTRO/share/slam_toolbox/config/mapper_params_online_async.yaml
+```bash
+# /opt/ros/$ROS_DISTRO/share/slam_toolbox/config/mapper_params_online_async.yaml
 ```
 
 建议复制一份到本地进行自定义：
@@ -132,7 +132,7 @@ slam_toolbox:
 
 ```bash
 # 方式A：使用系统默认配置（快速启动）
-ros2 launch slam_toolbox online_async_launch.py \
+#ros2 launch slam_toolbox online_async_launch.py \
   use_sim_time:=true
 
 # 方式B：使用自定义配置文件（推荐）
@@ -233,9 +233,9 @@ Nav2 使用统一的 **YAML 参数文件** 配置所有导航组件。
 系统默认配置文件位于：
 
 ```bash
-/opt/ros/$ROS_DISTRO/share/turtlebot3_navigation2/param/waffle.yaml
+#/opt/ros/$ROS_DISTRO/share/turtlebot3_navigation2/param/waffle.yaml
 # 或
-/opt/ros/$ROS_DISTRO/share/nav2_bringup/params/nav2_params.yaml
+#/opt/ros/$ROS_DISTRO/share/nav2_bringup/params/nav2_params.yaml
 ```
 
 复制并自定义：
@@ -331,7 +331,7 @@ global_costmap:
 export TURTLEBOT3_MODEL=waffle
 
 # 方式A：使用 TurtleBot3 官方 launch（推荐，自动加载 RViz2）
-ros2 launch turtlebot3_navigation2 navigation2.launch.py \
+#ros2 launch turtlebot3_navigation2 navigation2.launch.py \
   use_sim_time:=True \
   map:=$HOME/maps/tb3_map.yaml
 
@@ -342,7 +342,7 @@ ros2 launch turtlebot3_navigation2 navigation2.launch.py \
   params_file:=$HOME/tb3_config/nav2_params.yaml
 
 # 方式C：使用 nav2_bringup（更底层，灵活）
-ros2 launch nav2_bringup bringup_launch.py \
+#ros2 launch nav2_bringup bringup_launch.py \
   use_sim_time:=True \
   map:=$HOME/maps/tb3_map.yaml \
   params_file:=$HOME/tb3_config/nav2_params.yaml
