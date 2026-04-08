@@ -19,10 +19,3 @@
 
 
 
-#### 起飞
-```bash
-export PX4_HOME_LAT=25.926562 
-export PX4_HOME_LON=119.493454 
-export PX4_HOME_ALT=15
-make px4_sitl gz_x500
-```
