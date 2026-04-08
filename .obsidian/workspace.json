@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 243.50152587890625,
+    "collapsed": true
   },
   "right": {
     "id": "6fac88fc3bd0c2e8",
@@ -199,8 +200,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 304.5,
-    "collapsed": true
+    "width": 304.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -217,20 +217,19 @@
   },
   "active": "5411c40f1edd50fa",
   "lastOpenFiles": [
+    "chapter6-camera in QGC.md",
+    "chapter6-PX4+QGC.md",
     "assets/week6/settigns-joystick.png",
     "assets/week6/settings-livestreaming.png",
     "assets/week6/settings-comm.png",
     "assets/week6/qgc-some-brand-video.png",
     "assets/week6/qgc-some-brand.avif",
     "assets/week6/multi-drones-on-WSL.png",
-    "chapter6-PX4+QGC.md",
     "assets/week6/multi-drones-on-linux.png",
     "assets/week6/multi-drones-on-WSL-QClaw.png",
     "assets/week6/lat_lon_alt.png",
     "assets/week6/x500.png",
-    "assets/week6/x500_depth1.png",
     "chapter4-5.md",
-    "chapter6-camera in QGC.md",
     "chapter5-PX4+GQC vs ROS2+Rviz2+Nav2.md",
     "教学进度表-大纲.md",
     "chapter中未讲部分.md",

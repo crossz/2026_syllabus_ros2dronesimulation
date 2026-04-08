@@ -70,29 +70,6 @@ make px4_sitl gz_x500_depth
 
 ![[assets/week6/settigns-joystick.png]]
 
-### 地面站 - [仿真环境] 显示指定区域
-> - LAT、LON、ALT
-> - pilot
-
-![[assets/week6/lat_lon_alt.png]]
-
-- PX4 Autopilot 
-```bash
-export PX4_HOME_LAT= 
-export PX4_HOME_LON=
-export PX4_HOME_ALT=
-make px4_sitl gz_x500
-```
-
-
-
-
-
-
-> 25.926562
-> 119.493454
-> 15
-
 
 ### 地面站 - 开源 + 全平台
 
@@ -119,6 +96,32 @@ mavlink start -t <电脑的IP> -u 14550
 ![[assets/week6/settings-comm.png]]
 
 
+--------------------------------
+> 实验一：重复以上步骤，掌握 QGC + PX4 的进阶用法
+-----------------------------------------
+
+### 地面站 - [仿真环境] 显示指定区域
+> - LAT、LON、ALT
+> - pilot
+
+![[assets/week6/lat_lon_alt.png]]
+
+- PX4 Autopilot 
+```bash
+export PX4_HOME_LAT= 
+export PX4_HOME_LON=
+export PX4_HOME_ALT=
+make px4_sitl gz_x500
+```
+
+
+
+
+
+
+> 25.926562
+> 119.493454
+> 15
 ### 多个飞机 Multi-drones
 
 > QGC 的用途并不是用于无人机集群的控制的
@@ -150,8 +153,19 @@ PX4_GZ_STANDALONE=1 PX4_SYS_AUTOSTART=4001 PX4_GZ_MODEL_POSE="0,1" PX4_SIM_MODEL
 - PX4_GZ_MODEL_POSE="0,1" offsets the second drone by 1 meter in Y so they don't spawn on top of each other
 
 
+------------------
+> 实验二：自己设计简单场地（px4 gz环境 + QGC 地图） + 多个无人机
+---------------
+
 
 
 ### Control - 通过 ROS2
-- com 的用法（需要下载 px4_msg）
-- 用 opencode 实现的 fligh plan
+- PX4 进行自定义算法和无人机控制的方式
+基于 px4_ros_com（依赖库：px4_msg） 
+
+- 用 opencode 实现无人机的起飞和降落等基础控制
+
+
+------------------------------------
+> 实验三：通过 ros2 中的代码方式（采用基于大模型的 coding 方式，或者自己找一些代码、脚本），模拟控制系统，使无人机可以完成特定轨迹的飞行（比如绕圈、8字）
+------------------------
