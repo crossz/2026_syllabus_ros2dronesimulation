@@ -166,11 +166,19 @@ MicroXRCEAgent udp4 -p 8888
 ```bash
 ros2 topic list
 ```
+![](micro-xrce-dds_topics.png)
+
 - 查看传感器数据（例如 轨迹点）
 ```bash
 ros2 topic echo /fmu/in/trajectory_setpoint
+ros2 topic echo /fmu/out/vehicle_global_position
 ```
 
+### 创建无人机飞行的 ROS2 控制脚本
+
+> 建议，通过 opencode，各种 openclaw 的方式尝试实现。
+
+参考：[https://gitcode.com/zhengxinfz/ROS2DroneSim](https://gitcode.com/zhengxinfz/ROS2DroneSim)
 
 ------------------------------------
 > 实验三：通过 ros2 中的代码方式（采用基于大模型的 coding 方式，或者自己找一些代码、脚本），模拟控制系统，使无人机可以完成特定轨迹的飞行（比如绕圈、8字）
