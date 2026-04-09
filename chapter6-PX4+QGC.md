@@ -4,9 +4,9 @@
 QGC：开源地面站，可以部署在多种设备中
 
 #### 对比图
-![assets/week5/minimax/tech_stack_comparison.png](assets/week5/minimax/tech_stack_comparison.png)
+![](assets/week5/minimax/tech_stack_comparison.png)
 #### 架构
-![[assets/week6/infra.png]]
+![](assets/week6/infra.png)
 ## 无人机 <---> 飞控(软+硬) <---> 电脑
 
 mavlink
@@ -24,17 +24,17 @@ mavlink
 
 在这里选择仿真软件或版本，Gazebo Harmonic（不是 Gazebo Classis）即 gz，然后可以查看到 `models` 和 `worlds` 目录
 
-![[assets/week6/px4_gz_worlds_dir.png]]
+![](assets/week6/px4_gz_worlds_dir.png)
 
 - WORLD 的选择
-![[assets/week6/px4_gz_worlds.png]]
+![](assets/week6/px4_gz_worlds.png)
 
 ```bash
 PX4_GZ_WORLD=walls make px4_sitl gz_x500
 ```
 
 - 飞机模型的选择
-![[assets/week6/px4_gz_drone_model.png]]
+![](assets/week6/px4_gz_drone_model.png)
 
 ```bash
 make px4_sitl gz_tiltrotor
@@ -48,16 +48,16 @@ make px4_sitl gz_x500_depth
 **飞机模型 - sensor**
 
 - x500_depth
-![[assets/week6/x500_depth.png]]
+![](assets/week6/x500_depth.png)
 
-![[assets/week6/x500_depth1.png]]
+![](assets/week6/x500_depth1.png)
 
 - x500
-![[assets/week6/x500.png]]
+![](assets/week6/x500.png)
 
 **设置截图**
 增加 QGC 上的视频显示（会变卡）
- ![[assets/week6/settings-livestreaming.png]]
+ ![](assets/week6/settings-livestreaming.png)
 
 > 如果 QGC 中无法看到视频：有的版本需要手动设置摄像头数据从 gazebo 转为 QGC 的视频流。
 > 在独立的 terminal中运行：
@@ -68,16 +68,16 @@ make px4_sitl gz_x500_depth
 
 当飞机飞的高度不够，或者想调整角度，可以用屏幕虚拟手柄进行微调。
 
-![[assets/week6/settigns-joystick.png]]
+![](assets/week6/settigns-joystick.png)
 
 
 ### 地面站 - 开源 + 全平台
 
 #### Android 端 QGC
 - 某品牌宣传
-![[assets/week6/qgc-some-brand.avif]]
+![](assets/week6/qgc-some-brand.avif)
 - 某品牌视频教程
-![[assets/week6/qgc-some-brand-video.png]]
+![](assets/week6/qgc-some-brand-video.png)
 - 某民间手搓自主导航：[https://www.bilibili.com/video/BV1UN4y157qR](https://www.bilibili.com/video/BV1UN4y157qR)
 
 #### windows 端 QGC
@@ -93,7 +93,7 @@ mavlink start -t <电脑的IP> -u 14550
 
 **设置截图**
 - windows 端 GQC 的通信设置
-![[assets/week6/settings-comm.png]]
+![](assets/week6/settings-comm.png)
 
 
 --------------------------------
@@ -104,7 +104,7 @@ mavlink start -t <电脑的IP> -u 14550
 > - LAT、LON、ALT
 > - pilot
 
-![[assets/week6/lat_lon_alt.png]]
+![](assets/week6/lat_lon_alt.png)
 
 - PX4 Autopilot 
 ```bash
@@ -127,13 +127,13 @@ make px4_sitl gz_x500
 > QGC 的用途并不是用于无人机集群的控制的
 
 - 3台无人机 - win11 + WSL + QClaw(简单实现)
-![[assets/week6/multi-drones-on-WSL-QClaw.png]]
+![](assets/week6/multi-drones-on-WSL-QClaw.png)
 
 - 3台无人机 - takeoff 状态，逐个操作
-![[assets/week6/multi-drones-on-WSL.png]]
+![](assets/week6/multi-drones-on-WSL.png)
 
 - 2 台无人机飞行计划 
-![[assets/week6/multi-drones-on-linux.png]]
+![](assets/week6/multi-drones-on-linux.png)
 
 官方文档：[https://docs.px4.io/main/en/sim_gazebo_gz/multi_vehicle_simulation](https://docs.px4.io/main/en/sim_gazebo_gz/multi_vehicle_simulation)
 
@@ -159,11 +159,21 @@ PX4_GZ_STANDALONE=1 PX4_SYS_AUTOSTART=4001 PX4_GZ_MODEL_POSE="0,1" PX4_SIM_MODEL
 
 
 
-### Control - 通过 ROS2
-- PX4 进行自定义算法和无人机控制的方式
-基于 px4_ros_com（依赖库：px4_msg） 
+## Control - 通过 ROS2
 
-- 用 opencode 实现无人机的起飞和降落等基础控制
+### 打通 topics
+- Micro-XRCE-DDS Agent
+```bash
+MicroXRCEAgent udp4 -p 8888
+```
+- 查看 topic 列表
+```bash
+ros2 topic list
+```
+- 查看传感器数据（例如 IMU）
+```bash
+ros2 topic echo /fmu/out/vehicle_imu
+```
 
 
 ------------------------------------
