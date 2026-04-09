@@ -4,7 +4,7 @@
 QGC：开源地面站，可以部署在多种设备中
 
 #### 对比图
-![[assets/week5/minimax/tech_stack_comparison.png]]
+![assets/week5/minimax/tech_stack_comparison.png](assets/week5/minimax/tech_stack_comparison.png)
 #### 架构
 ![[assets/week6/infra.png]]
 ## 无人机 <---> 飞控(软+硬) <---> 电脑
