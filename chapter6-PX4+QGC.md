@@ -91,6 +91,8 @@ make px4_sitl gz_x500_depth
 mavlink start -t <电脑的IP> -u 14550
 ```
 
+>mavlink start -t 192.168.31.24 -u 14550
+
 **设置截图**
 - windows 端 GQC 的通信设置
 ![](assets/week6/settings-comm.png)
@@ -116,12 +118,6 @@ make px4_sitl gz_x500
 
 
 
-
-
-
-> 25.926562
-> 119.493454
-> 15
 ### 多个飞机 Multi-drones
 
 > QGC 的用途并不是用于无人机集群的控制的
@@ -170,9 +166,9 @@ MicroXRCEAgent udp4 -p 8888
 ```bash
 ros2 topic list
 ```
-- 查看传感器数据（例如 IMU）
+- 查看传感器数据（例如 轨迹点）
 ```bash
-ros2 topic echo /fmu/out/vehicle_imu
+ros2 topic echo /fmu/in/trajectory_setpoint
 ```
 
 
