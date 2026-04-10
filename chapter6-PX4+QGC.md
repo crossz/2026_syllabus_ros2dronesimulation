@@ -51,8 +51,7 @@ make px4_sitl gz_x500_depth
 增加 QGC 上的视频显示（会变卡）
  ![](assets/week6/settings-livestreaming.png)
 
-> 如果 QGC 中无法看到视频：有的版本需要手动设置摄像头数据从 gazebo 转为 QGC 的视频流。
-> 在独立的 terminal中运行：
+> 如果 QGC 中无法看到视频，可以尝试强制转发视频流，在独立的 terminal中运行：
 > gz topic -e -t /world/default/model/x500_0/link/camera_link/sensor/camera/image | gst-launch-1.0 fdsrc !   video/x-raw,format=RGB,width=640,height=480 !   videoconvert !   x264enc tune=zerolatency bitrate=800 speed-preset=ultrafast !   rtph264pay !   udpsink host=127.0.0.1 port=5600
 
 
@@ -145,9 +144,22 @@ make px4_sitl gz_x500
 PX4_SYS_AUTOSTART=4001 PX4_SIM_MODEL=gz_x500 ./build/px4_sitl_default/bin/px4 -i 1
 ```
 
+> 如果需要发送远端 QGC, 在 pxh> 控制台输入
+```bash
+param set MAV_SYS_ID 1 mavlink start -x -u 14561 -o 14550 -t 10.168.1.168
+```
+
+
 - 步骤 2 - Terminal 2: 加载 drone 2 (包含：链接已启动的 Gazebo server):
 ```
 PX4_GZ_STANDALONE=1 PX4_SYS_AUTOSTART=4001 PX4_GZ_MODEL_POSE="0,1" PX4_SIM_MODEL=gz_x500 ./build/px4_sitl_default/bin/px4 -i 2
+```
+
+> 如果需要发送远端 QGC, 在 pxh> 控制台输入
+
+```bash
+param set MAV_SYS_ID 2
+mavlink start -x -u 14562 -o 14550 -t 10.168.1.168
 ```
 
 ### 说明:
@@ -186,6 +198,8 @@ ros2 topic echo /fmu/out/vehicle_global_position
 > 建议，通过 opencode，各种 openclaw 的方式尝试实现。
 
 参考：[https://gitcode.com/zhengxinfz/ROS2DroneSim](https://gitcode.com/zhengxinfz/ROS2DroneSim)
+
+注意：过程中会提示缺少 px4_msgs 包，一般是通过其 github 的仓库下载后用标准 `colcon build` 方式构建，后续即可完成自定义 ros2 控制脚本
 
 ------------------------------------
 > 实验三：通过 ros2 中的代码方式（采用基于大模型的 coding 方式，或者自己找一些代码、脚本），模拟控制系统，使无人机可以完成特定轨迹的飞行（比如绕圈、8字）
