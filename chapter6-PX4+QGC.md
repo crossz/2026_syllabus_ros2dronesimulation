@@ -7,14 +7,6 @@ QGC：开源地面站，可以部署在多种设备中
 ![](assets/week5/minimax/tech_stack_comparison.png)
 #### 架构
 ![](assets/week6/infra.png)
-## 无人机 <---> 飞控(软+硬) <---> 电脑
-
-mavlink
-
-- 仿真链接
-	- 遥控 - 端口直连（简单任务）
-	- Control - ROS2 对接（自定义控制 + 二次开发 + 算法 + 多平台部署安装）
-- 实机链接 [阿木450演示视频](https://www.bilibili.com/video/BV1Hq4y1o7Dt)
 
 ## 飞控系统
 
@@ -71,6 +63,19 @@ make px4_sitl gz_x500_depth
 ![](assets/week6/settigns-joystick.png)
 
 
+--------------------------------
+> 实验一：重复以上步骤，掌握 QGC + PX4 的进阶用法
+-----------------------------------------
+
+### 无人机 <---> 飞控(软+硬) <---> 电脑
+
+mavlink
+
+- 仿真链接
+	- 遥控 - 端口直连（简单任务）
+	- Control - ROS2 对接（自定义控制 + 二次开发 + 算法 + 多平台部署安装）
+- 实机链接 [阿木450演示视频](https://www.bilibili.com/video/BV1Hq4y1o7Dt)
+
 ### 地面站 - 开源 + 全平台
 
 #### Android 端 QGC
@@ -92,15 +97,17 @@ mavlink start -t <电脑的IP> -u 14550
 ```
 
 >mavlink start -t 192.168.31.24 -u 14550
+>mavlink start -t 10.5.35.229 -u 14550
+
+- 打开摄像头向 windows端传输视频
+>PX4_VIDEO_HOST_IP=10.5.35.229 PX4_GZ_WORLD=walls make px4_sitl gz_x500_depth
+
+
 
 **设置截图**
 - windows 端 GQC 的通信设置
 ![](assets/week6/settings-comm.png)
 
-
---------------------------------
-> 实验一：重复以上步骤，掌握 QGC + PX4 的进阶用法
------------------------------------------
 
 ### 地面站 - [仿真环境] 显示指定区域
 > - LAT、LON、ALT
