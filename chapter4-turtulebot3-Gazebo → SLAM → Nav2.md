@@ -332,8 +332,8 @@ export TURTLEBOT3_MODEL=waffle
 
 # 方式A：使用 TurtleBot3 官方 launch（推荐，自动加载 RViz2）
 #ros2 launch turtlebot3_navigation2 navigation2.launch.py \
-  use_sim_time:=True \
-  map:=$HOME/maps/tb3_map.yaml
+#  use_sim_time:=True \
+#  map:=$HOME/maps/tb3_map.yaml
 
 # 方式B：使用自定义参数文件
 ros2 launch turtlebot3_navigation2 navigation2.launch.py \
@@ -343,9 +343,9 @@ ros2 launch turtlebot3_navigation2 navigation2.launch.py \
 
 # 方式C：使用 nav2_bringup（更底层，灵活）
 #ros2 launch nav2_bringup bringup_launch.py \
-  use_sim_time:=True \
-  map:=$HOME/maps/tb3_map.yaml \
-  params_file:=$HOME/tb3_config/nav2_params.yaml
+#  use_sim_time:=True \
+#  map:=$HOME/maps/tb3_map.yaml \
+#  params_file:=$HOME/tb3_config/nav2_params.yaml
 ```
 
 > ✅ 启动后会自动打开 **RViz2**，并加载地图。  
