@@ -133,7 +133,7 @@ slam_toolbox:
 ```bash
 # 方式A：使用系统默认配置（快速启动）
 #ros2 launch slam_toolbox online_async_launch.py \
-  use_sim_time:=true
+#  use_sim_time:=true
 
 # 方式B：使用自定义配置文件（推荐）
 ros2 launch slam_toolbox online_async_launch.py \
