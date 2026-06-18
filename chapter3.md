@@ -44,10 +44,8 @@ sudo apt install ros-${ROS_DISTRO}-turtlebot3*
 sudo apt install ros-${ROS_DISTRO}-ros-gz
 ```
 
-- 设置turtlebot3机器人类型环境变量
-```bash
-export TURTLEBOT3_MODEL=waffle
-```
+设置turtlebot3机器人类型环境变量：
+`export TURTLEBOT3_MODEL=waffle`, 这在之后的 terminal 中都要声明一下。
 
 - 启动gazebo仿真环境
 ```bash
@@ -74,7 +72,7 @@ rviz2
 
 ### turtulebot4
 
-[[chapter3-turtulebot4]]
+[[chapters/chapter3-turtulebot4]]
 
 
 ### WPR (商业机器人 demo)
@@ -82,4 +80,3 @@ rviz2
 https://deepwiki.com/6-robot/wpr_simulation2
 
 > ROS2 Humble + Gazebo Classic(官方停止维护)
-

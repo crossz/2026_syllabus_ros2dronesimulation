@@ -185,7 +185,7 @@ MicroXRCEAgent udp4 -p 8888
 ```bash
 ros2 topic list
 ```
-![](micro-xrce-dds_topics.png)
+![](assets/week6/micro-xrce-dds_topics.png)
 
 - 查看传感器数据（例如 轨迹点）
 ```bash

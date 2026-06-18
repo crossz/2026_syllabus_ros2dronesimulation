@@ -153,7 +153,7 @@ ros2 launch turtlebot3_bringup rviz2.launch.py
 
 # 使用 slam_toolbox 自带的 RViz 配置
 # ros2 run rviz2 rviz2 \
-  -d /opt/ros/$ROS_DISTRO/share/slam_toolbox/rviz/mapper_viz.rviz
+#  -d /opt/ros/$ROS_DISTRO/share/slam_toolbox/rviz/mapper_viz.rviz
 
 ```
 

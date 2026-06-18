@@ -3,23 +3,23 @@
 具体商业产品：[阿木实验室 - Prometheus 系列](https://docs.amovlab.com/prometheus-wiki/#/src/Prometheus-%E8%87%AA%E4%B8%BB%E6%97%A0%E4%BA%BA%E6%9C%BA%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/Prometheus%E9%85%8D%E5%A5%97%E7%A1%AC%E4%BB%B6?id=%e9%85%8d%e5%a5%97%e7%a1%ac%e4%bb%b6)
 
 ## 案例1：minimax
-![[assets/week5/minimax/ros2_microros_nav2_architecture.png]]
+![](assets/week5/minimax/ros2_microros_nav2_architecture.png)
 
-![[assets/week5/minimax/px4_qgc_architecture.png]]
+![](assets/week5/minimax/px4_qgc_architecture.png)
 
-![[assets/week5/minimax/tech_stack_comparison.png]]
+![](assets/week5/minimax/tech_stack_comparison.png)
 ## 案例2： kimi
-![[assets/week5/kimi/simple-compare.png]]
+![](assets/week5/kimi/simple-compare.png)
 
-![[assets/week5/kimi/applications.png]]
+![](assets/week5/kimi/applications.png)
 
-### 案例3：OrkClaw
+### 案例3：ArkClaw
 
-![[assets/week5/orkClaw/ugv.jpg]]
+![](assets/week5/orkClaw/ugv.jpg)
 
-![[assets/week5/orkClaw/drone.jpg]]
+![](assets/week5/orkClaw/drone.jpg)
 
-![[assets/week5/orkClaw/px4vsugv.jpg]]
+![](assets/week5/orkClaw/px4vsugv.jpg)
 
 ---
 # PX4 与 导航的关系

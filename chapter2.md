@@ -2,7 +2,7 @@ ROS2通信机制
 
 # ==ROS 架构图==[^1]
 
-![[slides/imgs/slide10-ros2-architecture.png]]
+![[slides-ros2/imgs/slide10-ros2-architecture.png]]
 ```
 ┌─────────────────────────────────────┐
 │         应用程序 (Nodes)              │
